@@ -11,4 +11,4 @@ This script uses a predefined set of special unicode characters that have to be 
 
 | Glyph | Image | Codepoint | MUFI Name | MUFI link |
 | ----- | ----- | --------- | --------- | --------- |
-| ƀ     | ![ƀ](https://mufi.info/db-imgtxt.php?t=mufi_char&c=mufichar&i=3744)      | \u0180    | LATIN SMALL LETTER B WITH STROKE | https://mufi.info/m.php?p=muficharinfo&i=3744 |
+| ƀ     | ![ƀ](https://mufi.info/db-imgtxt.php?t=mufi_char&c=mufichar&i=3744&pt=50&x=80&y=80&fg=102020&align=centre&ypad=10)      | \u0180    | LATIN SMALL LETTER B WITH STROKE | https://mufi.info/m.php?p=muficharinfo&i=3744 |
