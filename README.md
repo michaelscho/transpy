@@ -7,6 +7,9 @@ TODO
 TODO
 
 ## Prerequisites
+
+### Special characters
+
 This script uses a predefined set of special unicode characters that have to be used in transcribing manuscripts in Transkribus. These characters have been choosen to represent common phenomenon of medieval manuscripts in a standardized manner and are based on MUFI https://mufi.info/ recomendation.
 
 | Glyph | font-Image | Codepoint | MUFI Name | MUFI link |
@@ -40,3 +43,15 @@ This script uses a predefined set of special unicode characters that have to be 
 | ◌ͧ [^u] | ![◌ͧ](https://mufi.info/db-imgtxt.php?t=mufi_char&c=mufichar&i=4701&pt=50&x=80&y=80&fg=102020&align=centre&ypad=10) |\u0367| COMBINING LATIN SMALL LETTER U | https://mufi.info/m.php?p=muficharinfo&i=4701 |
 | Ꝝ | ![Ꝝ](https://mufi.info/db-imgtxt.php?t=mufi_char&c=mufichar&i=4776&pt=50&x=80&y=80&fg=102020&align=centre&ypad=10) | \ua75c | LATIN CAPITAL LETTER RUM ROTUNDA | https://mufi.info/m.php?p=muficharinfo&i=4776 |
 | ꝝ | ![ꝝ](https://mufi.info/db-imgtxt.php?t=mufi_char&c=mufichar&i=4775&pt=50&x=80&y=80&fg=102020&align=centre&ypad=10) | \ua75d | LATIN SMALL LETTER RUM ROTUNDA | https://mufi.info/m.php?p=muficharinfo&i=4775 |
+
+
+### Transkribus structural tags
+
+This script uses as set of structural tags to determain importance, place and role of text zones in Transkribus. In order to have this script to work, the folowing tags must be created and used in Transkribus.
+
+* header (existing)
+* footer (existing)
+* marginalia (existing)
+* column_1 (to be created)
+* column_2 (to be created)
+* chapter_count (to be created)
