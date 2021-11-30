@@ -368,9 +368,18 @@ def export_tei(filenames):
         text_page = text_page + text_column_one + text_column_two
     return text_page
 
+# function for incrementing folia_numbers, e.g. 28v-30r
+def increment_folia(start_folia):
+    if 'r' in start_folia:
+        start_folia = start_folia.replace('r','v')
+    elif 'v' in start_folia:
+        start_folia = str(int(start_folia.replace('v',''))+1)+'r'
+    return start_folia
+
+
 
 ## export as single tei file
-def bdd_export_tei(filenames):
+def bdd_export_tei(filenames, link_to_facs, start_folia):
     text_page = ""
 
     # open each pagexmlfile for exporting text to tei
@@ -378,18 +387,24 @@ def bdd_export_tei(filenames):
         tree = LET.parse(filename)
         root = tree.getroot()
 
-
         # create pagebreak
-        pagebreak = '\n<pb n="{...}" facs="{...}"/>'
+        pagebreak = '\n<pb n="'+ start_folia +'" facs="'+ link_to_facs + '{image_number}"/>'
+        start_folia = increment_folia(start_folia)
+        image_number = root.xpath('.//ns0:TranskribusMetadata/@pageNr', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
+        print(image_number)
+        pagebreak = pagebreak.replace('{image_number}',image_number.zfill(4))
+
         try:
             header = root.xpath('//ns0:TextRegion[contains(@type,"header")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
             text_header = '\n<fw type="page-header" place="top" ana="{ana}">{fw}</fw>'
             unicode_header = header.xpath('.//ns0:TextLine/ns0:TextEquiv/ns0:Unicode/text()', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
             coords_header = header.xpath('.//ns0:TextLine//ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
+
             #print(unicode_header)
             text_header = text_header.replace('{fw}',unicode_header[0])
             #print(text_header)
             text_header = text_header.replace('{ana}',coords_header[0])
+
 
 
         except:
@@ -414,7 +429,7 @@ def bdd_export_tei(filenames):
                 line_text = line.xpath('.//ns0:TextEquiv/ns0:Unicode/text()', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
                 line_coords = line.xpath('.//ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
                 line_number += 1
-                text_column_one = text_column_one + '\n<lb n="' + str(line_number) + '" ana="' + line_coords[0] + '" />' + line_text[0]
+                text_column_one = text_column_one + '\n<lb n="' + str(line_number) + '" ana="' + line_coords[0] + '"/>' + line_text[0]
 
 ## TODO hier except weiter machen analog zu oben und bei spälte 2 auch!
 
@@ -432,15 +447,16 @@ def bdd_export_tei(filenames):
             text_column_two = text_column_two.replace('{ana}',coords_column[0])
 
 
-            unicode_column_two = column_1.xpath('.//ns0:TextLine', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
+            unicode_column_two = column_2.xpath('.//ns0:TextLine', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
             line_number = 0
             for line in unicode_column_two:
                 line_text = line.xpath('.//ns0:TextEquiv/ns0:Unicode/text()', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
                 line_coords = line.xpath('.//ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
+
                 line_number += 1
-                text_column_two = text_column_two + '\n<lb n="' + str(line_number) + '" ana="' + line_coords[0] + '" />' + line_text[0]
+                text_column_two = text_column_two + '\n<lb n="' + str(line_number) + '" ana="' + line_coords[0] + '"/>' + line_text[0]
         except:
-            text_column_two = "\n<cb n='b'/>"
+            text_column_two = '\n<cb n="b"/>'
 
         text_page = text_page + text_start + text_column_one + text_column_two
 
@@ -696,7 +712,7 @@ def postproccess_tei(path_to_pagexml_folder, output_filename):
 #    f.write(processed_text)
 
 path_to_files = load_pagexml(config.export_folder + '793755/Rom_BAV_Pal__lat__585_ED/page/expanded/')
-bdd_export_tei(path_to_files)
+bdd_export_tei(path_to_files, 'https://digi.ub.uni-heidelberg.de/diglit/bav_pal_lat_585/', '22v')
 
 
 
