@@ -507,10 +507,6 @@ def bdd_export_tei(filenames, link_to_facs, start_folia):
         else:
             pass
 
-
-
-
-
         try:
             footer = root.xpath('//ns0:TextRegion[contains(@type,"footer")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
             text_footer = '\n<fw type="quire-numeral" place="bottom" ana="{ana}">{fw}</fw>'
@@ -550,15 +546,9 @@ def bdd_export_tei(filenames, link_to_facs, start_folia):
                 except Exception as e:
                     print(e)
 
-
-                    # TODO: <item> element ist noch nicht richtig, außerdem Praefatiuncula einfügen, dann testen, eventuell muss das alles hier rumgestellt werden, weil das mit den zwei spalten nicht geht, wenn kapitel über die spalten drüber gehen
-
-
         except Exception as e:
             print(e)
             label_toc = ''
-
-
 
         # label chapter
         try:
@@ -589,7 +579,6 @@ def bdd_export_tei(filenames, link_to_facs, start_folia):
 
         except: label = ''
 
-
         text_column_one = text_column_one.replace('{left|right}','left')
         text_column_two = text_column_two.replace('{left|right}','right')
 
@@ -598,7 +587,6 @@ def bdd_export_tei(filenames, link_to_facs, start_folia):
 
 
         # inscription
-        # TODO left und right stimmt nicht
 
         try:
             for inskription in root.xpath('//ns0:TextRegion[contains(@custom,"type:Inskription")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}):
@@ -640,42 +628,8 @@ def bdd_export_tei(filenames, link_to_facs, start_folia):
 
                 text_page = re.sub(text_to_be_replaced,replace_text,text_page,flags=re.DOTALL)
 
-
-        #text_column_one = re.sub(r'(\n<lb.*?/>\n<note)','</hi></head>\g<1>',text_column_one,flags=re.MULTILINE)
-        #text_column_two = re.sub(r'(\n<lb.*?/>\n<note)','</hi></head>\g<1>',text_column_two,flags=re.MULTILINE)
-
         except Exception as e:
             print(e)
-
-#        try:
-#            for inskription in root.xpath('//ns0:TextRegion[contains(@custom,"type:Inskription")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}):
-#                inskription_text = ''
-#                for line in inskription.xpath('.//ns0:TextLine/ns0:TextEquiv/ns0:Unicode/text()', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}):
-#                    inskription_text = inskription_text + ' ' + line
-#                inskription_xml = '\n<note type="inscription" place="margin {left|right}" anchored="false" ana="{ana}">{Inskription}</note>'.replace('{Inskription}',inskription_text)
-#                coords_inskription = chapter_number.xpath('./ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-#                inskription_xml = inskription_xml.replace('{ana}',coords_inskription[0])
-#                inskription_xml = inskription_xml.replace('> ','>')
-#
-#                replace_key = re.search('\*(\d+)\*',inskription_text)
-#                replace_key = replace_key.group(0)
-#                div_number = replace_key.replace('*','')
-#                text_to_be_replaced = '(<div n="' + div_number + '.*?)~(\w)'
-#                try:
-#                    replace_text = re.search(text_to_be_replaced, text_column_one,flags=re.DOTALL).group(0)
-#                except:
-#                    replace_text = re.search(text_to_be_replaced, text_column_two,flags=re.DOTALL).group(0)
-#                replace_text = re.sub('~(\w)',inskription_xml+'\n<p n="1"><hi rend="color:red initial">\g<1></hi>',replace_text)
-#                #print(text_to_be_replaced)
-#                #print(replace_text)
-#
-#                text_column_one = re.sub(text_to_be_replaced,replace_text,text_column_one,flags=re.DOTALL)
-#                text_column_two = re.sub(text_to_be_replaced,replace_text,text_column_two,flags=re.DOTALL)
-
-
-
-
-
 
     # TODO oben berücksichtigen
     text_page = text_page.replace('</item></item>','</item>')
@@ -683,11 +637,6 @@ def bdd_export_tei(filenames, link_to_facs, start_folia):
     text_page = re.sub('\*\d+\*','',text_page)
     text_page = re.sub('\~\d+\~','',text_page)
     text_page = re.sub('#(\w)','<hi rend="versal">\g<1></hi>',text_page)
-
-
-
-
-
 
     return text_page
 
@@ -943,11 +892,6 @@ text_page = text_page.replace('</item></abbr>','</abbr>')
 text_page = text_page.replace('</item></expan></choice>','</expan></choice></item>')
 text_page = re.sub('(type="chapter"><head type="chapter-title"><label type="chapter-number" .*?</hi></label> )<choice><abbr><hi rend="color:red">','\g<1><hi rend="color:red"><choice><abbr>',text_page,flags=re.DOTALL)
 text_page = re.sub('(type="chapter"><head type="chapter-title"><label type="chapter-number" .*?</hi></label> <hi rend="color:red"><choice><abbr>.*?<expan>)<hi rend="color:red">','\g<1>',text_page,flags=re.DOTALL)
-
-
-
-#Qđ</abbr><expan><hi rend="color:red">Quod</expan></choice>
-
 text_page = text_page.replace('</item></expan></choice>','</expan></choice></item>')
 
 
@@ -962,3 +906,6 @@ with open('/home/michael/Dokumente/transpy/resources/new_xml_file.xml','w') as n
     newfile.write(new_file)
 
 # download_data_from_transkribus(80437, 732612, 24, 33)
+
+
+# TODO einzelne Sonderzeichen ersetzen durch tei:g, code aufräumen
