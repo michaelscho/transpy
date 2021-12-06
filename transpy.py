@@ -15,24 +15,41 @@ from os import walk # handles filenames in folder
 import pandas as pd
 
 
-# connection, importing and exporting data
+""" Functions for importing and exporting data from Transkribus via REST-AP
 
-## start transkribus session (log in)
+"""
+
+
 def login_transkribus(user,pw):
-    # ...set session...
-    session = requests.Session()
+    """ Login to Transkribus and start session
 
+    Uses REST url https://transkribus.eu/TrpServer/rest/auth/login
+    :param user: Username as string (should be specified in config.py)
+    :param pw: Password as string (should be specified in config.py)
+    :return: Returns session
+    """
+
+    # set session...
+    session = requests.Session()
     # ..post credentials
     req = session.post('https://transkribus.eu/TrpServer/rest/auth/login',data = {'user': user, 'pw': pw})
     return session
 
-# import documents to transkribus
+# TODO import documents to transkribus
 
-# export, safe and load documents
-
-## export page-xml to local machine
 def export_pagexml(session, collection_id, document_id, startpage, endpage):
-    # Get document via url https://transkribus.eu/TrpServer/rest/collections/{collection-ID}/{document-ID}/fulldoc
+    """ Export page-XML to local machine for further processing
+
+    Uses REST url https://transkribus.eu/TrpServer/rest/collections/{collection-ID}/{document-ID}/fulldoc
+
+    :param session: Transkribus session as returned from login_transkribus()
+    :param collection_id: Transkribus collection number as Int
+    :param document_id: Transkribus document number as Int
+    :param startpage: First page of document to be exported as Int
+    :param endpage: Last page of document to be exported as Int
+    :return: Returns url to exported data that can be downloaded as zip-file
+    """
+
     # concat url to document...
     url = 'https://transkribus.eu/TrpServer/rest/collections/' + str(collection_id) + '/' + str(document_id) + '/export?pages='+str(startpage)+'-'+str(endpage)
 
@@ -58,8 +75,19 @@ def export_pagexml(session, collection_id, document_id, startpage, endpage):
     export_file_url = export_status["result"]
     return export_file_url
 
-## download zip file to local maschine and unzip
+""" Functions for downloading and extracting data to local machine
+
+"""
+
 def download_export(url):
+    """ Download of exported data
+
+    Downloads exported data from transkribus server using url returned by export_pagexml() as zip file,
+    saves it to export folder on local machine specified in config.py and returns name of zip file
+
+    :param url: Url to zip file as string
+    :return: Name of downloaded zip file as string
+    """
 
     # download zip file to the subfolder ./documents on a local machine...
     zip_file_name = config.export_folder+'export.zip'
@@ -71,9 +99,16 @@ def download_export(url):
     save_file.close()
     return zip_file_name
 
-## unzip file
 def unzip_file(zip_file_name):
-    # ...unzip it into local folder...
+    """ Extracts data from zip file
+
+    Extracts data from zip file into local folder specified in config.py
+    and returns path to pageXML for further processing
+
+    :param zip_file_name: name of zip file as string as returned by download_export()
+    :return: path to downloaded pageXML as string
+    """
+
     with ZipFile(zip_file_name,'r') as zip_obj:
         list_of_filenames = zip_obj.namelist()
         for filename in list_of_filenames:
@@ -82,8 +117,11 @@ def unzip_file(zip_file_name):
         zip_obj.extractall(config.export_folder)
     return path_to_pagexml
 
-## built key for numeric sorting
 def only_numbers(x):
+    """ building sort key for load_pagexml()
+
+    """
+
     if 'new' in x:
         x = x.replace('_new.xml','')
         x = x.rsplit('/',1)
@@ -92,14 +130,36 @@ def only_numbers(x):
         x = x.rsplit('/',1)
     return(int(x[1]))
 
-## get filenames in folder
 def load_pagexml(folder_name):
+    """ Get path to pageXML files for further processing
+
+    :param folder_name: Takes path to pageXML as returned by unzip_file()
+    :return: Returns path to pageXML files as list
+    """
+
     filenames = next(walk(folder_name))[2]
     path_to_files = sorted([folder_name + '/' + string for string in filenames], key = only_numbers)
     return path_to_files
 
-## Getting list of abbreviations from remote exist-db collections provided by xquery script
+""" Export and import functions for handling data on existdb instance using REST API
+
+Documentation: https://exist-db.org/exist/apps/doc/devguide_rest
+"""
+
 def get_exist_data(user, pw, exist_url, resources_folder):
+    """ Getting list of abbreviations from remote exist-db collections provided by xquery script
+
+    Downloads list of abbreviation needed for automatic expansion from existdb instance
+    queried by xquery script named 'abbreviations.xquery' on server as JSON file
+    'abbreviation_dictionary.json' in resource folder specified in config.py on local machine.
+
+    :param user: Username as string (should be specified in config.py)
+    :param pw: Password as string (should be specified in config.py)
+    :param exist_url: Url to xquery script providing abbreviations as string (should be specified in config.py)
+    :param resources_folder: Download-folder as string (should be specified in config.py)
+    :return: Returns dictionary containing abbreviations with corresponding expansions for further processing
+    """
+
     # login to exist...
     # ...set session...
     session = requests.Session()
@@ -136,6 +196,21 @@ def get_exist_data(user, pw, exist_url, resources_folder):
     json.dump(dictionary_abbr_exist, abbreviation_json)
     abbreviation_json.close()
     # ...return dictionary
+    return dictionary_abbr_exist
+
+def load_abbreviation_dict():
+    """ Check if abbreviation file already exists or has to be downloaded
+
+    :return: dictionary containing abbreviations and corresponding expansions
+    """
+    try:
+        dictionary_abbr_exist = config.resources_folder + 'abbreviation_dictionary.json'
+        with open(dictionary_abbr_exist,'r') as json_file:
+            dictionary_abbr_exist = json.load(json_file)
+    except:
+        dictionary_abbr_exist = get_exist_data(exist_credentials.user_exist, exist_credentials.pw_exist, config.exist_url, config.resources_folder)
+        with open(dictionary_abbr_exist,'r') as json_file:
+            dictionary_abbr_exist = json.load(json_file)
     return dictionary_abbr_exist
 
 
@@ -353,6 +428,13 @@ def replace_abbreviations_from_tei(dictionary_abbr_external, processed_text):
     return refined_xml
 
 
+
+
+
+
+
+
+
 ## export as single tei file
 def export_tei(filenames):
 
@@ -399,246 +481,9 @@ def increment_folia(start_folia):
         start_folia = str(int(start_folia.replace('v',''))+1)+'r'
     return start_folia
 
-## export as single tei file
-def bdd_export_tei(filenames, link_to_facs, start_folia):
-    text_page = ""
-
-    # open each pagexmlfile for exporting text to tei
-    for filename in filenames:
-        tree = LET.parse(filename)
-        root = tree.getroot()
-
-        # create tei:pb
-        pagebreak = '\n<pb n="'+ start_folia +'" facs="'+ link_to_facs + '{image_number}"/>'
-        start_folia = increment_folia(start_folia)
-        image_number = root.xpath('.//ns0:TranskribusMetadata/@pageNr', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
-        pagebreak = pagebreak.replace('{image_number}',image_number.zfill(4))
-
-        # add tei:fw
-        try:
-            header = root.xpath('//ns0:TextRegion[contains(@type,"header")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
-            text_header = '\n<fw type="page-header" place="top" ana="{ana}">{fw}</fw>'
-            unicode_header = header.xpath('.//ns0:TextLine/ns0:TextEquiv/ns0:Unicode/text()', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-            coords_header = header.xpath('.//ns0:TextLine//ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-
-            #print(unicode_header)
-            text_header = text_header.replace('{fw}',unicode_header[0])
-            #print(text_header)
-            text_header = text_header.replace('{ana}',coords_header[0])
-
-        except:
-            text_header = ''
-
-        text_start = pagebreak + text_header
-
-        # add text of column 1
-        try:
-            column_1 = root.xpath('//ns0:TextRegion[contains(@custom,"type:column_1")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
-            # create column 1 with coordiantes
-            text_column_one = text_start + '\n<cb n="a" ana="{ana}"/>'
-            coords_column = column_1.xpath('.//ns0:TextLine//ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-            text_column_one = text_column_one.replace('{ana}',coords_column[0])
-
-            # lines in column
-
-            unicode_column_one = column_1.xpath('.//ns0:TextLine', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-            line_number = 0
-            for line in unicode_column_one:
-                line_text = line.xpath('.//ns0:TextEquiv/ns0:Unicode/text()', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-                line_coords = line.xpath('.//ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-                line_number += 1
-                text_column_one = text_column_one + '\n<lb n="' + str(line_number) + '" ana="' + line_coords[0] + '"/>' + line_text[0]
-
-        except:
-            text_column_one = '\n<cb n="a"/>'
-
-        # add text of column 2
-        try:
-            column_2 = root.xpath('//ns0:TextRegion[contains(@custom,"type:column_2")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
-
-            # put together text of column 1 and text of column 2
-
-            text_column_two = '\n<cb n="b" ana="{ana}"/>'
-            coords_column = column_2.xpath('.//ns0:TextLine//ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-            text_column_two = text_column_two.replace('{ana}',coords_column[0])
-
-
-            unicode_column_two = column_2.xpath('.//ns0:TextLine', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-            line_number = 0
-            for line in unicode_column_two:
-                line_text = line.xpath('.//ns0:TextEquiv/ns0:Unicode/text()', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-                line_coords = line.xpath('.//ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-
-                line_number += 1
-                text_column_two = text_column_two + '\n<lb n="' + str(line_number) + '" ana="' + line_coords[0] + '"/>' + line_text[0]
-        except:
-            text_column_two = '\n<cb n="b"/>'
-
-        # prüfen, ob toc incipit auf Seite ist
-        if '~i~' in text_column_one:
-            text_column_one = re.sub(r'~i~(.*?)~','<!-- Beginn Inhaltsverzeichnis -->\n<div type="toc" xml:id="vatican-bav-pal-585-01-toc">\n<head type="incipit"><hi rend="color:red capitals">\g<1></hi></head>\n<list>\n~',text_column_one, flags=re.DOTALL)
-            #print(text_column_one)
-        else:
-            pass
-        if '~i~' in text_column_two:
-            text_column_two = re.sub(r'~i~(.*?)~','<!-- Beginn Inhaltsverzeichnis -->\n<div type="toc" xml:id="vatican-bav-pal-585-01-toc">\n<head type="incipit"><hi rend="color:red capitals">\g<1></hi></head>\n<list>\n~',text_column_two, flags=re.DOTALL)
-        else:
-            pass
-
-        # prüfen, ob chapter incipit auf Seite ist
-        if '*i*' in text_column_one:
-            text_column_one = re.sub(r'\*i\*(.*?)\*p\*','</list>\n</div>\n<!-- Beginn des Haupttextes  -->\n<div type="content" xml:id="vatican-bav-pal-585-01-con">\n<div xml:id="vatican-bav-pal-585-01-con-000" type="praefatiuncula">\n<head type="incipit"><hi rend="color:red capitals">\g<1></hi></head><p n="1"><hi rend="color:red">',text_column_one, flags=re.DOTALL)
-        else:
-            pass
-        if '*i*' in text_column_two:
-            text_column_two = re.sub(r'\*i\*(.*?)\*p\*','</list>\n</div>\n<!-- Beginn des Haupttextes  -->\n<div type="content" xml:id="vatican-bav-pal-585-01-con">\n<div xml:id="vatican-bav-pal-585-01-con-000" type="praefatiuncula">\n<head type="incipit"><hi rend="color:red capitals">\g<1></hi></head><p n="1"><hi rend="color:red">',text_column_two, flags=re.DOTALL)
-        else:
-            pass
-
-        if '#p#' in text_column_one:
-            text_column_one = text_column_one.replace('#p#','</hi>')
-
-        else:
-            pass
-
-        if '#p#' in text_column_two:
-            text_column_two = text_column_two.replace('#p#','</hi>')
-
-        else:
-            pass
-
-        try:
-            footer = root.xpath('//ns0:TextRegion[contains(@type,"footer")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
-            text_footer = '\n<fw type="quire-numeral" place="bottom" ana="{ana}">{fw}</fw>'
-            unicode_footer = footer.xpath('.//ns0:TextLine/ns0:TextEquiv/ns0:Unicode/text()', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-            coords_footer = footer.xpath('.//ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-            text_footer = text_footer.replace('{fw}',unicode_footer[0])
-            text_footer = text_footer.replace('{ana}',coords_footer[0])
-
-        except:
-            text_footer = ''
-
-
-        # label toc
-        try:
-            for chapter_number_toc in root.xpath('//ns0:TextRegion[contains(@custom,"type:chapter_count")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}):
-                chapter_number_toc_text = chapter_number_toc.xpath('.//ns0:TextLine/ns0:TextEquiv/ns0:Unicode/text()', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
-                label_toc = '<item n="{n}"><label place="margin {left|right}" type="chapter-number" ana="{ana}"><hi rend="color:red">{chapter_number_toc}</hi></label> <hi rend="color:red">'.replace('{chapter_number_toc}',chapter_number_toc_text)
-                coords_label_toc = chapter_number_toc.xpath('./ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-                label_toc = label_toc.replace('{ana}',coords_label_toc[0])
-
-                replace_key = re.search('~(\d+)~',chapter_number_toc_text)
-                replace_key = replace_key.group(0)
-                #print(replace_key)
-                div_number = replace_key.replace('~','')
-                label_toc = label_toc.replace('{n}',div_number)
-                text_column_one = re.sub(replace_key+'(\w)',label_toc+'\g<1></hi>',text_column_one)
-                text_column_two = re.sub(replace_key+'(\w)',label_toc+'\g<1></hi>',text_column_two)
-
-                try:
-                    text_column_one, number_of_replacements_1 = re.subn(r'(\n<pb.*?/>\n<fw.*?>.*?</fw>\n<cb n="a".*?/>\n<lb.*?/><item n="' + div_number + ')','</item>\g<1>',text_column_one,flags=re.MULTILINE)
-                    if number_of_replacements_1 == 0:
-                        text_column_one = re.sub('(\<lb.*?/><item n="' + div_number + ')','</item>\g<1>',text_column_one)
-
-                    text_column_two, number_of_replacements_2 = re.subn('(\n<cb n="b".*?/>\n<lb.*?/><item n="' + div_number + ')','</item>\g<1>',text_column_two,flags=re.MULTILINE)
-                    if number_of_replacements_2 == 0:
-                        text_column_two = re.sub('\n(\<lb.*?/><item n="' + div_number + ')','</item>\n\g<1>',text_column_two)
-                except Exception as e:
-                    print(e)
-
-        except Exception as e:
-            print(e)
-            label_toc = ''
-
-        # label chapter
-        try:
-            for chapter_number in root.xpath('//ns0:TextRegion[contains(@custom,"type:chapter_count")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}):
-                chapter_number_text = chapter_number.xpath('.//ns0:TextLine/ns0:TextEquiv/ns0:Unicode/text()', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
-                label = '<div n="{n}" type="chapter"><head type="chapter-title"><label type="chapter-number" place="margin {left|right}" ana="{ana}"><hi rend="color:red">{chapter_number}</hi></label> <hi rend="color:red">'.replace('{chapter_number}',chapter_number_text)
-                coords_label = chapter_number.xpath('./ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-
-                label = label.replace('{ana}',coords_label[0])
-
-                replace_key = re.search('\*(\d+)\*',label)
-                replace_key = replace_key.group(0)
-                div_number = replace_key.replace('*','')
-                label = label.replace('{n}',div_number)
-                text_column_one = text_column_one.replace(replace_key, label).replace(replace_key,'')
-                text_column_two = text_column_two.replace(replace_key, label).replace(replace_key,'')
-                try:
-                    text_column_one, number_of_replacements_1 = re.subn(r'(\n<pb.*?/>\n<fw.*?>.*?</fw>\n<cb n="a".*?/>\n<lb.*?/><div n="' + div_number + ')','</p>\n</div>\g<1>',text_column_one,flags=re.MULTILINE)
-                    if number_of_replacements_1 == 0:
-                        text_column_one = re.sub('(\<lb.*?/><div n="' + div_number + ')','</p>\n</div>\n\g<1>',text_column_one)
-
-                    text_column_two, number_of_replacements_2 = re.subn('(\n<cb n="b".*?/>\n<lb.*?/><div n="' + div_number + ')','</p>\n</div>\n\g<1>',text_column_two,flags=re.MULTILINE)
-                    if number_of_replacements_2 == 0:
-                        text_column_two = re.sub('(\<lb.*?/><div n="' + div_number + ')','</p>\n</div>\n\g<1>',text_column_two)
-                except Exception as e:
-                    print(e)
-
-
-        except: label = ''
-
-        text_column_one = text_column_one.replace('{left|right}','left')
-        text_column_two = text_column_two.replace('{left|right}','right')
-
-        text_page = text_page + text_column_one + text_column_two + text_footer
 
 
 
-        # inscription
-
-        try:
-            for inskription in root.xpath('//ns0:TextRegion[contains(@custom,"type:Inskription")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}):
-                inskription_text = ''
-                for line in inskription.xpath('.//ns0:TextLine/ns0:TextEquiv/ns0:Unicode/text()', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}):
-                    inskription_text = inskription_text + ' ' + line
-                inskription_xml = '</hi></head>\n<note type="inscription" place="margin {left|right}" anchored="false" ana="{ana}">{Inskription}</note>'.replace('{Inskription}',inskription_text)
-
-                coords_inskription = inskription.xpath('./ns0:Coords/@points', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-
-                # left or right mit coordinaten bestimmen
-                width = coords_inskription[0].split(' ')
-                for points in width:
-                    points = points.split(',')
-                    #print(points)
-                    if int(points[0])<800:
-                        side = 'left'
-                    else:
-                        side = 'right'
-                #print(side)
-
-                inskription_xml = inskription_xml.replace('{ana}',coords_inskription[0])
-
-                inskription_xml = inskription_xml.replace('> ','>')
-                inskription_xml = inskription_xml.replace('{left|right}',side)
-                #print(inskription_xml)
-
-                replace_key = re.search('\*(\d+)\*',inskription_text)
-                replace_key = replace_key.group(0)
-                div_number = replace_key.replace('*','')
-                text_to_be_replaced = '(<div n="' + div_number + '.*?)~(\w)'
-
-                try:
-                    replace_text = re.search(text_to_be_replaced, text_page,flags=re.DOTALL).group(0)
-                except Exception as e:
-                    print(e)
-
-                replace_text = re.sub('~(\w)',inskription_xml+'\n<p n="1"><hi rend="color:red initial">\g<1></hi>',replace_text)
-
-                text_page = re.sub(text_to_be_replaced,replace_text,text_page,flags=re.DOTALL)
-
-        except Exception as e:
-            print(e)
-
-    # TODO oben berücksichtigen
-    text_page = text_page.replace('</item></item>','</item>')
-    text_page = text_page.replace('</list>','</item></list>')
-    text_page = re.sub('\*\d+\*','',text_page)
-    text_page = re.sub('\~\d+\~','',text_page)
-    text_page = re.sub('#(\w)','<hi rend="versal">\g<1></hi>',text_page)
-
-    return text_page
 
 
 
@@ -713,6 +558,11 @@ def line_breaks_angled_dash(text_page):
 
     return text_page
 
+
+
+
+
+
 # make list items unique
 def get_unique_string(wordlist):
 
@@ -725,8 +575,9 @@ def get_unique_string(wordlist):
 
     return list_of_unique_strings
 
-# TODO make list of all unique abbreviations and output
 def save_abbreviations(dictionary_abbr_exist, filenames):
+    """ Saves list of expanded abbreviation in xml file
+    """
 
     # open each pagexmlfile for postprocessing
     wordlist_abbr = []
@@ -770,77 +621,65 @@ def save_abbreviations(dictionary_abbr_exist, filenames):
         with open('./abbr.xml', 'a') as f:
             f.write(entry)
 
-# TODO train modells
 
-# download data
+
+
+""" Wrapper functions for getting and processing data for different usecases
+
+"""
+
 def download_data_from_transkribus(collection_id, document_id, startpage, endpage):
+    """ Download data from transkribus and return path to pageXMl
+
+    :param collection_id: Transkribus collection number as Int
+    :param document_id: Transkribus document number as Int
+    :param startpage: First page of document to be exported as Int
+    :param endpage: Last page of document to be exported as Int
+    :return: Returns path to pageXML as list of filenames
+    """
+
     ## start session
     session = login_transkribus(transkribus_credentials.username,transkribus_credentials.password)
-
     ## export pagexml
     export_file_url = export_pagexml(session, collection_id, document_id, startpage, endpage)
-
     ## download exported file
     local_xml_files = download_export(export_file_url)
-
     ## unzip downloaded file and get path to pagexml-files
     path_to_pagexml = unzip_file(local_xml_files)
 
     return path_to_pagexml
 
-# load existing abbreviation_dictionary or download new one
-def load_abbreviation_dict():
-    try:
-        dictionary_abbr_exist = config.resources_folder + 'abbreviation_dictionary.json'
-        with open(dictionary_abbr_exist,'r') as json_file:
-            dictionary_abbr_exist = json.load(json_file)
-    except:
-        dictionary_abbr_exist = get_exist_data(exist_credentials.user_exist, exist_credentials.pw_exist, config.exist_url, config.resources_folder)
-        with open(dictionary_abbr_exist,'r') as json_file:
-            dictionary_abbr_exist = json.load(json_file)
-    return dictionary_abbr_exist
+def postprocess_pagexml(path_to_pagexml_folder):
+    """ pageXML: Expands abbreviations in pageXML
 
+    Function for creating expanded groundtruth from abbreviated ground truth
+    Saves processed pageXML files in subfolder './documents/.../page/expanded/"
+    Files can be uploaded to Transkribus for training expanded model
 
-# prepare for collation using collatex
-def postprocess_for_collatex(text,sigla):
-    # delete interpunctuation
-    text = text.replace('\uF1F8','').replace('\uF1EA','').replace('\uF1F5','').replace('\uF1F0','').replace('\uF160','').replace('\uF1E2','').replace('\uF1E1','')
-    # delete linebreaks
-    text = text.replace("\n<cb n='b'/>",'')
-    text = text.replace("\n<pb/><cb n='a'/>",'')
-    text = text.replace("<pb/><cb n='a'/>",'')
-    text = text.replace('\n<lb/>',' ')
-    text = text.replace("<lb break='no'/>",'')
-    text = text.replace("<cb n='b'/><lb break='no'/>",'')
-    text = text.replace("<cb n='b'/>",'')
-    with open('/home/michael/Dokumente/BDD/Collation/witnesses/'+sigla+'.txt','w') as f:
-        f.write(text)
-    return text
+    :param path_to_pagexml_folder: Path to pageXML folder as string
+    """
 
-
-# DIFFERENT USECASES
-
-# expanding page-xml, e.g. for creating normalized model
-
-def postprocess_pagexml(path_to_pagexml_folder, output_filename):
     # load dictionary of abbreviations
     dictionary_abbr_exist = load_abbreviation_dict()
     #gets path of xml files
     path_to_files = load_pagexml(config.export_folder + path_to_pagexml_folder)
-    #print(path_to_files)
     # expands abbreviations
     replace_abbreviations_from_pagexml(dictionary_abbr_exist, path_to_files)
 
-# TODO Upload to transkribus
-def fname(arg):
-    pass
-
-# Create textorientated textfile
-def fname(arg):
-    pass
 
 # Getting TEI file
-def postproccess_tei(path_to_pagexml_folder, output_filename):
+def postproccess_tei(path_to_pagexml_folder, output_filename=''):
+    """ TEI: Expands abbreviations in pageXML
+
+    Function for creating expanded TEI file from abbreviated ground truth
+    Saves processed TEI file in specified subfolder.
+    Files can be used for further TEI workflow
+
+    :param path_to_pagexml_folder: Path to pageXML folder as string
+    :param output_filename: Filename of TEI file to be created. If none is given, no file will be created
+    :return: Text using tei expansions as string
+    """
+
     # load dictionary of abbreviations
     dictionary_abbr_exist = load_abbreviation_dict()
     #gets path of xml files
@@ -849,63 +688,12 @@ def postproccess_tei(path_to_pagexml_folder, output_filename):
     text_page = export_tei(path_to_files)
     # replaces linebreaks by tei <lb/> and <lb break='no'/>
     processed_text = line_breaks_angled_dash(text_page)
-    #TODO replacing abbreviations
+    # replacing abbreviations
     expanded_text = replace_abbreviations_from_tei(dictionary_abbr_exist, processed_text)
     return expanded_text
-
-    # saves tei file
-    #with open(output_filename,'w') as f:
-    #    f.write(processed_text)
-    #    print(abbreviated_text)
-
-#v
-#download_data_from_transkribus(80437,793755,37,218)
-#text = postproccess_tei('793755/Rom_BAV_Pal__lat__585_ED/page', 'output.xml')
-#postprocess_for_collatex(text,'V')
-
-#b
-#download_data_from_transkribus(80437,732612,24,48)
-#text = postproccess_tei('732612/01_Transkription_Bamberg_Stabi_Can_6/page', 'output.xml')
-#postprocess_for_collatex(text,'B')
-
-
-
-#postprocess_pagexml('793755/Rom_BAV_Pal__lat__585_ED/page', 'output.xml')
-## converts files to simple tei
-#path_to_files = load_pagexml(config.export_folder + '793755/Rom_BAV_Pal__lat__585_ED/page/expanded/')
-#print(path_to_files)
-#text_page = export_tei(path_to_files)
-#print('Starting creating linebreaks')
-#processed_text = line_breaks(text_page)
-#print(processed_text)
-#with open('./bav-pal-lat-585.txt','w') as f:
-#    f.write(processed_text)
-
-path_to_files = load_pagexml(config.export_folder + '793755/Rom_BAV_Pal__lat__585_ED/page/')
-dictionary_abbr_external = load_abbreviation_dict()
-text_page = bdd_export_tei(path_to_files, 'https://digi.ub.uni-heidelberg.de/diglit/bav_pal_lat_585/', '15r')
-text_page = line_breaks_angled_dash(text_page)
-text_page = replace_abbreviations_from_tei(dictionary_abbr_external, text_page)
-text_page = text_page.replace('<choice><abbr><p n="1">','<p n="1"><choice><abbr>')
-text_page = text_page.replace('<expan><p n="1">','<expan>')
-text_page = text_page.replace('</item></abbr>','</abbr>')
-text_page = text_page.replace('</item></expan></choice>','</expan></choice></item>')
-text_page = re.sub('(type="chapter"><head type="chapter-title"><label type="chapter-number" .*?</hi></label> )<choice><abbr><hi rend="color:red">','\g<1><hi rend="color:red"><choice><abbr>',text_page,flags=re.DOTALL)
-text_page = re.sub('(type="chapter"><head type="chapter-title"><label type="chapter-number" .*?</hi></label> <hi rend="color:red"><choice><abbr>.*?<expan>)<hi rend="color:red">','\g<1>',text_page,flags=re.DOTALL)
-text_page = text_page.replace('</item></expan></choice>','</expan></choice></item>')
-
-
-
-
-#replace placeholder in template file and save as new file
-with open('/home/michael/Dokumente/transpy/resources/tei_template.xml','r') as xmlfile:
-    template_file = xmlfile.read()
-
-new_file = template_file.replace('%%',text_page)
-with open('/home/michael/Dokumente/transpy/resources/new_xml_file.xml','w') as newfile:
-    newfile.write(new_file)
-
-# download_data_from_transkribus(80437, 732612, 24, 33)
-
-
-# TODO einzelne Sonderzeichen ersetzen durch tei:g, code aufräumen
+    if output_filename != '':
+        # saves tei file
+        with open(output_filename,'w') as f:
+            f.write(processed_text)
+    else:
+        pass
