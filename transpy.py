@@ -15,10 +15,9 @@ from os import walk # handles filenames in folder
 import pandas as pd
 
 
-""" Functions for importing and exporting data from Transkribus via REST-AP
+""" Functions for importing and exporting data from Transkribus via REST-API
 
 """
-
 
 def login_transkribus(user,pw):
     """ Login to Transkribus and start session
@@ -213,19 +212,18 @@ def load_abbreviation_dict():
             dictionary_abbr_exist = json.load(json_file)
     return dictionary_abbr_exist
 
+""" function for postprocessing page-xml
 
+"""
 
-
-
-
-
-
-# postprocess page-xml
-
-## detect and replace abbreviations using list of special characters as marker
-
-# apply rules for manual expansion defined in config
 def manual_expansion(word):
+    """ apply rules for manual expansion defined in config
+
+    Takes abbreviated word and returns expansion based on rules specified in config.py
+    :param word: word containign special character as specified in config.py as string
+    :return: expanded word as string
+    """
+
     expansion = word
     for key, value in config.rules_for_expansion.items():
         expansion = expansion.replace(key,value)
@@ -233,6 +231,15 @@ def manual_expansion(word):
 
 # replace expansions in page-xml files
 def replace_abbreviations_from_pagexml(dictionary_abbr_exist, filenames):
+    """ detect and replace abbreviations using list of special characters as marker automaticly
+
+    Takes abbreviated word indicated by special character as specified in config.py and
+    replaces with corresponding expansion as specified in dictionary or by rules for manual expansions
+    using function manual_expansion. Saves files in subfolder ./expanded/.
+
+    :param dictionary_abbr_exist: Dictionary containing list of abbreviations and corresponding expansions
+    :param filenames: pageXML filenames as list
+    """"
 
     # open each pagexmlfile for postprocessing
     for filename in filenames:
@@ -265,12 +272,22 @@ def replace_abbreviations_from_pagexml(dictionary_abbr_exist, filenames):
 
                     i.text = i.text.replace(word,expansion)
         new_filename = filename.replace('/page/','/page/expanded/')
+        root = new_filename.split('expanded/')[0] + 'expanded/'
+        new_number = new_filename.split('expanded/')[1]
+        new_number = new_number.replace('.xml','')
+        new_number = new_number.replace('/','')
+        print(new_number)
+        new_number = new_number.zfill(4)
+        print(new_number)
+        new_filename = root+new_number + '.xml'
         print(new_filename)
         with open(new_filename, 'w') as f:
             tree.write(f, encoding='unicode')
 
-
 def replace_abbreviations_from_tei(dictionary_abbr_external, processed_text):
+    """ TODO documentation
+
+    """
 
     # ...replace whitespace with underscore in xml-tags to enable split() without loosing element structure...
     match_elements = re.findall('\<(.*?)\>',processed_text)
@@ -388,11 +405,7 @@ def replace_abbreviations_from_tei(dictionary_abbr_external, processed_text):
                 #print(choice_element)
             else:
                 pass
-
-
-
             #choice_element = str(dictionary_abbr[word_copy]['expan_with_tags'])
-
 
             # ...loop through text and replace original word with choice element...
             # (Abbreviations starting with a tag have to be treated differently)
@@ -427,16 +440,11 @@ def replace_abbreviations_from_tei(dictionary_abbr_external, processed_text):
     #print(dictionary_abbr)
     return refined_xml
 
-
-
-
-
-
-
-
-
 ## export as single tei file
 def export_tei(filenames):
+    """ TODO documentation
+
+    """
 
     text_page = ""
 
@@ -458,11 +466,8 @@ def export_tei(filenames):
         # find column 2 and return element
         try:
             column_2 = root.xpath('//ns0:TextRegion[contains(@custom,"type:column_2")]', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
-
             # put together text of column 1 and text of column 2
-
             text_column_two = "\n<cb n='b'/>"
-
             unicode_column_two = column_2.xpath('.//ns0:TextLine//ns0:Unicode', namespaces = {'ns0':'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
 
             for line in unicode_column_two:
@@ -475,27 +480,26 @@ def export_tei(filenames):
 
 # function for incrementing folia_numbers, e.g. 28v-30r
 def increment_folia(start_folia):
+    """ TODO documentation
+
+    """
+
     if 'r' in start_folia:
         start_folia = start_folia.replace('r','v')
     elif 'v' in start_folia:
         start_folia = str(int(start_folia.replace('v',''))+1)+'r'
     return start_folia
 
-
-
-
-
-
-
 # postprocess line breaks, takes and returns exported text_page
 def line_breaks(text_page):
+    """ TODO documentation
+
+    """
 
     # TODO for now, delete manual inserted angle dash
     text_page = text_page.replace('¬','')
-
     # load dictinary containing wordforms
     df = pd.read_csv(config.resources_folder+'lexicon.csv')
-
 
     # check word with linebreak
     # find words next to linebreaks
@@ -522,7 +526,9 @@ def line_breaks(text_page):
 
 # TODO postprocess word segmentation, takes and returns exported text_page
 def word_segmentation(text_page):
-    pass
+    """ TODO documentation
+
+    """
 
     # check word segmentation
     wordlist = text_page.replace('<lb/>','').replace("<pb/><cb n='a'/>","").replace("<cb n='b'/>","").split()
@@ -550,6 +556,9 @@ def word_segmentation(text_page):
 
 # use manually inserted ¬ for creating proper tei linebreaks
 def line_breaks_angled_dash(text_page):
+    """ TODO documentation
+
+    """
 
     text_page = text_page.replace('¬ ','¬')
     text_page = re.sub(r'¬\n(<lb.*?)/>','\g<1> break="no"/>',text_page, flags=re.DOTALL)
@@ -558,18 +567,14 @@ def line_breaks_angled_dash(text_page):
 
     return text_page
 
-
-
-
-
-
 # make list items unique
 def get_unique_string(wordlist):
+    """ TODO documentation
+
+    """
 
     list_of_unique_strings = []
-
     unique_wordlist = set(wordlist)
-
     for word in unique_wordlist:
         list_of_unique_strings.append(word)
 
@@ -621,9 +626,6 @@ def save_abbreviations(dictionary_abbr_exist, filenames):
         with open('./abbr.xml', 'a') as f:
             f.write(entry)
 
-
-
-
 """ Wrapper functions for getting and processing data for different usecases
 
 """
@@ -666,6 +668,14 @@ def postprocess_pagexml(path_to_pagexml_folder):
     # expands abbreviations
     replace_abbreviations_from_pagexml(dictionary_abbr_exist, path_to_files)
 
+def create_normalised_ground_truth(collection_id, document_id, startpage, endpage):
+    """ Wrapper function for creating and saving ground truth
+
+    TODO Reupload to Transkribus
+    """
+
+    path_to_pagexml = download_data_from_transkribus(collection_id, document_id, startpage, endpage)
+    postprocess_pagexml(path_to_pagexml)
 
 # Getting TEI file
 def postproccess_tei(path_to_pagexml_folder, output_filename=''):
@@ -697,3 +707,7 @@ def postproccess_tei(path_to_pagexml_folder, output_filename=''):
             f.write(processed_text)
     else:
         pass
+
+""" execute """
+# Downloads graphematic transcription from Transkribus and converts it to normalised ground truth
+#create_normalised_ground_truth(74304, 793755, 37, 218)
