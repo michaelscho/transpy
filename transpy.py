@@ -239,7 +239,7 @@ def replace_abbreviations_from_pagexml(dictionary_abbr_exist, filenames):
 
     :param dictionary_abbr_exist: Dictionary containing list of abbreviations and corresponding expansions
     :param filenames: pageXML filenames as list
-    """"
+    """
 
     # open each pagexmlfile for postprocessing
     for filename in filenames:
@@ -362,18 +362,33 @@ def replace_abbreviations_from_tei(dictionary_abbr_external, processed_text):
                     # ...check, if expanded special character has occured before tag that is to be entered...
                     # ..if so, add length of insertion to start
                     character_list = config.rules_for_expansion
-                    trigger = False
-                    for key, value in character_list.items():
-                        if value in word_with_tag:
-                            if word_with_tag.index(value) < start:
-                                start = start + (len(key))
-                                if start > 1:
-                                    if trigger == False:
-                                        start = start -1
-                                        trigger = True
 
-                                    else:
-                                        pass
+                    if '</hi>' in tag:
+                        #if (bool(re.search('>\w</hi>',word_copy)) == True) and (bool(i in character_list in re.search('>\w</hi>',word_copy)) == False):
+                        try:
+                            if (bool(re.search('>\w</hi>',word_copy)) == True) and (bool(any(i in character_list.keys() for character in re.search('>\w</hi>',word_copy)[0])) == False):
+                                if 'Ꝓ' in re.search('>\w</hi>',word_copy)[0]:
+                                    pass
+                                else:
+                                    start = start
+                                    print(word_copy)
+                            else:
+                                pass
+                        except Exception as e:
+                            print(e)
+                    else:
+                        trigger = False
+                        for key, value in character_list.items():
+                            if value in word_with_tag:
+                                if word_with_tag.index(value) < start:
+                                    start = start + (len(key))
+                                    if start > 1:
+                                        if trigger == False:
+                                            start = start -1
+                                            trigger = True
+
+                                        else:
+                                            pass
                     # ...insert tag on index...
                     word_with_tag = str(word_with_tag)
                     word_with_tag = word_with_tag[:start]+tag+word_with_tag[start:]
@@ -562,8 +577,10 @@ def line_breaks_angled_dash(text_page):
 
     text_page = text_page.replace('¬ ','¬')
     text_page = re.sub(r'¬\n(<lb.*?)/>','\g<1> break="no"/>',text_page, flags=re.DOTALL)
-    text_page = re.sub(r'¬\n(<cb.*?n="b".*?/>\n<lb.*?)/>','\g<1> break="no"/>',text_page)
-    text_page = re.sub(r'¬\n(<pb.*?<cb.*?n="a".*?/>\n<lb.*?)/>','\g<1> break="no"/>',text_page)
+    text_page = re.sub(r'¬\n+(<cb.*?n="b".*?/>\n<lb.*?)/>','\g<1> break="no"/>',text_page)
+    text_page = re.sub(r'¬\n+(<pb.*?<cb.*?n="a".*?/>\n<lb.*?)/>','\g<1> break="no"/>',text_page)
+    text_page = re.sub(r'¬','<lb break="no"/>',text_page)
+
 
     return text_page
 
@@ -582,6 +599,7 @@ def get_unique_string(wordlist):
 
 def save_abbreviations(dictionary_abbr_exist, filenames):
     """ Saves list of expanded abbreviation in xml file
+    
     """
 
     # open each pagexmlfile for postprocessing
@@ -667,6 +685,7 @@ def postprocess_pagexml(path_to_pagexml_folder):
     path_to_files = load_pagexml(config.export_folder + path_to_pagexml_folder)
     # expands abbreviations
     replace_abbreviations_from_pagexml(dictionary_abbr_exist, path_to_files)
+    save_abbreviations(dictionary_abbr_exist, path_to_files)
 
 def create_normalised_ground_truth(collection_id, document_id, startpage, endpage):
     """ Wrapper function for creating and saving ground truth
@@ -711,3 +730,5 @@ def postproccess_tei(path_to_pagexml_folder, output_filename=''):
 """ execute """
 # Downloads graphematic transcription from Transkribus and converts it to normalised ground truth
 #create_normalised_ground_truth(74304, 793755, 37, 218)
+
+# Downloads graphematic transcription from Transkribus and converts it to normalised ground truth
