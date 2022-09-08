@@ -11,7 +11,7 @@ import config # stores basic config
 import exist_credentials # takes credentials from local config file
 import xml.etree.ElementTree as ET # for parsing xml data
 import lxml.etree as LET # TODO replace etree for parsing xml data
-from os import walk # handles filenames in folder
+import os # handles filenames in folder
 import pandas as pd
 
 
@@ -116,6 +116,17 @@ def unzip_file(zip_file_name):
         zip_obj.extractall(config.export_folder)
     return path_to_pagexml
 
+def rename_files(path_to_pagexml):
+    """ Renames downloaded files
+
+    Renames downloaded files to numbered filenames using 4 leading zeros
+    :param path_to_pagexml: Path to file as provided by function unzip_file
+    """
+    path_to_pagexml = config.export_folder + path_to_pagexml[:-1]
+    for filename in os.listdir(path_to_pagexml):
+        # replace string for Frankfurt ms and add leading numbers if neccessary
+        os.rename(os.path.join(path_to_pagexml+"/",filename), os.path.join(path_to_pagexml+"/", filename.replace('Ms Barth 50 - Decretum-', '').zfill(4)))
+
 def only_numbers(x):
     """ building sort key for load_pagexml()
 
@@ -136,7 +147,7 @@ def load_pagexml(folder_name):
     :return: Returns path to pageXML files as list
     """
 
-    filenames = next(walk(folder_name))[2]
+    filenames = next(os.walk(folder_name))[2]
     path_to_files = sorted([folder_name + '/' + string for string in filenames], key = only_numbers)
     return path_to_files
 
@@ -599,7 +610,7 @@ def get_unique_string(wordlist):
 
 def save_abbreviations(dictionary_abbr_exist, filenames):
     """ Saves list of expanded abbreviation in xml file
-    
+
     """
 
     # open each pagexmlfile for postprocessing
@@ -666,6 +677,8 @@ def download_data_from_transkribus(collection_id, document_id, startpage, endpag
     local_xml_files = download_export(export_file_url)
     ## unzip downloaded file and get path to pagexml-files
     path_to_pagexml = unzip_file(local_xml_files)
+    ## renames files
+    rename_files(path_to_pagexml)
 
     return path_to_pagexml
 
