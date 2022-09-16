@@ -98,7 +98,7 @@ def download_export(url):
     save_file.close()
     return zip_file_name
 
-def unzip_file(zip_file_name):
+def unzip_file(zip_file_name, path_to_folder):
     """ Extracts data from zip file
 
     Extracts data from zip file into local folder specified in config.py
@@ -113,16 +113,16 @@ def unzip_file(zip_file_name):
         for filename in list_of_filenames:
             if 'page/' in filename:
                 path_to_pagexml = filename.split('page/')[0]+'page/'
-        zip_obj.extractall(config.export_folder)
+        zip_obj.extractall(path_to_folder)
     return path_to_pagexml
 
-def rename_files(path_to_pagexml):
+def rename_files(path_to_pagexml, path_to_folder):
     """ Renames downloaded files
 
     Renames downloaded files to numbered filenames using 4 leading zeros
     :param path_to_pagexml: Path to file as provided by function unzip_file
     """
-    path_to_pagexml = config.export_folder + path_to_pagexml[:-1]
+    path_to_pagexml = path_to_folder + path_to_pagexml[:-1]
     for filename in os.listdir(path_to_pagexml):
         # replace string for Frankfurt ms and add leading numbers if neccessary
         os.rename(os.path.join(path_to_pagexml+"/",filename), os.path.join(path_to_pagexml+"/", filename.replace('Ms Barth 50 - Decretum-', '').zfill(4)))
@@ -659,7 +659,7 @@ def save_abbreviations(dictionary_abbr_exist, filenames):
 
 """
 
-def download_data_from_transkribus(collection_id, document_id, startpage, endpage):
+def download_data_from_transkribus(collection_id, document_id, startpage, endpage, path_to_folder):
     """ Download data from transkribus and return path to pageXMl
 
     :param collection_id: Transkribus collection number as Int
@@ -676,9 +676,9 @@ def download_data_from_transkribus(collection_id, document_id, startpage, endpag
     ## download exported file
     local_xml_files = download_export(export_file_url)
     ## unzip downloaded file and get path to pagexml-files
-    path_to_pagexml = unzip_file(local_xml_files)
+    path_to_pagexml = unzip_file(local_xml_files, path_to_folder)
     ## renames files
-    rename_files(path_to_pagexml)
+    rename_files(path_to_pagexml, path_to_folder)
 
     return path_to_pagexml
 
