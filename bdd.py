@@ -737,7 +737,7 @@ def main():
     new_file = new_file.replace("{date-yyyy-mm-dd}", str(today))
 
     with open(f'/home/michael/Dokumente/transpy/output/{book_string}/{manuscript.tei_base_id_book}.xml',
-              'w') as newfile:
+              'w+') as newfile:
         newfile.write(new_file)
 
 
