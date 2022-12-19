@@ -14,9 +14,8 @@ Simply clone and install dependencies using pip.
 The script uses three different config files that are provided as a template: `exist_credentials_template.py`, `transkribus_credentials_template.py` and `config_template.py`. Each of them must be renamed by deleting `_template`.
 Then, credentials must be provided in `exist_credentials.py`, `transkribus_credentials.py`. In `config.py`, the folderstructure as well as other information on special characters or rules of expansion of these characters as well as information on the manuscripts can be changed.
 
-### Folderstructure
-
 ### Abbreviation-list
+This scripts automatically expands abbreviated words identified by special characters. For the expansion, a list of abbreviations in `resources/abbreviation_dictionary.json` is used first. If the abbreviation is not found there, rules are used as specified in `config.py`. 
 
 ### Special characters
 
@@ -59,10 +58,10 @@ This script uses a predefined set of special unicode characters that have to be 
 
 This script uses as set of structural tags to determain importance, place and role of text zones in Transkribus. In order to have this script to work, the folowing tags must be created and used in Transkribus.
 
-* header (existing)
-* footer (existing)
-* marginalia (existing)
-* column_1 (to be created)
-* column_2 (to be created)
-* chapter_count (to be created)
+* `header` (existing)
+* `footer` (existing)
+* `marginalia` (existing)
+* `column_1` (to be created)
+* `column_2` (to be created)
+* `chapter_count` (to be created)
 
