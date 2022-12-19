@@ -1,0 +1,358 @@
+<?xml-model href="https://burchard.adwmainz.net/exist/webdav/db/collections/bdd/data/schemata/bdd-trans-work.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="bdd-frankfurt-ub-b-50">
+
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+
+        <!-- Automatisch generierte Metadaten prüfen und ergänzen-->
+
+        <!-- Titel ggf. anpassen -->
+        <title type="main" xml:lang="ger">Decretum Burchardi, Buch {book}</title>
+        <title type="main" xml:lang="ger">Automatische Transkription durch Transkribus</title>
+
+        <!-- Pro Bearbeiter*in neues <respStmt> anlegen -->
+        <respStmt xml:id="MiS">
+          <persName>
+            <forename>Michael</forename>
+            <surname>Schonhardt</surname>
+            <affiliation>Universität Kassel</affiliation>
+          </persName>
+          <resp xml:lang="ger">Codierung nach TEI (P5)</resp>
+        </respStmt>
+
+        <respStmt xml:id="">
+          <persName>
+            <forename></forename>
+            <surname></surname>
+            <affiliation></affiliation>
+          </persName>
+          <resp xml:lang="ger">Proofreading_1</resp>
+        </respStmt>
+
+        <respStmt xml:id="Transkribus">
+          <name>Transkribus</name>
+          <resp xml:lang="ger">Automatische Transkription</resp>
+        </respStmt>
+
+      </titleStmt>
+
+      <publicationStmt>
+        <p>Working files, not ready for circulation.</p>
+      </publicationStmt>
+
+      <!-- Handschrift prüfen -->
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier xml:id="frankfurt-ub-b-50">
+            <settlement>Frankfurt a.M.</settlement>
+            <repository>UB</repository>
+            <idno>Barth. 50</idno>
+          </msIdentifier>
+
+          <!-- ggf. Hände anpassen oder durch neue <handNote> ergänzen -->
+          <physDesc>
+            <handDesc hands="2">
+              <handNote xml:id="m1" scope="major">Haupthand</handNote>
+              <handNote xml:id="m2" scope="minor">Nebenhand</handNote>
+            </handDesc>
+          </physDesc>
+        </msDesc>
+      </sourceDesc>
+    </fileDesc>
+
+    <!-- encodingDesc muss nicht geprüft werden -->
+    <encodingDesc>
+      <p n="1">Die vorliegende Liste berücksichtigt keine Ligaturen, die in den Transkriptionen stillschweigend aufgelöst werden. Sonderzeichen, die der Abkürzung von Wörtern dienen, werden über das TEI Modul gaiji nach den Empfehlungen der MUFI
+        (https://folk.uib.no/hnooh/mufi/) in der Version 4.0 verzeichnet und im body als unicode-Zeichen in einem g-Element gesetzt. Zur korrekten Darstellung aller Zeichen ist ggf. ein entsprechender Zeichensatz notwendig, z.B. Andron Scriptor Web
+        (https://folk.uib.no/hnooh/mufi/fonts/index.html#Andron).</p>
+      <charDecl>
+        <!-- -ur -->
+        <char xml:id="char-f1c2">
+          <localProp name="name" value="COMBINING ABBREVIATION MARK SUPERSCRIPT UR LEMNISKATE FORM"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1C2</mapping>
+          <mapping type="standardized">ur</mapping>
+          <graphic url="images/f1c2.png"/>
+        </char>
+        <!-- -bus -->
+        <char xml:id="char-f1ac">
+          <localProp name="name" value="LATIN ABBREVIATION SIGN SEMICOLON"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1AC</mapping>
+          <mapping type="standardized">;</mapping>
+          <graphic url="images/f1ac.png"/>
+        </char>
+        <!-- Interpunktion -->
+        <!-- Distinctio -->
+        <char xml:id="char-f1f8">
+          <localProp name="name" value="DISTINCTIO"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1F8</mapping>
+          <mapping type="standardized">,</mapping>
+          <graphic url="images/f1f8.png"/>
+        </char>
+        <!-- punctus versus -->
+        <char xml:id="char-f1ea">
+          <localProp name="name" value="PUNCTUS VERSUS"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1EA</mapping>
+          <mapping type="standardized">.</mapping>
+          <graphic url="images/f1ea.png"/>
+        </char>
+        <!-- punctus flexus -->
+        <char xml:id="char-f1f5">
+          <localProp name="name" value="PUNCTUS FLEXUS"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1F5</mapping>
+          <mapping type="standardized">,</mapping>
+          <graphic url="images/f1f5.png"/>
+        </char>
+        <!-- punctus elevatus -->
+        <char xml:id="char-f1f0">
+          <localProp name="name" value="PUNCTUS ELEVATUS DIAGONAL STROKE"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1F0</mapping>
+          <mapping type="standardized">;</mapping>
+          <graphic url="images/f1f0.png"/>
+        </char>
+        <!-- punctus interrogativus -->
+        <char xml:id="char-f160">
+          <localProp name="name" value="PUNCTUS INTERROGATIVUS"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F160</mapping>
+          <mapping type="standardized">?</mapping>
+          <graphic url="images/f160.png"/>
+        </char>
+        <!-- punctus interrogativus und positura -->
+        <char xml:id="char-int-posit">
+          <localProp name="name" value="PUNCTUS INTERROGATIVUS+COMMA POSITURA"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="Combined">U+F160 + U+F1E2</mapping>
+          <mapping type="standardized">?;</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- paragraphus -->
+        <char xml:id="char-f1e1">
+          <localProp name="name" value="PARAGRAPHUS"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1E1</mapping>
+          <mapping type="standardized">¶</mapping>
+          <graphic url="images/f1e1.png"/>
+        </char>
+        <!-- b mit Strich -->
+        <char xml:id="char-0180">
+          <localProp name="name" value="LATIN SMALL LETTER B WITH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ƀ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-B">U+0180</mapping>
+          <mapping type="standardized">b</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- d mit Strich -->
+        <char xml:id="char-0111">
+          <localProp name="name" value="LATIN SMALL LETTER D WITH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">đ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-A">U+0111</mapping>
+          <mapping type="standardized">d</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- h mit Strich -->
+        <char xml:id="char-0127">
+          <localProp name="name" value="LATIN SMALL LETTER H WITH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ħ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-A">U+0127</mapping>
+          <mapping type="standardized">h</mapping>
+        </char>
+        <!-- K mit Strich -->
+        <char xml:id="char-a740">
+          <localProp name="name" value="LATIN CAPITAL LETTER K WITH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">Ꝁ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A740</mapping>
+          <mapping type="standardized">K</mapping>
+        </char>
+        <!-- k mit Strich -->
+        <char xml:id="char-a741">
+          <localProp name="name" value="LATIN SMALL LETTER K WITH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ꝁ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A741</mapping>
+          <mapping type="standardized">k</mapping>
+        </char>
+        <!-- L mit hohem Strich -->
+        <char xml:id="char-a748">
+          <localProp name="name" value="LATIN CAPITAL LETTER L WITH HIGH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">Ꝉ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A748</mapping>
+          <mapping type="standardized">L</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- l mit hohem Strich -->
+        <char xml:id="char-a749">
+          <localProp name="name" value="LATIN SMALL LETTER L WITH HIGH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ꝉ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A749</mapping>
+          <mapping type="standardized">l</mapping>
+        </char>
+        <!-- l mit mittlerem Strich -->
+        <char xml:id="char-019a">
+          <localProp name="name" value="LATIN CAPITAL LETTER L WITH HIGH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ƚ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-B">U+019A</mapping>
+          <mapping type="standardized">l</mapping>
+        </char>
+        <!-- Pre -->
+        <char xml:id="char-Pmacr">
+          <localProp name="name" value="LATIN CAPITAL LETTER P + COMBINING MACRON"/>
+          <mapping type="MUFI" subtype="Unicode">P̅</mapping>
+          <mapping type="MUFI" subtype="Combined">U+0050 + U0305</mapping>
+          <mapping type="standardized">P</mapping>
+          <graphic url="images/Pmacr.png"/>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- pre -->
+        <char xml:id="char-e665">
+          <localProp name="name" value="LATIN SMALL LETTER P WITH MACRON"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+E665</mapping>
+          <mapping type="MUFI" subtype="Combined">U+E665 = 0070 + 0304</mapping>
+          <mapping type="standardized">p</mapping>
+          <graphic url="images/e665.png"/>
+        </char>
+        <!-- e-caudata -->
+        <char xml:id="char-0119">
+          <localProp name="name" value="LATIN SMALL LETTER E WITH OGONEK"/>
+          <mapping type="MUFI" subtype="Unicode">ę</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-A">U+0119</mapping>
+          <mapping type="standardized">ae</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- Per -->
+        <char xml:id="char-a750">
+          <localProp name="name" value="LATIN CAPITAL LETTER P WITH STROKE THROUGH DESCENDER"/>
+          <mapping type="MUFI" subtype="Unicode">Ꝑ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A750</mapping>
+          <mapping type="standardized">Per</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- per -->
+        <char xml:id="char-a751">
+          <localProp name="name" value="LATIN SMALL LETTER P WITH STROKE THROUGH DESCENDER"/>
+          <mapping type="MUFI" subtype="Unicode">ꝑ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A751</mapping>
+          <mapping type="standardized">per</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- Pro -->
+        <char xml:id="char-a752">
+          <localProp name="name" value="LATIN CAPITAL LETTER P WITH FLOURISH"/>
+          <mapping type="MUFI" subtype="Unicode">Ꝓ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A752</mapping>
+          <mapping type="standardized">Pro</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- pro -->
+        <char xml:id="char-a753">
+          <localProp name="name" value="LATIN SMALL LETTER P WITH FLOURISH"/>
+          <mapping type="MUFI" subtype="Unicode">ꝓ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A753</mapping>
+          <mapping type="standardized">pro</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- Nasalstrich -->
+        <char xml:id="char-0304">
+          <localProp name="name" value="COMBINING MACRON"/>
+          <mapping type="MUFI" subtype="Unicode">̄</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+0304</mapping>
+          <mapping type="standardized">m</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- Kürzungsstrich -->
+        <char xml:id="char-0305">
+          <localProp name="name" value="COMBINING OVERLINE"/>
+          <mapping type="MUFI" subtype="Unicode">̅</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+0304</mapping>
+          <mapping type="standardized"/>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- q mit Strich -->
+        <char xml:id="char-a757">
+          <localProp name="name" value="LATIN SMALL LETTER Q WITH STROKE THROUGH DESCENDER"/>
+          <mapping type="MUFI" subtype="Unicode">ꝗ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A757</mapping>
+          <mapping type="standardized">q</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- q mit Schlaufe -->
+        <char xml:id="char-a759">
+          <localProp name="name" value="LATIN SMALL LETTER Q WITH DIAGONAL STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ꝙ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A759</mapping>
+          <mapping type="standardized">q</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- -rum -->
+        <char xml:id="char-a75D">
+          <localProp name="name" value="LATIN SMALL LETTER RUM ROTUNDA"/>
+          <mapping type="MUFI" subtype="Unicode">ꝝ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+a75D</mapping>
+          <mapping type="standardized">rum</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- -RUM -->
+        <char xml:id="char-a75C">
+          <localProp name="name" value="LATIN CAPITAL LETTER RUM ROTUNDA"/>
+          <mapping type="MUFI" subtype="Unicode">Ꝝ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+a75C</mapping>
+          <mapping type="standardized">RUM</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- -us -->
+        <char xml:id="char-1dd2">
+          <localProp name="name" value="COMBINING US ABOVE"/>
+          <mapping type="MUFI" subtype="Unicode">᷒</mapping>
+          <mapping type="MUFI" subtype="Combining-Diacritical-Marks-Supplement">U+1DD2</mapping>
+          <mapping type="standardized">us</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- -a (hochgestellt) -->
+        <char xml:id="char-1dd3">
+          <localProp name="name" value="COMBINING LATIN SMALL LETTER FLATTENED OPEN A ABOVE"/>
+          <mapping type="MUFI" subtype="Unicode">ᷓ</mapping>
+          <mapping type="MUFI" subtype="Combining-Diacritical-Marks-Supplement">U+1DD3</mapping>
+          <mapping type="standardized">a</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- -i (hochgestellt) -->
+        <char xml:id="char-0365">
+          <localProp name="name" value="COMBINING LATIN SMALL LETTER I"/>
+          <mapping type="MUFI" subtype="Unicode">ͥ</mapping>
+          <mapping type="MUFI" subtype="Combining-Diacritical-Marks">U+0365</mapping>
+          <mapping type="standardized">i</mapping>
+        </char>
+        <!-- Bild fehlt -->
+      </charDecl>
+    </encodingDesc>
+
+    <!-- nach Abschluss von Arbeiten hier entsprechend durch neuen <change> vermerken und Status ändern -->
+    <revisionDesc>
+      <change when="{date-yyyy-mm-dd}" who="#MiS" status="created"/>
+    </revisionDesc>
+
+  </teiHeader>
+
+  <!-- Beginn der Transkription -->
+
+  <text>
+    <!-- Achtung, ggf. pagebreak vor Buch setzen -->
+
+    <body xml:lang="lat">
+      <div type="book" n="{book}">
+
+        %%
+            </p>
+            </div>
+          </div>
+        </div>
+        </body>
+    </text>
+
+</TEI>
