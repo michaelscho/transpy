@@ -65,3 +65,5 @@ This script uses as set of structural tags to determain importance, place and ro
 * `column_2` (to be created)
 * `chapter_count` (to be created)
 
+## Usage
+Script must be called from cli specifying the mansucript to be processed (based on sigla as specified in `config.py`) as well as the booknumber. Then, the Transkribus pagerange must be given as well as the forst folio of the section and the iiif canvas number. The flag `-dl` specifies, if PAGE XML needs to be downloaded from transkribus or if existing xml can be used: `python bdd.py B 7 282-291 139v 236435 -dl`. In order to work, there must be a folder for the book to be processed in the `documents`as well as the `output` folder such as `documents/07`. 
