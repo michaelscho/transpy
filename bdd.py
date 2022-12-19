@@ -161,7 +161,7 @@ class ManuscriptToProcess:
                 'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
             line_number = 0
             for line in unicode_column:
-                line_text = line.xpath('.//ns0:TextEquiv/ns0:Unicode/text()', namespaces={
+                line_text = line.xpath('./ns0:TextEquiv/ns0:Unicode/text()', namespaces={
                     'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
                 line_coords = self.coords_text_region(line, './/ns0:Coords/@points')
                 line_number += 1

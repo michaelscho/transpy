@@ -1,12 +1,22 @@
 # transpy
 
-## Installation
-TODO
-
 ## Description
-TODO
+This script has been designed to be used in the project Burchards Dekret Digital (https://www.adwmainz.de/projekte/burchards-dekret-digital/beschreibung.html) and needs to be adapted for usage in other contexts.
+It assumes an exist-db and Transkribus based workflow. Transkriptions are created in Transkribus using special characters and enriched by a simple markup structure. 
+They are then exported as PAGE XML and postprocessed using a generated list of abbreviations as well as rules specified in `config.py`. 
+Next, they are then transformed into TEI in accordance to the projects documentation.
+
+## Installation
+Simply clone and install dependencies using pip.
 
 ## Prerequisites
+### Config
+The script uses three different config files that are provided as a template: `exist_credentials_template.py`, `transkribus_credentials_template.py` and `config_template.py`. Each of them must be renamed by deleting `_template`.
+Then, credentials must be provided in `exist_credentials.py`, `transkribus_credentials.py`. In `config.py`, the folderstructure as well as other information on special characters or rules of expansion of these characters as well as information on the manuscripts can be changed.
+
+### Folderstructure
+
+### Abbreviation-list
 
 ### Special characters
 
@@ -55,3 +65,4 @@ This script uses as set of structural tags to determain importance, place and ro
 * column_1 (to be created)
 * column_2 (to be created)
 * chapter_count (to be created)
+
