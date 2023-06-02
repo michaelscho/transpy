@@ -1,25 +1,26 @@
 # transpy
 
 ## Description
-This script has been designed to be used in the project Burchards Dekret Digital (https://www.adwmainz.de/projekte/burchards-dekret-digital/beschreibung.html) and needs to be adapted for usage in other contexts.
-It assumes an exist-db and Transkribus based workflow. Transkriptions are created in Transkribus using special characters and enriched by a simple markup structure. 
-They are then exported as PAGE XML and postprocessed using a generated list of abbreviations as well as rules specified in `config.py`. 
-Next, they are then transformed into TEI in accordance to the projects documentation.
+Transpy is a script designed to be used in the [Burchards Dekret Digital](https://www.adwmainz.de/projekte/burchards-dekret-digital/beschreibung.html) project, but can be adapted for usage in other contexts as well. It assumes an exist-db and Transkribus-based workflow, where transcriptions are created in Transkribus using special characters and enriched with a simple markup structure. The transcriptions are then exported as PAGE XML and post-processed using a generated list of abbreviations and rules specified in `config.py`. Finally, the transcriptions are transformed into TEI format according to the project's documentation.
 
 ## Installation
-Simply clone and install dependencies using pip.
+To install transpy, simply clone the repository and install the dependencies using pip:
+```bash
+git clone https://github.com/your/repo.git
+pip install -r requirements.txt
+```
 
 ## Prerequisites
-### Config
-The script uses three different config files that are provided as a template: `exist_credentials_template.py`, `transkribus_credentials_template.py` and `config_template.py`. Each of them must be renamed by deleting `_template`.
-Then, credentials must be provided in `exist_credentials.py`, `transkribus_credentials.py`. In `config.py`, the folderstructure as well as other information on special characters or rules of expansion of these characters as well as information on the manuscripts can be changed.
+### Configuration
+Transpy uses three different configuration files: `exist_credentials.py`, `transkribus_credentials.py`, and `config.py`. Please rename the provided template files (`exist_credentials_template.py`, `transkribus_credentials_template.py`, and `config_template.py`) by removing the "_template" suffix. Then, provide the necessary credentials and adjust the folder structure and other settings in `config.py` according to your needs.
 
 ### Abbreviation-list
-This scripts automatically expands abbreviated words identified by special characters. For the expansion, a list of abbreviations in `resources/abbreviation_dictionary.json` is used first. If the abbreviation is not found there, rules are used as specified in `config.py`. 
+The script automatically expands abbreviated words identified by special characters. For abbreviation expansion, a list of abbreviations in JSON format is used. You can provide the abbreviation dictionary by creating a file named `abbreviation_dictionary.json` in the `resources` folder. If the abbreviation is not found there, rules are used as specified in `config.py`. 
 
 ### Special characters
+Transpy uses a predefined set of special Unicode characters that are recommended for transcribing manuscripts in Transkribus. These characters represent common phenomena found in medieval manuscripts and are based on the MUFI (Medieval Unicode Font Initiative) recommendations. The script relies on the usage of these special characters in your Transkribus transcriptions.
 
-This script uses a predefined set of special unicode characters that have to be used in transcribing manuscripts in Transkribus. These characters have been choosen to represent common phenomenon of medieval manuscripts in a standardized manner and are based on MUFI https://mufi.info/ recomendation.
+The table below shows some of the special characters used in transpy, along with their glyph, codepoint, MUFI name, and MUFI link:
 
 | Glyph | font-Image | Codepoint | MUFI Name | MUFI link |
 | ----- | ----- | --------- | --------- | --------- |
@@ -56,14 +57,29 @@ This script uses a predefined set of special unicode characters that have to be 
 
 ### Transkribus structural tags
 
-This script uses as set of structural tags to determain importance, place and role of text zones in Transkribus. In order to have this script to work, the folowing tags must be created and used in Transkribus.
+This script relies on a set of structural tags in Transkribus to determine the importance, place, and role of text zones. These tags need to be created and used in Transkribus for the script to work properly. The following tags are required:
 
-* `header` (existing)
-* `footer` (existing)
-* `marginalia` (existing)
-* `column_1` (to be created)
-* `column_2` (to be created)
-* `chapter_count` (to be created)
+* `header` (existing): Used to mark the header section of the manuscript.
+* `footer` (existing): Used to mark the footer section of the manuscript.
+* `marginalia` (existing): Used to mark marginalia or notes in the manuscript.
+* `column_1` (to be created): This tag should be created and used to mark the first column of text in the manuscript.
+* `column_2` (to be created): This tag should be created and used to mark the first column of text in the manuscript.
+* `chapter_count` (to be created): This tag should be created and used to mark the chapter count or numbering in the manuscript.
+
+Make sure to apply these tags appropriately in your Transkribus documents according to the structure and content of the manuscript.
 
 ## Usage
-Script must be called from cli specifying the mansucript to be processed (based on sigla as specified in `config.py`) as well as the booknumber. Then, the Transkribus pagerange must be given as well as the forst folio of the section and the iiif canvas number. The flag `-dl` specifies, if PAGE XML needs to be downloaded from transkribus or if existing xml can be used: `python bdd.py B 7 282-291 139v 236435 -dl`. In order to work, there must be a folder for the book to be processed in the `documents`as well as the `output` folder such as `documents/07`. 
+To use this script, you need to call it from the command line (CLI) and provide specific parameters for the manuscript to be processed. The parameters include the manuscript's sigla (based on the specified values in config.py) and the book number. Additionally, you need to specify the Transkribus page range, the first folio of the section, and the IIIF canvas number.
+
+Here's an example command to run the script:
+
+```bash
+python bdd.py B 7 282-291 139v 236435 -dl
+
+```
+
+The -dl flag indicates whether the PAGE XML needs to be downloaded from Transkribus or if existing XML files can be used.
+
+It's important to ensure that there is a corresponding folder for the book to be processed in the documents directory, as well as an output folder to store the generated output files. For example, if you're processing book 7, there should be a folder named `07` in the `documents` directory.
+
+Ensure that you have provided the necessary credentials in the `exist_credentials.py` and `transkribus_credentials.py` files, as mentioned in the prerequisites section of the README.

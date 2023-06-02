@@ -1,13 +1,131 @@
+"""
+BDD Manuscript Processing Script
+================================
+
+Author: Michael Schonhardt, Burchards Dekret Digital, Universität Kassel
+Email: m.schonhardt@uni-kassel.de
+
+Summary:
+--------
+This script downloads, exports, and converts manuscripts stored in Transkribus into BDD-TEI format. It performs various tasks including downloading data from Transkribus, testing the page XML for consistency, converting the page XML to TEI, and replacing abbreviations with their full forms based on a provided dictionary. The processed manuscript is then saved as a new XML file in TEI format.
+
+Description:
+------------
+This script is designed to automate the processing of manuscripts stored in Transkribus. It retrieves the necessary data from Transkribus, performs consistency checks on the page XML files, converts them to TEI format following the BDD schema, and applies abbreviation expansion using an external dictionary. The resulting TEI representation is saved as a new XML file.
+
+Usage:
+------
+To use this script, run it from the command line with the following arguments:
+python bdd.py <siglum> <book> <page_range> <folio> <iiif_image_id> [-dl]
+
+- siglum: The unique identifier for the manuscript (e.g., B, F, V).
+- book: The book number.
+- page_range: The range of Transkribus page numbers to process (e.g., 282-291).
+- folio: The starting folio number.
+- iiif_image_id: The ID of the IIIF image (as specified in the iiif-manifest).
+- -dl: (optional) Include this flag to download the data from Transkribus.
+
+Dependencies:
+-------------
+This script relies on the following external libraries:
+- argparse
+- transpy
+- config
+- lxml
+- re
+- datetime
+- os
+
+License:
+--------
+This script is released under the MIT license. Please refer to the accompanying LICENSE file for more information.
+
+"""
+
 import argparse
 import transpy
 import config
 import lxml.etree as LET
 import re
 import datetime
+import os
 
 
 class ManuscriptToProcess:
+    """
+    Represents a manuscript to be processed, including various attributes and methods for data extraction and conversion.
+
+    Attributes:
+        sigla (str): The unique identifier for the manuscript.
+        signatur (str): The signature of the manuscript.
+        transkribus_collection (str): The ID of the Transkribus collection containing the manuscript.
+        transkribus_document (str): The ID of the Transkribus document representing the manuscript.
+        tei_base_id (str): The base ID for TEI representation of the manuscript.
+        tei_base_id_book (str): The base ID for the book-level TEI representation of the manuscript.
+        iiif_scale_factor (float): The scale factor for IIIF images.
+        base_folder (str): The base folder path for the manuscript data.
+        bdd_tei_text (str): The TEI representation of the manuscript.
+        start_folio (str): The starting folio number of the manuscript.
+        iiif_image_id (int): The ID of the IIIF image.
+        path_to_pagexml_files (List[str]): The paths to the PAGE XML files for the manuscript.
+        facs_url (str): The URL for the facsimile of the manuscript.
+        corresp (str): The correspondence information for the manuscript.
+        ana (str): The annotation information for the manuscript.
+        toc_label_for_later_replacement (List[str]): A list of TOC labels for later replacement.
+        label_for_later_replacement (List[str]): A list of labels for later replacement.
+        interrogation_label_for_later_replacement (List[str]): A list of interrogation labels for later replacement.
+        inscriptions_to_replace (List[str]): A list of inscriptions for later replacement.
+
+    Methods:
+        __init__(self, sigla):
+            Initializes a ManuscriptToProcess instance with the provided sigla.
+
+        increment_folia(self):
+            Increments the folio numbers of the manuscript.
+
+        identify_placement_of_element(coords):
+            Identifies the placement of an element on the page using the provided coordinates.
+
+        coords_baseline(self, root, xpath):
+            Retrieves and adjusts the coordinates from the baseline of a text region in a PAGE XML document.
+
+        coords_text_region(self, root, xpath):
+            Get the bounding box coordinates of a text region in a PAGE XML file.
+
+        create_tei_fw_head(self, root):
+            Creates tei:fw for the header of the manuscript.
+
+        create_column(self, root, column_name, column_a_b):
+            Creates text of a column from a PAGE XML file.
+
+        create_tei_fw_foot(self, root):
+            Creates tei:fw for the footer of the manuscript.
+
+        store_toc_label_for_later_replacement(self, root):
+            Stores information about TOC labels for later replacement.
+
+        store_label_for_later_replacement(self, root):
+            Stores information about labels for later replacement.
+
+        store_interrogation_label_for_later_replacement(self, root):
+            Stores information about interrogation labels for later replacement.
+
+        store_inscription_for_later_replacement(self, root):
+            Stores information about inscriptions for later replacement.
+
+        create_tei_from_pagexml(self):
+            Creates TEI representation from the extracted text in the PAGE XML files.
+
+    """
+
     def __init__(self, sigla):
+        """
+        Initializes a ManuscriptToProcess instance with the provided sigla.
+
+        Args:
+            sigla (str): The unique identifier for the manuscript.
+        """
+
         self.sigla = sigla
         self.signatur = config.manuscript_data[sigla]['signatur']
         self.transkribus_collection = config.manuscript_data[sigla]['transkribus_collection_id']
@@ -34,6 +152,20 @@ class ManuscriptToProcess:
 
     # function for incrementing folia_numbers, e.g. 28v-30r
     def increment_folia(self):
+        """
+        Increments the folio numbers of the manuscript.
+
+        This function is used to increment the folio numbers, following the standard notation for folios in manuscripts,
+        where 'r' stands for recto (the front side of a leaf) and 'v' for verso (the back side). The function changes
+        'r' to 'v' (moving to the back side of the same leaf), or increments the leaf number and changes 'v' to 'r'
+        (moving to the front side of the next leaf).
+
+        This method does not take any parameters or return anything. It modifies the instance variable 'start_folio'.
+
+        Example:
+        If the current 'start_folio' is '28r', it will be changed to '28v'.
+        If the current 'start_folio' is '28v', it will be changed to '29r'.
+        """
 
         if 'r' in self.start_folio:
             self.start_folio = self.start_folio.replace('r', 'v')
@@ -42,12 +174,26 @@ class ManuscriptToProcess:
 
     @staticmethod
     def identify_placement_of_element(coords):
-        """ Identifies place of element by coordinates taken from pageXML
 
-        Takes list of coordinates of an elements textregion and checks side of placement on page.
-        Returns 'lest' or 'right' as string for replacing placeholder {left|right} in xml.
-        :param coords: coordinates of element as list
-        :return side: 'left' or 'right' as string
+        """
+        Identifies the placement of an element on the page using the provided coordinates.
+
+        This static method processes a list of coordinates that represent the position of a text region
+        on a manuscript page. It checks whether the region is located on the left or right side of the page 
+        based on the x-coordinate (horizontal position). The method returns a string indicating the side 
+        of placement, which can be used to replace the placeholder {left|right} in an XML file.
+
+        Parameters:
+        coords (List[str]): A list of strings, where each string contains the x and y coordinates 
+        (separated by a comma) for a point on the text region's bounding box. 
+        For example: ['800,600', '900,700', '800,800', '700,600']
+
+        Returns:
+        str: A string indicating the side of placement on the page. It can be either 'left' or 'right'.
+
+        Note:
+        The method considers a region to be on the 'left' side of the page if any of its x-coordinates are 
+        less than 800. Otherwise, it is considered to be on the 'right' side.
         """
 
         side = 'right'
@@ -60,57 +206,121 @@ class ManuscriptToProcess:
         return side
 
     def coords_baseline(self, root, xpath):
-        """ get coordinates from baseline
+        """
+        Retrieves and adjusts the coordinates from the baseline of a text region in a PAGE XML document.
+
+        This method takes the root of an PAGE XML document tree and an XPath expression to find elements within
+        the PAGE XML that match the given expression. For each matching element, it processes the baseline coordinates,
+        adjusts these coordinates according to a scale factor, and returns them in a specific format.
+
+        Parameters:
+        root (etree.Element): The root node of a PAGE XML document tree.
+        xpath (str): An XPath expression used to find specific elements in the PAGE XML tree.
+
+        Returns:
+        coord_string (str): A string representing the adjusted coordinates of the baseline in the format "c1,c2,w,h",
+        where:
+            c1: The x-coordinate of the leftmost point of the baseline, adjusted by the scale factor and reduced by 20.
+            c2: The y-coordinate of the leftmost point of the baseline, adjusted by the scale factor and reduced by 50.
+            w:  The width of the baseline (the distance in x-coordinates between the leftmost and rightmost points), adjusted by the scale factor and increased by 80.
+            h:  The height of the baseline, fixed at 100.
+
+        Note:
+        The method assumes that the baseline coordinates in the PAGE XML are in the format "x1,y1 x2,y2 ... xn,yn", where
+        each pair of values (x,y) represents a point on the baseline. The x and y values are separated by a comma, and
+        each pair of values is separated by a space.
         """
 
+        # scaling factor for coordinates
         x = float(self.iiif_scale_factor)
 
+        # fetch coordinates using XPath query from the PAGE XML document root
         coords = root.xpath(xpath,
                             namespaces={'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
 
+        # iterate over all coordinate sets found
         for i in coords:
+            # split the coordinates by space (expected format is "x1,y1 x2,y2 ... xn,yn")
             coord = i.split(' ')
-            coord_left = coord[0].split(',')
-            coord_right = coord[-1].split(',')
-            c1 = int(int(coord_left[0]) * x) - 20  # full bild von frankfurt 1.3 größer als in transkribus
-            c2 = int(int(coord_left[1]) * x) - 50
-            w = int(coord_right[0]) - int(coord_left[0]) + 80
-            w = int(w * x)
-            h = 100
-        coord_string = f"{c1},{c2},{w},{h}"
-        return coord_string
 
+            # split the leftmost (first) coordinate by comma into x and y values
+            coord_left = coord[0].split(',')
+
+            # split the rightmost (last) coordinate by comma into x and y values
+            coord_right = coord[-1].split(',')
+
+            # calculate adjusted x-coordinate (c1) and y-coordinate (c2) of the leftmost point of the baseline
+            c1 = int(int(coord_left[0]) * x) - 20  # scale the original x-coordinate by the factor x and reduce by 20
+            c2 = int(int(coord_left[1]) * x) - 50  # scale the original y-coordinate by the factor x and reduce by 50
+
+            # calculate the width of the baseline (the x-distance between the leftmost and rightmost points)
+            w = int(coord_right[0]) - int(coord_left[0]) + 80  # add 80 to the width
+
+            # scale the width by the factor x
+            w = int(w * x)
+
+            # fix the height of the baseline at 100
+            h = 100
+
+        # format the calculated values into a string "c1,c2,w,h"
+        coord_string = f"{c1},{c2},{w},{h}"
+
+        return coord_string
+        
     def coords_text_region(self, root, xpath):
-        """ get coordinates from textregion
+        """ 
+        Get the bounding box coordinates of a text region in a PAGE XML file.
+
+        This function takes in the root of a PAGE XML document and an XPath query, 
+        and returns the coordinates of the bounding box that contains all points 
+        found by the XPath query. The coordinates are scaled by a scaling factor 
+        and adjusted to add padding around the bounding box. The returned coordinates 
+        are in the format "x,y,width,height".
+
+        :param root: The root of the PAGE XML document.
+        :param xpath: The XPath query to find the points.
+        :return: The bounding box coordinates as a string in the format "x,y,width,height".
         """
 
+        # scaling factor for coordinates
         x = float(self.iiif_scale_factor)
+
+        # fetch coordinates using XPath query from the PAGE XML document root
         coords = root.xpath(xpath,
                             namespaces={'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
 
+        # iterate over all coordinate sets found
         for i in coords:
+            # initialize lists to store x and y coordinates
             coords_list_left = []
             coords_list_right = []
+
+            # split the coordinates by space (expected format is "x1,y1 x2,y2 ... xn,yn")
             coord = i.split(' ')
+
             for e in coord:
+                # split each coordinate by comma into x and y values and append to respective lists
                 e = e.split(',')
                 coords_list_left.append(int(e[0]))
                 coords_list_right.append(int(e[1]))
 
-        c1 = int(min(coords_list_left) * x)
-        w = max(coords_list_left)
+        # calculate the bounding box coordinates
+        c1 = int(min(coords_list_left) * x)  # leftmost x-coordinate, scaled by x
+        w = max(coords_list_left)  # width of the bounding box, scaled by x and adjusted for padding
         w = int(w * x)
         w = w - c1
         w = w + 30
-        c2 = min(coords_list_right)
+        c2 = min(coords_list_right)  # topmost y-coordinate, scaled by x and adjusted for padding
         c2 = int(c2 * x)
-        h = max(coords_list_right)
+        h = max(coords_list_right)  # height of the bounding box, scaled by x and adjusted for padding
         h = int(h * x)
         h = h - c2
         h = h + 30
         c2 = c2 - 30
 
+        # format the calculated values into a string "c1,c2,w,h"
         coord_string = str(c1) + ',' + str(c2) + ',' + str(w) + ',' + str(h)
+
         return coord_string
 
     def create_tei_fw_head(self, root):
@@ -163,7 +373,7 @@ class ManuscriptToProcess:
             for line in unicode_column:
                 line_text = line.xpath('./ns0:TextEquiv/ns0:Unicode/text()', namespaces={
                     'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
-                line_coords = self.coords_text_region(line, './/ns0:Coords/@points')
+                line_coords = self.coords_text_region(line, './ns0:Coords/@points')
                 line_number += 1
                 text_column = f'{text_column}\n<lb n="{line_number}" facs="{line_coords}"/>{line_text[0]}'
         except Exception as e:
@@ -243,6 +453,17 @@ class ManuscriptToProcess:
                 print(str(e) + '>>>Error with label<<<')
 
     def store_interrogation_label_for_later_replacement(self, root):
+        """
+        Stores the information about interrogation labels for later replacement.
+
+        This function searches for TextRegions with a custom attribute indicating 
+        the type 'chapter_count' and extracts the chapter number text from it. 
+        If the chapter number text contains a specific pattern ('*i<number>*'), 
+        it retrieves the coordinates of the label and stores the information 
+        for later replacement in the XML.
+
+        :param root: The root element of the PAGE XML document.
+        """
         for chapter_number in root.xpath('//ns0:TextRegion[contains(@custom,"type:chapter_count")]', namespaces={
             'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}):
             chapter_number_text = chapter_number.xpath('.//ns0:TextLine/ns0:TextEquiv/ns0:Unicode/text()', namespaces={
@@ -267,6 +488,17 @@ class ManuscriptToProcess:
                 print(f"{e} >>>Interrogation<<<")
 
     def store_inscription_for_later_replacement(self, root):
+        """
+        Stores the information about inscriptions for later replacement.
+
+        This function searches for TextRegions with a custom attribute indicating
+        the type 'Inskription' and extracts the inscription text from it.
+        It retrieves the coordinates of the inscription label and constructs the
+        corresponding XML element to represent the inscription. The information
+        is then stored for later replacement in the XML.
+
+        :param root: The root element of the PAGE XML document.
+        """
         for inskription in root.xpath('//ns0:TextRegion[contains(@custom,"type:Inskription")]', namespaces={
             'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'}):
             inskription_text = ''
@@ -290,6 +522,14 @@ class ManuscriptToProcess:
             self.inscriptions_to_replace.append([replace_text, text_to_be_replaced, replace_key])
 
     def create_tei_from_pagexml(self):
+        """
+        Creates TEI representation from the extracted text in the PAGE XML files.
+
+        This function processes each PAGE XML file and extracts the text from the columns and headers.
+        It constructs the TEI representation by combining the extracted text and applying certain
+        replacements and transformations. The TEI representation is stored in the 'bdd_tei_text' attribute of the object.
+
+        """
         text_page = ""
         # open each pagexml-file for exporting text to tei
         for filename in self.path_to_pagexml_files:
@@ -348,8 +588,35 @@ class ManuscriptToProcess:
         self.bdd_tei_text = text_page
 
 
-class BddTei:
+    """
+    A class for transforming PAGE XML files to TEI format according to BDD schematics.
+
+    Attributes:
+        tei (str): The TEI representation of the manuscript.
+        toc_label_for_later_replacement (list): A list of TOC labels for later replacement.
+        interrogation_label_for_later_replacement (list): A list of interrogation labels for later replacement.
+        label_for_later_replacement (list): A list of chapter labels for later replacement.
+        inscriptions_to_replace (list): A list of inscriptions to replace.
+        tei_base_id_book (str): The base ID of the TEI book.
+
+    Methods:
+        bdd_export_tei(): Transforms the PAGE XML as a single TEI file according to BDD schematics.
+        sc_to_g(): Replaces special characters in the TEI representation.
+        bdd_specific_tei(): Modifies specific elements in the TEI representation according to BDD requirements.
+        line_breaks_angled_dash(): Adjusts line breaks in the TEI representation using manually inserted '¬' character.
+        preprocessing(): Performs preprocessing operations before abbreviation expansion.
+        postprocessing(): Performs postprocessing operations on the TEI representation after abbreviation expansion.
+
+    """
+    
     def __init__(self, manuscript):
+        """
+        Initializes a BddTei object.
+
+        Args:
+            manuscript (ManuscriptToProcess): The ManuscriptToProcess object containing the necessary data.
+
+        """
         self.tei = manuscript.bdd_tei_text
         self.toc_label_for_later_replacement = manuscript.toc_label_for_later_replacement
         self.interrogation_label_for_later_replacement = manuscript.interrogation_label_for_later_replacement
@@ -357,8 +624,19 @@ class BddTei:
         self.inscriptions_to_replace = manuscript.inscriptions_to_replace
         self.tei_base_id_book = manuscript.tei_base_id_book
 
-    ## transform pagexml as single tei file according to bdd schematics
     def bdd_export_tei(self):
+        """
+        Transforms the PAGE XML as a single TEI file according to BDD schematics.
+
+        This method performs various replacements and transformations on the TEI representation, 
+        based on the extracted data from the PAGE XML files. It replaces TOC labels, interrogation labels, 
+        and chapter labels with their corresponding values. It also adjusts the structure of the TEI representation 
+        by inserting appropriate tags and removing unnecessary elements.
+
+        Note:
+        - This method modifies the 'tei' attribute of the ManuscriptToProcess instance.
+
+        """
 
         # Insert label TOC
         for element in self.toc_label_for_later_replacement:
@@ -415,12 +693,39 @@ class BddTei:
         self.tei = re.sub(r'~(\w)', r'\g<1></hi>', self.tei)
 
     def sc_to_g(self):
+        """
+        Replaces special characters in the TEI representation.
+
+        This method replaces special characters from a list provided in the config file. Each character is replaced 
+        with its corresponding replacement value.
+
+        Note:
+        - This method modifies the 'tei' attribute of the ManuscriptToProcess instance.
+
+        """
 
         # replace special characters from list in config file...
         for character in config.character_list:
             self.tei = self.tei.replace(character[1], character[0])
 
     def bdd_specific_tei(self):
+        """
+        Modifies specific elements in the TEI representation according to BDD requirements.
+
+        This method performs various replacements and transformations on specific elements in the TEI representation
+        to meet the requirements of BDD. It replaces '<add>' tags with '<add place="above" type="contemporary">'.
+        It replaces '...' with '<unclear reason="tight-binding" resp="Transkribus" cert="low">...</unclear>'.
+        It replaces '[' with '<note type="editorial-comment" resp="transkribus">', ']' with '</note>',
+        and '<note>' with '<note type="editorial-comment" resp="transkribus">'.
+        It replaces '<del>' with '<del rend="">'.
+        It replaces '<subst>' with '<subst><del rend="erasure"/><add place="" type="">' and '</subst>' with '</add></subst>'.
+        It modifies '<delSpan>' elements and '<seg>' elements by adding IDs and anchor points.
+        It removes the '§' character from the TEI representation.
+
+        Note:
+        - This method modifies the 'tei' attribute of the ManuscriptToProcess instance.
+
+        """
         # <add> used in Transkribus to show inline additions
         self.tei = self.tei.replace('<add>', '<add place="above" type="contemporary">')
 
@@ -436,10 +741,24 @@ class BddTei:
         # del
         self.tei = self.tei.replace('<del>', '<del rend="">')
 
+        # subst
+        self.tei = self.tei.replace('<subst>', '<subst><del rend="erasure"/><add place="" type="">')
+        self.tei = self.tei.replace('</subst>', '</add></subst>')
+
+        # delspan
+        # seg
+        n = 1
+        for i in re.findall('<delSpan>.*?</delSpan>', self.tei, re.DOTALL):
+            print(i)
+            id = f"{self.tei_base_id_book}-delSpan-{str(n).zfill(3)}"
+            seg_text = i.replace('<delSpan>', f'<delSpan spanTo="#{id}" rend=""/>').replace('</delSpan>', f'<anchor xml:id="{id}"/>')
+            self.tei = self.tei.replace(i, seg_text)
+            n += 1
+
         # seg
         n = 1
         for i in re.findall('<seg>.*?</seg>', self.tei):
-            print(i)
+            #print(i)
             id = f"{self.tei_base_id_book}-supp-{str(n).zfill(3)}"
             seg_text = i.replace('<seg>', '').replace('</seg>', '')
             supplied = i.replace('<seg>', f'<supplied xml:id="{id}" reason="displaced-over-the-line">').replace(
@@ -454,6 +773,17 @@ class BddTei:
 
     # use manually inserted ¬ for creating proper tei linebreaks
     def line_breaks_angled_dash(self):
+        """
+        Adjusts line breaks in the TEI representation using manually inserted '¬' character.
+
+        This method modifies line breaks in the TEI representation by replacing '¬ ' with '¬',
+        and by replacing '¬\n' with appropriate line break elements based on the surrounding context.
+        It uses regular expressions to identify specific patterns and perform the replacements.
+
+        Note:
+        - This method modifies the 'tei' attribute of the ManuscriptToProcess instance.
+
+        """
         self.tei = self.tei.replace('¬ ', '¬')
         self.tei = re.sub(r'¬\n(<lb.*?)/>', r'\g<1> break="no"/>', self.tei, flags=re.DOTALL)
         self.tei = re.sub(r'¬\n+(<cb.*?n="b".*?/>\n<lb.*?)/>', r'\g<1> break="no"/>', self.tei)
@@ -472,7 +802,16 @@ class BddTei:
         self.tei = self.tei.replace('', '')
 
     def postprocessing(self):
-        """ postprocessing after expansion of abbreviations
+        """
+        Performs postprocessing operations on the TEI representation after abbreviation expansion.
+
+        This method applies various corrections and modifications to the TEI representation to address specific issues.
+        It checks for incorrect placement of '</p>' or '</hi>' within '<choice>' elements and adjusts the placement.
+        It performs specific replacements for certain patterns in the TEI representation.
+        It corrects line breaks and handles ambiguous expansions.
+
+        Note:
+        - This method modifies the 'tei' attribute of the ManuscriptToProcess instance.
 
         """
 
@@ -556,22 +895,64 @@ class BddTei:
 
 
 class PageXMLTests:
+    """
+    A class for performing tests on PAGE XML files.
+
+    This class provides methods for performing various tests on PAGE XML files. It can concatenate multiple text files,
+    check text regions for necessary tags, check entries in the single text file, check the number of items in a list,
+    and check the internal structure of the text based on special placeholders.
+
+    Args:
+        path_to_pagexml_files (list): A list of file paths to the PAGE XML files to be tested.
+
+    Attributes:
+        filenames (list): A list of file paths to the PAGE XML files.
+        single_text_file (str): The concatenated text from all the files.
+
+    """
+
     def __init__(self, path_to_pagexml_files):
+        """
+        Initializes an instance of the PageXMLTests class.
+
+        Args:
+            path_to_pagexml_files (list): A list of file paths to the PAGE XML files to be tested.
+
+        """
         self.filenames = path_to_pagexml_files
         self.single_text_file = ""
 
     def create_single_text_file(self):
+        """
+        Concatenates multiple text files into a single text file.
+    
+        This method reads multiple text files specified by the 'filenames' attribute and concatenates their contents
+        into a single text file. The resulting text file is stored in the 'single_text_file' attribute of the object.
+    
+        Returns:
+            str: The concatenated text from all the files.
+    
+        """
         single_text_file = ""
         for filename in self.filenames:
-            with open(filename, 'r') as file:
+            with open(filename, 'r', encoding = 'utf8') as file:
                 text = file.read()
                 single_text_file = single_text_file + text
         self.single_text_file = single_text_file
         return self.single_text_file
 
     def check_text_regions(self):
-        """ Checks text regions for necessary tags
+        """
+        Checks text regions in the XML files for necessary tags.
 
+        This method iterates over the XML files specified by the 'filenames' attribute and checks each text region
+        for the presence of necessary markup tags. It specifically looks for the presence of the "structure {type:"
+        tag within each text region. If a text region is found without the necessary markup, an error message is printed
+        with the details of the text region.
+
+        Note:
+        - The method prints error messages if any text regions are found without the necessary markup.
+        - The method terminates the script if inconsistent text regions are found.
         """
 
         consistent_text_regions = True
@@ -602,6 +983,28 @@ class PageXMLTests:
             exit()
 
     def check_entries(self, character, type):
+        """
+        Checks entries in the single text file for a given character pattern.
+    
+        This method counts the number of entries in the single text file that match the specified character pattern.
+        The character pattern is provided as the 'character' parameter. The method searches for entries marked up by
+        '~n~' or entries enclosed within the specified characters. The type of entries is provided as the 'type' parameter.
+    
+        Note:
+        - The method assumes that the single text file has been created before calling this method.
+        - The method prints the number of entries detected and returns the number of entries, the set of entries,
+          and the list of entries.
+    
+        Args:
+        - character (str): The character pattern used to mark up the entries.
+        - type (str): The type of entries being checked.
+    
+        Returns:
+        - number_of_entries (int): The number of entries detected.
+        - set_of_entries (set): A set containing unique entries.
+        - entries (list): A list of all entries detected.
+    
+        """
         # count number of chapters using toc entries marked up by '~n~'
         if "*" in character:
             entries = re.findall(f'\*\d+\*', self.single_text_file)
@@ -616,6 +1019,22 @@ class PageXMLTests:
         return number_of_entries, set_of_entries, entries
 
     def check_number_of_items(self, items, test_number):
+        """
+        Checks the number of items in a list for a specific test number.
+
+        This method checks the number of occurrences of each item in the list 'items' and compares it to the expected
+        test number. If the count of an item divided by 2 is equal to the test number, the item is considered correct.
+        Otherwise, an error message is printed indicating that the item has the wrong number. The method returns a boolean
+        value indicating whether all items have the correct number.
+
+        Args:
+        - items (list): A list of items to be checked.
+        - test_number (int): The expected test number.
+
+        Returns:
+        - test (bool): A boolean value indicating whether all items have the correct number.
+
+        """
         test = True
         for i in range(1, max(items)):
             if items.count(i) / 2 == test_number:
@@ -628,7 +1047,16 @@ class PageXMLTests:
         return test
 
     def check_internal_structure(self):
-        """ Checks internal structure as marked up using special placeholders ~n~ and *n*
+        """
+        Checks the internal structure of the text based on special placeholders.
+
+        This method performs checks on the internal structure of the text using special placeholders, namely '~n~' and '*n*'.
+        It creates a single text file for easy checking and then counts the number of TOC entries marked with '~n~' and
+        the number of chapters marked with '*n*'. It compares these numbers and performs further checks on the number
+        of placeholders in the text.
+
+        Note:
+        - This method relies on the 'create_single_text_file', 'check_entries', and 'check_number_of_items' methods.
 
         """
         print("Start checking internal structure")
@@ -656,6 +1084,18 @@ class PageXMLTests:
 
 
 def main():
+    """
+    Main script for downloading, exporting, and converting manuscripts stored in Transkribus into BDD-TEI format.
+
+    The script takes command line arguments to specify the manuscript to be processed. It performs various tasks including
+    downloading the data from Transkribus, testing the page XML for consistency, converting the page XML to TEI, and 
+    replacing abbreviations with their full forms based on a provided dictionary. The processed manuscript is then saved 
+    as a new XML file in TEI format.
+    
+    Note:
+    This script should be run from the command line, with the necessary arguments provided.
+    """
+
     # Get variables from console
     # example 'python bdd.py B 7 282-291 139v 236435 -dl'
     parser = argparse.ArgumentParser(
@@ -675,7 +1115,7 @@ def main():
     endpage = int(args.page_range.split('-')[1])
 
     # create path to folder
-    path_to_folder = config.export_folder + book_string + '/'
+    path_to_folder = os.path.join(config.export_folder,book_string)
 
     # create manuscript object
     manuscript = ManuscriptToProcess(args.siglum)
@@ -694,8 +1134,7 @@ def main():
 
     # open page-xml files for further processing
     # get path to individual page-xml files
-    manuscript.path_to_pagexml_files = transpy.load_pagexml(
-        f'{path_to_folder}{manuscript.transkribus_document}/{manuscript.base_folder}/page/')
+    manuscript.path_to_pagexml_files = transpy.load_pagexml(os.path.join(path_to_folder,str(manuscript.transkribus_document),manuscript.base_folder,'page'))
 
     # create pageXML object
     page_xml_tests = PageXMLTests(manuscript.path_to_pagexml_files)
@@ -725,8 +1164,8 @@ def main():
     tei_file.postprocessing()
 
     # replace placeholder in template file and save as new file
-    with open(f'/home/michael/Dokumente/transpy/resources/tei_template_{manuscript.tei_base_id[:-1]}.xml',
-              'r') as xmlfile:
+    with open(os.path.join(config.resources_folder,f'tei_template_{manuscript.tei_base_id[:-1]}.xml'),
+              'r', encoding='utf8') as xmlfile:
         template_file = xmlfile.read()
 
     new_file = template_file.replace('%%', tei_file.tei)
@@ -736,8 +1175,10 @@ def main():
     today = datetime.date.today()
     new_file = new_file.replace("{date-yyyy-mm-dd}", str(today))
 
-    with open(f'/home/michael/Dokumente/transpy/output/{book_string}/{manuscript.tei_base_id_book}.xml',
-              'w+') as newfile:
+    if os.path.exists(os.path.join(os.getcwd(),'output',f'{book_string}')) == False:
+        os.mkdir(os.path.join(os.getcwd(),'output',f'{book_string}'))
+    with open(os.path.join(os.getcwd(),'output',f'{book_string}',f'{manuscript.tei_base_id_book}.xml'),
+              'w+', encoding = 'utf8') as newfile:
         newfile.write(new_file)
 
 

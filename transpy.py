@@ -89,7 +89,7 @@ def download_export(url):
     """
 
     # download zip file to the subfolder ./documents on a local machine...
-    zip_file_name = config.export_folder+'export.zip'
+    zip_file_name = os.path.join(os.getcwd(),'documents','export.zip')
     zip_file = requests.get(url)
     zip_file.raise_for_status()
     save_file = open(zip_file_name,'wb')
@@ -109,11 +109,11 @@ def unzip_file(zip_file_name, path_to_folder):
     """
 
     with ZipFile(zip_file_name,'r') as zip_obj:
-        list_of_filenames = zip_obj.namelist()
-        for filename in list_of_filenames:
-            if 'page/' in filename:
-                path_to_pagexml = filename.split('page/')[0]+'page/'
+        path_to_pagexml = zip_obj.namelist()[1].split("/")[0]
+        path_to_pagexml_filename = zip_obj.namelist()[1].split("/")[1]
         zip_obj.extractall(path_to_folder)
+        path_to_pagexml = os.path.join(path_to_folder,path_to_pagexml,path_to_pagexml_filename,'page')
+        print('DEBUG 1: ' + path_to_pagexml)
     return path_to_pagexml
 
 def rename_files(path_to_pagexml, path_to_folder):
@@ -122,10 +122,9 @@ def rename_files(path_to_pagexml, path_to_folder):
     Renames downloaded files to numbered filenames using 4 leading zeros
     :param path_to_pagexml: Path to file as provided by function unzip_file
     """
-    path_to_pagexml = path_to_folder + path_to_pagexml[:-1]
     for filename in os.listdir(path_to_pagexml):
         # replace string for Frankfurt ms and add leading numbers if neccessary
-        os.rename(os.path.join(path_to_pagexml+"/",filename), os.path.join(path_to_pagexml+"/", filename.replace('Ms Barth 50 - Decretum-', '').zfill(4)))
+        os.rename(os.path.join(path_to_pagexml,filename), os.path.join(path_to_pagexml, filename.replace('Ms Barth 50 - Decretum-', '').zfill(4)))
 
 def only_numbers(x):
     """ building sort key for load_pagexml()
@@ -146,6 +145,8 @@ def load_pagexml(folder_name):
     :param folder_name: Takes path to pageXML as returned by unzip_file()
     :return: Returns path to pageXML files as list
     """
+
+    print('DEBUG 2: ' + folder_name)
 
     filenames = next(os.walk(folder_name))[2]
     path_to_files = sorted([folder_name + '/' + string for string in filenames], key = only_numbers)
@@ -202,7 +203,7 @@ def get_exist_data(user, pw, exist_url, resources_folder):
             dictionary_abbr_exist[choice[0]] = choice[1]
 
     # ... save dictionary in file in local subfolder ./resources for further usage...
-    abbreviation_json = open(resources_folder + "abbreviation_dictionary.json", "w")
+    abbreviation_json = open(resources_folder + "abbreviation_dictionary.json", "w", encoding = 'utf8')
     json.dump(dictionary_abbr_exist, abbreviation_json)
     abbreviation_json.close()
     # ...return dictionary
@@ -214,12 +215,12 @@ def load_abbreviation_dict():
     :return: dictionary containing abbreviations and corresponding expansions
     """
     try:
-        dictionary_abbr_exist = config.resources_folder + 'abbreviation_dictionary.json'
-        with open(dictionary_abbr_exist,'r') as json_file:
+        dictionary_abbr_exist = os.path.join(config.resources_folder, 'abbreviation_dictionary.json')
+        with open(dictionary_abbr_exist,'r', encoding = 'utf8') as json_file:
             dictionary_abbr_exist = json.load(json_file)
     except:
         dictionary_abbr_exist = get_exist_data(exist_credentials.user_exist, exist_credentials.pw_exist, config.exist_url, config.resources_folder)
-        with open(dictionary_abbr_exist,'r') as json_file:
+        with open(dictionary_abbr_exist,'r', encoding = 'utf8') as json_file:
             dictionary_abbr_exist = json.load(json_file)
     return dictionary_abbr_exist
 
@@ -296,9 +297,35 @@ def replace_abbreviations_from_pagexml(dictionary_abbr_exist, filenames):
             tree.write(f, encoding='unicode')
 
 def replace_abbreviations_from_tei(dictionary_abbr_external, processed_text):
-    """ TODO documentation
+    """ Processing TEI-Encoded Texts: Replacing Abbreviations and Reinserting XML Tags
 
+    This function is used to replace abbreviations in a TEI-encoded text with their respective expansions.
+    It works by identifying abbreviations via specific characters, replacing them with their expanded forms, 
+    and reinserting any XML tags that might have been removed during the process. The function then wraps 
+    the original abbreviation and its expanded form in a TEI <choice> element. Finally, the function returns 
+    the processed text with all abbreviations replaced with their expansions.
+
+    Parameters:
+    dictionary_abbr_external (dict): A dictionary containing abbreviations as keys and their corresponding 
+    expanded forms as values.
+    processed_text (str): The TEI-encoded text that needs to be processed.
+
+    Returns:
+    refined_xml (str): The processed text where all identified abbreviations have been replaced with their 
+    respective expansions wrapped in a TEI <choice> element. 
+
+    Steps:
+    1. Replace whitespace in XML tags with an underscore to maintain element structure.
+    2. Split the text into words and remove any duplicates.
+    3. Create a dictionary to store abbreviations and their respective expanded forms.
+    4. For each word, remove any interpunctuation and check if it contains any special characters that indicate an abbreviation.
+    5. If an abbreviation is found, the word is stored in the dictionary with information about any XML tags it contains and their respective start and end positions.
+    6. The function checks if the abbreviation is in the external abbreviation dictionary. If it is, the corresponding expansion is used. Otherwise, the function expands the abbreviation based on rules specified in the config file.
+    7. If any tags were removed from the word during the process, they are reinserted in their original positions in the expanded word.
+    8. The function then wraps the original abbreviation and its expanded form in a TEI <choice> element. This choice element replaces the original abbreviation in the text.
+    9. Finally, the function replaces the underscores in the XML tags with whitespace and returns the processed text.
     """
+
 
     # ...replace whitespace with underscore in xml-tags to enable split() without loosing element structure...
     match_elements = re.findall('\<(.*?)\>',processed_text)
@@ -466,10 +493,25 @@ def replace_abbreviations_from_tei(dictionary_abbr_external, processed_text):
     #print(dictionary_abbr)
     return refined_xml
 
-## export as single tei file
 def export_tei(filenames):
-    """ TODO documentation
+    """ export as single tei file
+    
+    This function exports text from XML files into a single TEI format string. 
 
+    It works by opening each XML file, locating specific text regions that correspond to different columns, 
+    and extracting the text. If a column is found, the corresponding text is appended to a string, which 
+    includes TEI-specific tags such as page break (<pb/>) and column break (<cb n='x'/>). If a column is 
+    not found, a page break and column break are still appended to the string, but no additional text is 
+    added. The process is repeated for each XML file provided in the 'filenames' list, and the final 
+    concatenated string is returned.
+
+    Parameters:
+    filenames (list): A list of XML filenames to be processed. Each filename should be a string representing 
+    the path to an XML file.
+
+    Returns:
+    text_page (str): A string of concatenated text from all processed XML files, formatted in TEI with 
+    specific tags denoting page breaks and column breaks.
     """
 
     text_page = ""
@@ -504,10 +546,20 @@ def export_tei(filenames):
         text_page = text_page + text_column_one + text_column_two
     return text_page
 
-# function for incrementing folia_numbers, e.g. 28v-30r
 def increment_folia(start_folia):
-    """ TODO documentation
+    """ 
+    Increments the folio number of manuscript pages in a standardized way.
 
+    Folio numbers follow a particular format: they consist of a number followed by either 'r' (for recto) 
+    or 'v' (for verso). This function takes as input a string representing a folio number. If the string 
+    ends with 'r', it replaces 'r' with 'v' to denote the reverse side of the same folio. If the string 
+    ends with 'v', it increments the folio number by 1 and appends 'r' to denote the recto side of the new folio.
+
+    Parameters:
+    start_folia (str): A string representing a folio number. It should end with either 'r' or 'v'.
+
+    Returns:
+    start_folia (str): The incremented folio number, represented as a string.
     """
 
     if 'r' in start_folia:
@@ -518,11 +570,23 @@ def increment_folia(start_folia):
 
 # postprocess line breaks, takes and returns exported text_page
 def line_breaks(text_page):
-    """ TODO documentation
+    """
+    Post-processes the line breaks in the exported text page.
 
+    This function analyzes each line break in the text page. If a split word due to a line break is found 
+    in a predefined dictionary (lexicon.csv), the line break tag is updated to denote that the word shouldn't
+    be split (<lb break="no" type="automated"/>). If the word isn't in the dictionary, it assumes that the word
+    is correctly split and simply marks the line break as automated (<lb type="automated"/>).
+
+    The function also removes any manually inserted angle dashes from the text page.
+
+    Parameters:
+    text_page (str): A string of text from a page, which may contain line breaks and split words.
+
+    Returns:
+    text_page (str): The processed string of text, with line breaks correctly marked and angle dashes removed.
     """
 
-    # TODO for now, delete manual inserted angle dash
     text_page = text_page.replace('¬','')
     # load dictinary containing wordforms
     df = pd.read_csv(config.resources_folder+'lexicon.csv')
@@ -550,69 +614,128 @@ def line_breaks(text_page):
 
     return text_page
 
-# TODO postprocess word segmentation, takes and returns exported text_page
 def word_segmentation(text_page):
-    """ TODO documentation
+    """
+    Post-processes the word segmentation in the exported text page.
 
+    This function analyzes the segmentation of words in the text page. It splits the page into individual words,
+    then compares each word to a predefined dictionary (lexicon.csv). If a word isn't found in the dictionary,
+    the function attempts to split the word into two parts that are found in the dictionary and adds a space 
+    between them. 
+
+    Parameters:
+    text_page (str): A string of text from a page, which may contain incorrectly segmented words.
+
+    Returns:
+    text_page (str): The processed string of text, with word segmentation corrected based on the predefined dictionary.
     """
 
-    # check word segmentation
+    # Remove line break, page and column tags from text and split into individual words
     wordlist = text_page.replace('<lb/>','').replace("<pb/><cb n='a'/>","").replace("<cb n='b'/>","").split()
 
-    # delete duplicates
+    # Remove duplicate words from the list
     wordlist = list(dict.fromkeys(wordlist))
 
+    # Iterate through each word in the list
     for word in wordlist:
+        # If the word is found in the lexicon, retain it as is
         if df['WF-Name'].str.contains('^'+word+'$', regex=True).any():
             new_word = word
         else:
+            # If the word is not found in the lexicon, attempt to split it into valid parts
             n = 1
             word1 = word[:len(word)-n]
             word2 = word[len(word)-n:]
 
+            # Try to find a valid split point for the word
             while not (df['WF-Name'].str.contains(word1+'$', regex=True).any()) and (df['WF-Name'].str.contains(word2+'$',regex=True).any()):
                 n += 1
                 word1 = word[:len(word)-n]
                 word2 = word[len(word)-n:]
-            new_word = word1 + ' ' + word2
+            new_word = word1 + ' ' + word2  # Add a space between the split word parts
 
+        # Replace the original word in the text with the possibly segmented word
         text_page = re.sub(word,new_word,text_page)
 
-    return text_page
+    return text_page  # Return the text with corrected word segmentation
 
-# use manually inserted ¬ for creating proper tei linebreaks
 def line_breaks_angled_dash(text_page):
-    """ TODO documentation
-
     """
-
+    Processes the exported text page to correctly handle line breaks marked by an angled dash (¬).
+    
+    This function takes the exported text page and replaces the manually inserted angled dash used to denote 
+    line breaks with the appropriate TEI line break tags. The angled dash is first processed to remove any 
+    trailing spaces, and then various patterns of ¬ followed by line break, column break or page break tags 
+    are replaced with the appropriate TEI tags. 
+    
+    Parameters:
+    text_page (str): A string of text from a page, which may contain angled dashes denoting line breaks.
+    
+    Returns:
+    text_page (str): The processed string of text, with angled dash denoted line breaks replaced with TEI line break tags.
+    """
+    
+    # Remove any trailing space after the angled dash
     text_page = text_page.replace('¬ ','¬')
-    text_page = re.sub(r'¬\n(<lb.*?)/>','\g<1> break="no"/>',text_page, flags=re.DOTALL)
-    text_page = re.sub(r'¬\n+(<cb.*?n="b".*?/>\n<lb.*?)/>','\g<1> break="no"/>',text_page)
-    text_page = re.sub(r'¬\n+(<pb.*?<cb.*?n="a".*?/>\n<lb.*?)/>','\g<1> break="no"/>',text_page)
-    text_page = re.sub(r'¬','<lb break="no"/>',text_page)
+    
+    # Replace patterns of angled dash followed by a line break with a line break tag denoting no break
+    text_page = re.sub(r'¬\n(<lb.*?)/>', '\g<1> break="no"/>', text_page, flags=re.DOTALL)
+    
+    # Replace patterns of angled dash followed by a column break and then a line break with a line break tag denoting no break
+    text_page = re.sub(r'¬\n+(<cb.*?n="b".*?/>\n<lb.*?)/>', '\g<1> break="no"/>', text_page)
+    
+    # Replace patterns of angled dash followed by a page break, column break and then a line break with a line break tag denoting no break
+    text_page = re.sub(r'¬\n+(<pb.*?<cb.*?n="a".*?/>\n<lb.*?)/>', '\g<1> break="no"/>', text_page)
+    
+    # Finally, replace any remaining angled dash with a line break tag denoting no break
+    text_page = re.sub(r'¬', '<lb break="no"/>', text_page)
+    
+    return text_page  # Return the text with properly marked line breaks
 
-
-    return text_page
-
-# make list items unique
 def get_unique_string(wordlist):
-    """ TODO documentation
-
     """
+    Returns a list of unique items from the input list of strings.
 
+    This function takes a list of strings, wordlist, and returns a new list that includes only unique strings. 
+    It does so by converting the input list to a set, which automatically removes any duplicates because sets 
+    only allow unique items. It then converts the set back into a list before returning it.
+
+    Parameters:
+    wordlist (list): A list of strings, which may contain duplicate items.
+
+    Returns:
+    list_of_unique_strings (list): A list of the unique strings from the input list.
+    """
+    
+    # Create an empty list to store the unique strings
     list_of_unique_strings = []
+
+    # Convert the input list to a set to remove duplicates
     unique_wordlist = set(wordlist)
+
+    # Convert the set back to a list
     for word in unique_wordlist:
         list_of_unique_strings.append(word)
 
-    return list_of_unique_strings
+    return list_of_unique_strings  # Return the list of unique strings
 
 def save_abbreviations(dictionary_abbr_exist, filenames):
-    """ Saves list of expanded abbreviation in xml file
-
     """
+    Identifies abbreviations in the text, expands them, and saves the results in an xml file.
 
+    This function parses through the text from a list of xml files. It identifies words that contain
+    special characters indicating they are abbreviations. It then checks each of these abbreviations
+    against a provided dictionary. If the abbreviation is in the dictionary, the function expands it.
+    If it is not in the dictionary, the function attempts to manually expand the abbreviation.
+    The function then writes the original abbreviation and its expansion to an output xml file.
+
+    Parameters:
+    dictionary_abbr_exist (dict): A dictionary with abbreviations as keys and their expansions as values.
+    filenames (list): A list of filenames for the xml files to be processed.
+
+    Returns:
+    None. But an 'abbr.xml' file is created in the current directory with the abbreviations and their expansions.
+    """
     # open each pagexmlfile for postprocessing
     wordlist_abbr = []
 
@@ -620,9 +743,11 @@ def save_abbreviations(dictionary_abbr_exist, filenames):
         tree = ET.parse(filename)
         root = tree.getroot()
         x = root.findall('.//{http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15}Unicode')
+
         for i in x:
             wordlist = i.text.split()
-            # define special characters that point to abbreviated words as dictionary (depending on modell used for recognition)...
+
+            # define special characters that point to abbreviated words as dictionary (depending on model used for recognition)...
             special_characters_dict = config.special_characters_dict
 
             # ... creating list of unique words to iterate...
@@ -637,9 +762,10 @@ def save_abbreviations(dictionary_abbr_exist, filenames):
                     # ...check if word is in abbreviation dictionary...
                     wordlist_abbr.append(word)
     wordlist = get_unique_string(wordlist_abbr)
+
     for word in wordlist:
         if word in dictionary_abbr_exist:
-        #... and insert corresponding expansion if found in dict...
+            #... and insert corresponding expansion if found in dict...
             expansion = dictionary_abbr_exist[word]
         # ...else, expand word by the following rules...
         else:
@@ -695,7 +821,8 @@ def postprocess_pagexml(path_to_pagexml_folder):
     # load dictionary of abbreviations
     dictionary_abbr_exist = load_abbreviation_dict()
     #gets path of xml files
-    path_to_files = load_pagexml(config.export_folder + path_to_pagexml_folder)
+    print('DEBUG 5')
+    path_to_files = load_pagexml(os.path.join(config.export_folder, path_to_pagexml_folder))
     # expands abbreviations
     replace_abbreviations_from_pagexml(dictionary_abbr_exist, path_to_files)
     save_abbreviations(dictionary_abbr_exist, path_to_files)
@@ -707,6 +834,7 @@ def create_normalised_ground_truth(collection_id, document_id, startpage, endpag
     """
 
     path_to_pagexml = download_data_from_transkribus(collection_id, document_id, startpage, endpage)
+    print('DEBUG 4: ' + path_to_pagexml)
     postprocess_pagexml(path_to_pagexml)
 
 # Getting TEI file
@@ -725,7 +853,8 @@ def postproccess_tei(path_to_pagexml_folder, output_filename=''):
     # load dictionary of abbreviations
     dictionary_abbr_exist = load_abbreviation_dict()
     #gets path of xml files
-    path_to_files = load_pagexml(config.export_folder + path_to_pagexml_folder)
+    print('DEBUG 3')
+    path_to_files = load_pagexml(os.path.join(config.export_folder, path_to_pagexml_folder))
     # creates single tei file from pagexml files
     text_page = export_tei(path_to_files)
     # replaces linebreaks by tei <lb/> and <lb break='no'/>
@@ -739,9 +868,3 @@ def postproccess_tei(path_to_pagexml_folder, output_filename=''):
             f.write(processed_text)
     else:
         pass
-
-""" execute """
-# Downloads graphematic transcription from Transkribus and converts it to normalised ground truth
-#create_normalised_ground_truth(74304, 793755, 37, 218)
-
-# Downloads graphematic transcription from Transkribus and converts it to normalised ground truth

@@ -42,7 +42,7 @@
       <!-- Handschrift prüfen -->
       <sourceDesc>
         <msDesc>
-          <msIdentifier xml:id="bdd-koeln-edd-c-119">
+          <msIdentifier xml:id="koeln-edd-c-119">
             <settlement>Köln</settlement>
             <repository>EDD</repository>
             <idno>Cod. 119</idno>
@@ -55,6 +55,11 @@
               <handNote xml:id="m2" scope="minor">Nebenhand</handNote>
             </handDesc>
           </physDesc>
+          <additional>
+            <adminInfo>
+              <note type="internal_observation"/>
+            </adminInfo>
+          </additional>
         </msDesc>
       </sourceDesc>
     </fileDesc>
@@ -331,9 +336,30 @@
     </encodingDesc>
 
     <!-- nach Abschluss von Arbeiten hier entsprechend durch neuen <change> vermerken und Status ändern -->
-    <revisionDesc>
-      <change when="{date-yyyy-mm-dd}" who="#MiS" status="created"/>
-    </revisionDesc>
+        <revisionDesc>
+            <!--loc = list of changes-->
+            <listChange type="book" n="{book}" xml:id="bdd-koeln-edd-c-119-{book}-loc">
+                <listChange type="working_package" n="1">
+                    <change type="transkribus_layouterkennung" status="done" when="" who="#MiS"/>
+                    <change type="transkribus_texterkennung" status="done" when="" who="#MiS"/>
+                    <change type="transkribus_textkorrektur" status="done" when="" who=""/>
+                    <change type="revision_numbering" status="toDo" when="" who=""/>
+                </listChange>
+                <listChange type="working_package" n="2">
+                    <change type="oxygen_transfer" status="done" when="{date-yyyy-mm-dd}" who="#MiS"/>
+                    <change type="collatex_table_creation" status="toDo" when="" who=""/>
+                    <change type="correction_with_tables" status="toDo" when="" who=""/>
+                    <change type="special_elements" status="toDo" when="" who=""/>
+                    <change type="oxygen_hands" status="toDo" when="" who=""/>
+                    <change type="oxygen_correction" status="toDo" when="" who=""/>
+                </listChange>
+                <listChange type="working_package" n="3">
+                    <change type="collatex_collation" status="toDo" when="" who=""/>
+                    <change type="collatex_correction" status="toDo" when="" who=""/>
+                </listChange>
+            </listChange>
+        </revisionDesc>
+
 
   </teiHeader>
 

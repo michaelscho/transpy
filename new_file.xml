@@ -1,0 +1,1207 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-model href="https://burchard.adwmainz.net/exist/webdav/db/collections/bdd/data/schemata/bdd-trans-work.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="bdd-bamberg-sb-c-6">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title type="main" xml:lang="ger">Decretum Burchardi, Buch 07</title>
+        <title type="main" xml:lang="ger">Automatische Transkription durch Transkribus</title>
+        <respStmt xml:id="MiS">
+          <persName>
+            <forename>Michael</forename>
+            <surname>Schonhardt</surname>
+            <affiliation>Universität Kassel</affiliation>
+          </persName>
+          <resp xml:lang="ger">Überführung nach TEI (P5) aus Transkribus</resp>
+        </respStmt>
+      </titleStmt>
+      <publicationStmt>
+        <p>Working files, not ready for circulation.</p>
+      </publicationStmt>
+      <sourceDesc>
+        <msDesc>
+          <msIdentifier xml:id="bamberg-sb-c-6">
+            <settlement>Bamberg</settlement>
+            <repository>SB</repository>
+            <idno>Can. 6</idno>
+          </msIdentifier>
+          <additional>
+            <adminInfo>
+              <note type="internal_observation"/>
+            </adminInfo>
+          </additional>
+        </msDesc>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <p n="1">Die vorliegende Liste berücksichtigt keine Ligaturen, die in den Transkriptionen
+                stillschweigend aufgelöst werden. Sonderzeichen, die der Abkürzung von Wörtern
+                dienen, werden über das TEI Modul gaiji nach den Empfehlungen der MUFI
+                (https://folk.uib.no/hnooh/mufi/) in der Version 4.0 verzeichnet und im body als
+                unicode-Zeichen in einem g-Element gesetzt. Zur korrekten Darstellung aller Zeichen
+                ist ggf. ein entsprechender Zeichensatz notwendig, z.B. Andron Scriptor Web
+                (https://folk.uib.no/hnooh/mufi/fonts/index.html#Andron).</p>
+      <charDecl>
+        <!-- -ur -->
+        <char xml:id="char-f1c2">
+          <localProp name="name" value="COMBINING ABBREVIATION MARK SUPERSCRIPT UR LEMNISKATE FORM"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1C2</mapping>
+          <mapping type="standardized">ur</mapping>
+          <graphic url="images/f1c2.png"/>
+        </char>
+        <!-- -bus -->
+        <char xml:id="char-f1ac">
+          <localProp name="name" value="LATIN ABBREVIATION SIGN SEMICOLON"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1AC</mapping>
+          <mapping type="standardized">;</mapping>
+          <graphic url="images/f1ac.png"/>
+        </char>
+        <!-- Interpunktion -->
+        <!-- Distinctio -->
+        <char xml:id="char-f1f8">
+          <localProp name="name" value="DISTINCTIO"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1F8</mapping>
+          <mapping type="standardized">,</mapping>
+          <graphic url="images/f1f8.png"/>
+        </char>
+        <!-- punctus versus -->
+        <char xml:id="char-f1ea">
+          <localProp name="name" value="PUNCTUS VERSUS"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1EA</mapping>
+          <mapping type="standardized">.</mapping>
+          <graphic url="images/f1ea.png"/>
+        </char>
+        <!-- punctus flexus -->
+        <char xml:id="char-f1f5">
+          <localProp name="name" value="PUNCTUS FLEXUS"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1F5</mapping>
+          <mapping type="standardized">,</mapping>
+          <graphic url="images/f1f5.png"/>
+        </char>
+        <!-- punctus elevatus -->
+        <char xml:id="char-f1f0">
+          <localProp name="name" value="PUNCTUS ELEVATUS DIAGONAL STROKE"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1F0</mapping>
+          <mapping type="standardized">;</mapping>
+          <graphic url="images/f1f0.png"/>
+        </char>
+        <!-- punctus interrogativus -->
+        <char xml:id="char-f160">
+          <localProp name="name" value="PUNCTUS INTERROGATIVUS"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F160</mapping>
+          <mapping type="standardized">?</mapping>
+          <graphic url="images/f160.png"/>
+        </char>
+        <!-- punctus interrogativus und positura -->
+        <char xml:id="char-int-posit">
+          <localProp name="name" value="PUNCTUS INTERROGATIVUS+COMMA POSITURA"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="Combined">U+F160 + U+F1E2</mapping>
+          <mapping type="standardized">?;</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- paragraphus -->
+        <char xml:id="char-f1e1">
+          <localProp name="name" value="PARAGRAPHUS"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+F1E1</mapping>
+          <mapping type="standardized">¶</mapping>
+          <graphic url="images/f1e1.png"/>
+        </char>
+        <!-- b mit Strich -->
+        <char xml:id="char-0180">
+          <localProp name="name" value="LATIN SMALL LETTER B WITH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ƀ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-B">U+0180</mapping>
+          <mapping type="standardized">b</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- d mit Strich -->
+        <char xml:id="char-0111">
+          <localProp name="name" value="LATIN SMALL LETTER D WITH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">đ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-A">U+0111</mapping>
+          <mapping type="standardized">d</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- h mit Strich -->
+        <char xml:id="char-0127">
+          <localProp name="name" value="LATIN SMALL LETTER H WITH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ħ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-A">U+0127</mapping>
+          <mapping type="standardized">h</mapping>
+        </char>
+        <!-- K mit Strich -->
+        <char xml:id="char-a740">
+          <localProp name="name" value="LATIN CAPITAL LETTER K WITH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">Ꝁ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A740</mapping>
+          <mapping type="standardized">K</mapping>
+        </char>
+        <!-- k mit Strich -->
+        <char xml:id="char-a741">
+          <localProp name="name" value="LATIN SMALL LETTER K WITH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ꝁ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A741</mapping>
+          <mapping type="standardized">k</mapping>
+        </char>
+        <!-- L mit hohem Strich -->
+        <char xml:id="char-a748">
+          <localProp name="name" value="LATIN CAPITAL LETTER L WITH HIGH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">Ꝉ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A748</mapping>
+          <mapping type="standardized">L</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- l mit hohem Strich -->
+        <char xml:id="char-a749">
+          <localProp name="name" value="LATIN SMALL LETTER L WITH HIGH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ꝉ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A749</mapping>
+          <mapping type="standardized">l</mapping>
+        </char>
+        <!-- l mit mittlerem Strich -->
+        <char xml:id="char-019a">
+          <localProp name="name" value="LATIN CAPITAL LETTER L WITH HIGH STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ƚ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-B">U+019A</mapping>
+          <mapping type="standardized">l</mapping>
+        </char>
+        <!-- Pre -->
+        <char xml:id="char-Pmacr">
+          <localProp name="name" value="LATIN CAPITAL LETTER P + COMBINING MACRON"/>
+          <mapping type="MUFI" subtype="Unicode">P̅</mapping>
+          <mapping type="MUFI" subtype="Combined">U+0050 + U0305</mapping>
+          <mapping type="standardized">P</mapping>
+          <graphic url="images/Pmacr.png"/>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- pre -->
+        <char xml:id="char-e665">
+          <localProp name="name" value="LATIN SMALL LETTER P WITH MACRON"/>
+          <mapping type="MUFI" subtype="Unicode"></mapping>
+          <mapping type="MUFI" subtype="PUA">U+E665</mapping>
+          <mapping type="MUFI" subtype="Combined">U+E665 = 0070 + 0304</mapping>
+          <mapping type="standardized">p</mapping>
+          <graphic url="images/e665.png"/>
+        </char>
+        <!-- e-caudata -->
+        <char xml:id="char-0119">
+          <localProp name="name" value="LATIN SMALL LETTER E WITH OGONEK"/>
+          <mapping type="MUFI" subtype="Unicode">ę</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-A">U+0119</mapping>
+          <mapping type="standardized">ae</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- Per -->
+        <char xml:id="char-a750">
+          <localProp name="name" value="LATIN CAPITAL LETTER P WITH STROKE THROUGH DESCENDER"/>
+          <mapping type="MUFI" subtype="Unicode">Ꝑ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A750</mapping>
+          <mapping type="standardized">Per</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- per -->
+        <char xml:id="char-a751">
+          <localProp name="name" value="LATIN SMALL LETTER P WITH STROKE THROUGH DESCENDER"/>
+          <mapping type="MUFI" subtype="Unicode">ꝑ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A751</mapping>
+          <mapping type="standardized">per</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- Pro -->
+        <char xml:id="char-a752">
+          <localProp name="name" value="LATIN CAPITAL LETTER P WITH FLOURISH"/>
+          <mapping type="MUFI" subtype="Unicode">Ꝓ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A752</mapping>
+          <mapping type="standardized">Pro</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- pro -->
+        <char xml:id="char-a753">
+          <localProp name="name" value="LATIN SMALL LETTER P WITH FLOURISH"/>
+          <mapping type="MUFI" subtype="Unicode">ꝓ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A753</mapping>
+          <mapping type="standardized">pro</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- Nasalstrich -->
+        <char xml:id="char-0304">
+          <localProp name="name" value="COMBINING MACRON"/>
+          <mapping type="MUFI" subtype="Unicode">̄</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+0304</mapping>
+          <mapping type="standardized">m</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- Kürzungsstrich -->
+        <char xml:id="char-0305">
+          <localProp name="name" value="COMBINING OVERLINE"/>
+          <mapping type="MUFI" subtype="Unicode">̅</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+0304</mapping>
+          <mapping type="standardized"/>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- q mit Strich -->
+        <char xml:id="char-a757">
+          <localProp name="name" value="LATIN SMALL LETTER Q WITH STROKE THROUGH DESCENDER"/>
+          <mapping type="MUFI" subtype="Unicode">ꝗ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A757</mapping>
+          <mapping type="standardized">q</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- q mit Schlaufe -->
+        <char xml:id="char-a759">
+          <localProp name="name" value="LATIN SMALL LETTER Q WITH DIAGONAL STROKE"/>
+          <mapping type="MUFI" subtype="Unicode">ꝙ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+A759</mapping>
+          <mapping type="standardized">q</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- -rum -->
+        <char xml:id="char-a75D">
+          <localProp name="name" value="LATIN SMALL LETTER RUM ROTUNDA"/>
+          <mapping type="MUFI" subtype="Unicode">ꝝ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+a75D</mapping>
+          <mapping type="standardized">rum</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- -RUM -->
+        <char xml:id="char-a75C">
+          <localProp name="name" value="LATIN CAPITAL LETTER RUM ROTUNDA"/>
+          <mapping type="MUFI" subtype="Unicode">Ꝝ</mapping>
+          <mapping type="MUFI" subtype="Latin-Extended-D">U+a75C</mapping>
+          <mapping type="standardized">RUM</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- -us -->
+        <char xml:id="char-1dd2">
+          <localProp name="name" value="COMBINING US ABOVE"/>
+          <mapping type="MUFI" subtype="Unicode">᷒</mapping>
+          <mapping type="MUFI" subtype="Combining-Diacritical-Marks-Supplement">U+1DD2</mapping>
+          <mapping type="standardized">us</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- -a (hochgestellt) -->
+        <char xml:id="char-1dd3">
+          <localProp name="name" value="COMBINING LATIN SMALL LETTER FLATTENED OPEN A ABOVE"/>
+          <mapping type="MUFI" subtype="Unicode">ᷓ</mapping>
+          <mapping type="MUFI" subtype="Combining-Diacritical-Marks-Supplement">U+1DD3</mapping>
+          <mapping type="standardized">a</mapping>
+        </char>
+        <!-- Bild fehlt -->
+        <!-- -i (hochgestellt) -->
+        <char xml:id="char-0365">
+          <localProp name="name" value="COMBINING LATIN SMALL LETTER I"/>
+          <mapping type="MUFI" subtype="Unicode">ͥ</mapping>
+          <mapping type="MUFI" subtype="Combining-Diacritical-Marks">U+0365</mapping>
+          <mapping type="standardized">i</mapping>
+        </char>
+        <!-- Bild fehlt -->
+      </charDecl>
+    </encodingDesc>
+    <!--revisionDesc>
+            <change when="2022-09-19" who="#MiS" status="created"/>
+        </revisionDesc>-->
+    <revisionDesc>
+      <!--loc = list of changes-->
+      <listChange type="book" n="07" xml:id="bdd-bamberg-sb-c-6-07-loc">
+        <listChange type="working_package" n="1">
+          <change type="transkribus_layouterkennung" status="done" when="2023-09-30" who="#ElV"/>
+          <change type="transkribus_texterkennung" status="done" when="2023-09-30" who="#ElV"/>
+          <change type="transkribus_textkorrektur" status="inProgress" when="2023" who="#ElV"/>
+          <change type="revision_numbering" status="inProgress" when="" who="#ElV"/>
+        </listChange>
+        <listChange type="working_package" n="2">
+          <change type="oxygen_transfer" status="done" when="2022" who="#MiS"/>
+          <change type="collatex_table_creation" status="done" when="2022" who="#MiS"/>
+          <change type="correction_with_tables" status="inProgress" when="2023" who="#ElV"/>
+          <change type="special_elements" status="toDo" when="" who=""/>
+          <change type="oxygen_hands" status="toDo" when="" who=""/>
+          <change type="oxygen_correction" status="toDo" when="" who=""/>
+        </listChange>
+        <listChange type="working_package" n="3">
+          <change type="collatex_collation" status="toDo" when="" who=""/>
+          <change type="collatex_correction" status="toDo" when="" who=""/>
+        </listChange>
+      </listChange>
+    </revisionDesc>
+  </teiHeader>
+  <!-- Beginn der Transkription -->
+  <text>
+    <!-- Achtung, ggf. pagebreak vor Buch setzen -->
+    <body xml:lang="lat">
+      <div type="book" n="07">
+        <pb n="139v" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00282/full/full/0/default.jpg/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/282" ana="/annotations/bamberg-sb-c-6-annotation-282"/>
+        <fw type="page-header" place="top" facs="2246,816,936,200"><choice><abbr>cap<g ref="#char-0305">̅</g></abbr><expan>Capitula</expan></choice> vii libri<pc type="distinctio"><g ref="#char-f1f8"></g></pc></fw>
+        <cb n="a" facs="932,921,1807,5268"/>
+        <lb n="1" facs="918,1000,1756,192"/>
+        <!-- Beginn Inhaltsverzeichnis -->
+        <div type="toc" xml:id="bamberg-sb-c-6-07-toc">
+          <head type="incipit">
+            <hi rend="color:red capitals">INCIPIVNT CAPITVLA LIBRI <lb n="2" facs="1062,1194,1659,160"/>SEPTIMI<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <seg corresp="#bamberg-sb-c-6-07-supp-001" type="pos-of-displaced"><g ref="#char-f1e1"></g>neis nascuntur<pc type="distinctio"><g ref="#char-f1f8"></g></pc></seg></hi>
+          </head>
+          <lb n="3" facs="1026,1317,1728,182"/>
+          <list>
+            <item n="1"><label place="margin left" type="chapter-number" facs="227,932,849,509"><hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>i<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">Q</hi><g ref="#char-0111">đ</g></abbr><expan><hi rend="color:red">Q</hi>uod</expan></choice> infames <choice><abbr>uocent<g ref="#char-f1c2"></g></abbr><expan>uocentur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> qui ex
+                            consangu<supplied xml:id="bamberg-sb-c-6-07-supp-001" reason="displaced-over-the-line">neis nascuntur<pc type="distinctio"><g ref="#char-f1f8"></g></pc></supplied><lb/></item>
+            <lb n="4" facs="1051,1500,1612,156"/>
+            <item n="2"><label place="margin left" type="chapter-number" facs="227,1493,849,171"><hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>ii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">Q</hi><g ref="#char-0111">đ</g></abbr><expan><hi rend="color:red">Q</hi>uod</expan></choice> nulli liceat de <choice><abbr><g ref="#char-a753">ꝓ</g>pria</abbr><expan>propria</expan></choice> cognatio<lb n="5" facs="1080,1648,1170,138" break="no"/>ne uxorem
+                            <del rend=""/>ducere<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="6" facs="1033,1799,770,149"/>
+            <item n="3"><label place="margin left" type="chapter-number" facs="227,1716,849,182"><hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>iii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e incestuosis<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="7" facs="986,1968,759,106"/>
+            <item n="4"><label place="margin left" type="chapter-number" facs="227,1950,849,135"><hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>iiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="8" facs="997,2102,802,182"/>
+            <item n="5"><label place="margin left" type="chapter-number" facs="227,2138,849,106"><hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>v<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="9" facs="1012,2267,1602,142"/>
+            <item n="6"><label place="margin left" type="chapter-number" facs="227,2296,849,232"><hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>vi<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">N</hi>e aliquis <choice><abbr>fideliu<g ref="#char-0304">̄</g></abbr><expan>fidelium</expan></choice> ad <choice><abbr><g ref="#char-a753">ꝓ</g>pinquam</abbr><expan>propinquam</expan></choice> <lb n="10" facs="1051,2440,1209,174"/>sanguinis sui accedat<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="11" facs="979,2508,1756,279"/>
+            <item n="7"><label place="margin left" type="chapter-number" facs="227,2580,849,333"><hi rend="color:red">vii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">Q</hi><g ref="#char-0111">đ</g></abbr><expan><hi rend="color:red">Q</hi>uod</expan></choice> equaliter <choice><abbr>c<g ref="#char-0305">̅</g>iungendum</abbr><expan>coniungendum</expan></choice> sit in ma<lb n="12" facs="1062,2753,1612,149" break="no"/>trimonio
+                            uir suis consangiuneis <lb n="13" facs="1080,2908,622,131"/>et uxoris<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="14" facs="1019,3034,1663,167"/>
+            <item n="8"><label place="margin left" type="chapter-number" facs="227,2966,849,362"><hi rend="color:red">viii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">Q</hi><g ref="#char-0111">đ</g></abbr><expan><hi rend="color:red">Q</hi>uod</expan></choice> uno modo parentela uiri<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et <lb n="15" facs="1066,3218,1450,153"/>mulieris<pc type="distinctio"><g ref="#char-f1f8"></g></pc> in
+                            coniunctione <lb n="16" facs="1091,3365,997,142"/>consideranda sit<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="17" facs="1015,3491,1659,146"/>
+            <item n="9"><label place="margin left" type="chapter-number" facs="227,3380,849,225"><hi rend="color:red">viiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">I</hi>n
+                            quo geniculo <choice><abbr>abstinendu<g ref="#char-0304">̄</g></abbr><expan>abstinendum</expan></choice> sit<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="18" facs="1015,3614,1695,182"/>
+            <item n="10"><label place="margin left" type="chapter-number" facs="227,3657,849,185"><hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>x<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">I</hi>n quo ramusculo<pc type="distinctio"><g ref="#char-f1f8"></g></pc><choice><abbr>c<g ref="#char-0305">̅</g>sanguinitatis</abbr><expan>consanguinitatis</expan></choice><lb n="19" facs="1080,3783,1612,185"/>legitima conubia fieri
+                            possint<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="20" facs="986,3959,1594,153"/>
+            <item n="11"><label place="margin left" type="chapter-number" facs="227,3894,849,264"><hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>xi<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">Q</hi><g ref="#char-0111">đ</g></abbr><expan><hi rend="color:red">Q</hi>uod</expan></choice> consanguinitas<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> ad <choice><abbr>septi<lb n="21" facs="1094,4107,1508,210" break="no"/>mu<g ref="#char-0304">̄</g></abbr><expan>septi<lb n="21" facs="1094,4107,1508,210" break="no"/>mum</expan></choice> <choice><abbr>geniculu<g ref="#char-0304">̄</g></abbr><expan>geniculum</expan></choice> <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> seruari debeat<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="22" facs="1066,4301,720,142"/>
+            <item n="12"><label place="margin left" type="chapter-number" facs="227,4211,849,196"><hi rend="color:red">xii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e
+                            eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="23" facs="1076,4460,720,128"/>
+            <item n="13"><label place="margin left" type="chapter-number" facs="227,4460,849,102"><hi rend="color:red">xiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e
+                            eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="24" facs="1058,4589,723,142"/>
+            <item n="14"><label place="margin left" type="chapter-number" facs="227,4614,849,106"><hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>xiiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e
+                            eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="25" facs="1055,4740,741,135"/>
+            <item n="15"><label place="margin left" type="chapter-number" facs="227,4773,849,99"><hi rend="color:red">xv<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e
+                            eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="26" facs="1033,4874,925,149"/>
+            <item n="16"><label place="margin left" type="chapter-number" facs="227,4924,849,95"><hi rend="color:red">xvi<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">I</hi>te<g ref="#char-0304">̄</g></abbr><expan><hi rend="color:red">I</hi>tem</expan></choice> de eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="27" facs="1037,4989,1695,218"/>
+            <item n="17"><label place="margin left" type="chapter-number" facs="227,5072,849,124"><hi rend="color:red">xvii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">V</hi>t
+                            duob<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> <choice><abbr>trib<g ref="#char-f1ac"></g></abbr><expan>tribus</expan></choice> <choice><abbr>testib<g ref="#char-f1ac"></g></abbr><expan>testibus</expan></choice> tes<note type="editorial-comment" resp="transkribus">Loch</note>timo<lb n="28" facs="1123,5201,1620,171" break="no"/>nia <choice><abbr>dicentib<g ref="#char-f1ac"></g></abbr><expan>dicentibus</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g>sanguinei</abbr><expan>consanguinei</expan></choice> <choice><abbr>separent<g ref="#char-f1c2"></g></abbr><expan>separentur</expan></choice></item>
+            <lb n="29" facs="1087,5331,716,128"/>
+            <item n="18"><label place="margin left" type="chapter-number" facs="227,5248,849,182"><hi rend="color:red">xviii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e
+                            eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="30" facs="1073,5460,1666,207"/>
+            <item n="19"><label place="margin left" type="chapter-number" facs="227,5482,849,520"><hi rend="color:red">xviiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">Q</hi><note type="editorial-comment" resp="transkribus">Loch</note>uid <choice><abbr>sc<g ref="#char-0305">̅</g>s</abbr><expan>sanctus</expan></choice> gregorius augiistino an<cb n="b" facs="2552,932,2131,5070"/> <lb n="1" facs="2711,989,1742,221" break="no"/><choice><abbr>gloru<g ref="#char-0304">̄</g></abbr><expan>glorum</expan></choice> <choice><abbr>p<g ref="#char-0304">̄</g>dicatori</abbr><expan>praedicatori</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g>pt<g ref="#char-0305">̅</g></abbr><expan>propter</expan></choice> <choice><abbr>te<note type="editorial-comment" resp="transkribus">Loch</note>ne<lb n="2" facs="2711,1169,1810,164" break="no"/>ritate<g ref="#char-0304">̄</g></abbr><expan>te<note type="editorial-comment" resp="transkribus">Lochnerit</note>at<lb n="2" facs="2711,1169,1810,164" break="no"/>em</expan></choice> noue fidei <g ref="#char-a751">ꝑ</g>mi<note type="editorial-comment" resp="transkribus">Loch</note>ferit<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="3" facs="2563,1310,1677,192"/>
+            <item n="20"><label place="margin right" type="chapter-number" facs="4385,932,630,671"><hi rend="color:red">xx<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">Q</hi><g ref="#char-0111">đ</g></abbr><expan><hi rend="color:red">Q</hi>uod</expan></choice><choice><abbr>sc<g ref="#char-0305">̅</g>s</abbr><expan>sanctus</expan></choice> gregorius<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+                            hoc <choice><abbr>angloru<g ref="#char-0304">̄</g></abbr><expan>anglorum</expan></choice> <lb n="4" facs="2693,1468,1530,192"/>genti <choice><abbr>specialit<g ref="#char-0305">̅</g></abbr><expan>specialiter</expan></choice> non <choice><abbr>generalit<g ref="#char-0305">̅</g></abbr><expan>generaliter</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <lb n="5" facs="2729,1587,1587,218"/><choice><abbr><g ref="#char-a751">ꝑ</g>miserit</abbr><expan>permiserit</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <seg corresp="#bamberg-sb-c-6-07-supp-002" type="pos-of-displaced"><g ref="#char-f1e1"></g>non debeant<pc type="distinctio"><g ref="#char-f1f8"></g></pc></seg><supplied xml:id="bamberg-sb-c-6-07-supp-002" reason="displaced-over-the-line">non
+                            debeant<pc type="distinctio"><g ref="#char-f1f8"></g></pc></supplied></item>
+            <lb n="6" facs="2689,1745,1645,171"/>
+            <item n="21"><label place="margin right" type="chapter-number" facs="4352,1655,662,326"><hi rend="color:red">xxi<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">Q</hi><g ref="#char-0111">đ</g></abbr><expan><hi rend="color:red">Q</hi>uod</expan></choice> extranei nisi ex necessario<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>dis<lb n="7" facs="2707,1929,1645,149" break="no"/>cidiu<g ref="#char-0304">̄</g></abbr><expan>dis<lb n="7" facs="2707,1929,1645,149" break="no"/>cidium</expan></choice> <choice><abbr>int<g ref="#char-0305">̅</g></abbr><expan>inter</expan></choice> consanguineos facere</item>
+            <lb n="8" facs="2671,2112,730,164"/>
+            <item n="22"><label place="margin right" type="chapter-number" facs="4334,2033,680,171"><hi rend="color:red">xxii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e
+                            eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="9" facs="2646,2278,799,106"/>
+            <item n="23"><label place="margin right" type="chapter-number" facs="4327,2256,687,99"><hi rend="color:red">xxiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="10" facs="2628,2278,2059,290"/>
+            <item n="24"><label place="margin right" type="chapter-number" facs="4493,2408,522,131"><hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>xxiiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e
+                            eadem <note type="editorial-comment" resp="transkribus">Loch</note>
+                            re<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <seg corresp="#bamberg-sb-c-6-07-supp-003" type="pos-of-displaced"><g ref="#char-f1e1"></g>mͦ inquirenda sit<pc type="distinctio"><g ref="#char-f1f8"></g></pc></seg><supplied xml:id="bamberg-sb-c-6-07-supp-003" reason="displaced-over-the-line">mͦ
+                            inquirenda sit<pc type="distinctio"><g ref="#char-f1f8"></g></pc></supplied></item>
+            <lb n="11" facs="2556,2469,1962,279"/>
+            <item n="25"><label place="margin right" type="chapter-number" facs="4403,2591,612,106"><hi rend="color:red">xxv<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">S</hi>acramen<note type="editorial-comment" resp="transkribus">Loch</note>tu<g ref="#char-0304">̄</g></abbr><expan><hi rend="color:red">S</hi>acramenLo<note type="editorial-comment" resp="transkribus">chtum</note></expan></choice> de parenteli<pc type="distinctio"><g ref="#char-f1f8"></g></pc> quo</item>
+            <lb n="12" facs="2722,2732,986,142"/>
+            <item n="26"><label place="margin right" type="chapter-number" facs="4370,2750,644,102"><hi rend="color:red">xxvi<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">I</hi>uramentu<g ref="#char-0304">̄</g></abbr><expan><hi rend="color:red">I</hi>uramentum</expan></choice> testiu<g ref="#char-0304">̄</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="13" facs="2603,2854,1774,164"/>
+            <item n="27"><label place="margin right" type="chapter-number" facs="4334,2886,727,135"><hi rend="color:red">xxvii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">S</hi>acram<g ref="#char-0305">̅</g>tu<g ref="#char-0304">̄</g></abbr><expan><hi rend="color:red">S</hi>acramentum</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> de in
+                            cestuoso discidio</item>
+            <lb n="14" facs="2534,3023,1839,178"/>
+            <item n="28"><label place="margin right" type="chapter-number" facs="4331,3038,684,1442"><hi rend="color:red">xxviii</hi></label><hi rend="color:red">H</hi><g ref="#char-0119">ę</g>c capitula de <choice><abbr>septe<g ref="#char-0304">̄</g></abbr><expan>septem</expan></choice><choice><abbr>gradib<g ref="#char-f1ac"></g></abbr><expan>gradibus</expan></choice><choice><abbr>c<g ref="#char-0305">̅</g>san<lb n="15" facs="2722,3149,1634,200" break="no"/>guinitatis</abbr><expan>consan<lb n="15" facs="2722,3149,1634,200" break="no"/>guinitatis</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc><choice><abbr>sc<g ref="#char-0305">̅</g>s</abbr><expan>sanctus</expan></choice> yfidorus diligenti <lb n="16" facs="2740,3347,1623,142"/><note type="editorial-comment" resp="transkribus">Loch</note> inquisitione
+                            descripserat<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et <lb n="17" facs="2664,3462,1666,153"/>in figura inferius de picta<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> a <choice><abbr><g ref="#char-a751">ꝑ</g><lb n="18" facs="2563,3610,1126,146" break="no"/>tius</abbr><expan>p<lb n="18" facs="2563,3610,1126,146" break="no"/>ertius</expan></choice> ordinauerat<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <note type="editorial-comment" resp="transkribus">Im
+                            folgenden Unterkapitel berücksichtigen bei Auszeichnung!</note> <lb n="19" facs="2549,3758,1706,182"/><choice><abbr>Capituilu<g ref="#char-0304">̄</g></abbr><expan>Capituilum</expan></choice> <pc type="distinctio"><g ref="#char-f1f8"></g></pc>i<pc type="distinctio"><g ref="#char-f1f8"></g></pc> de <choice><abbr>septe<g ref="#char-0304">̄</g></abbr><expan>septem</expan></choice> gradibus<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+                            <lb n="20" facs="2707,3963,673,149"/><choice><abbr>Capitulu<g ref="#char-0304">̄</g></abbr><expan>Capitulum</expan></choice> <pc type="distinctio"><g ref="#char-f1f8"></g></pc>ii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <lb n="21" facs="2707,4103,741,146"/><choice><abbr>Capitulu<g ref="#char-0304">̄</g></abbr><expan>Capitulum</expan></choice> <pc type="distinctio"><g ref="#char-f1f8"></g></pc>iii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <lb n="22" facs="2653,4272,838,153"/><choice><abbr>Capitulu<g ref="#char-0304">̄</g></abbr><expan>Capitulum</expan></choice> <pc type="distinctio"><g ref="#char-f1f8"></g></pc>iiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <lb n="23" facs="2696,4420,716,120"/><choice><abbr>Capitulu<g ref="#char-0304">̄</g></abbr><expan>Capitulum</expan></choice> <pc type="distinctio"><g ref="#char-f1f8"></g></pc>v<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <lb n="24" facs="2671,4546,860,164"/><choice><abbr>Capitulu<g ref="#char-0304">̄</g></abbr><expan>Capitulum</expan></choice> <pc type="distinctio"><g ref="#char-f1f8"></g></pc>vi<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <lb n="25" facs="2700,4708,860,153"/><choice><abbr>Capitulu<g ref="#char-0304">̄</g></abbr><expan>Capitulum</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> vii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="26" facs="2660,4859,1731,138"/>
+            <item n="29"><label place="margin right" type="chapter-number" facs="4327,4532,687,509"><hi rend="color:red">xxviiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><hi rend="color:red">D</hi>e incestuosis qui admonitiones <lb n="27" facs="2621,5010,1533,160"/><choice><abbr>sacerdotu<g ref="#char-0304">̄</g></abbr><expan>sacerdotum</expan></choice> contempnunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc></item>
+            <lb n="28" facs="2639,5118,1749,207"/>
+            <item n="30"><label place="margin right" type="chapter-number" facs="4316,5093,698,909"><hi rend="color:red">xxx<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi></label><choice><abbr><hi rend="color:red">Q</hi><g ref="#char-0111">đ</g></abbr><expan><hi rend="color:red">Q</hi>uod</expan></choice> infra <choice><abbr>sexta<g ref="#char-0304">̄</g></abbr><expan>sextam</expan></choice> generationem <note type="editorial-comment" resp="transkribus">Loch</note> <lb n="29" facs="2758,5270,1162,142"/>coniugia non <choice><abbr>fiant<g ref="#char-f1ac"></g></abbr><expan>ERROR</expan></choice> <pb n="140r" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00283/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/283" ana="/annotations/bamberg-sb-c-6-annotation-283"/> <fw type="page-header" place="top" facs="2002,676,1605,200"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>vii<pc type="distinctio"><g ref="#char-f1f8"></g></pc><choice><abbr>li<g ref="#char-0180">ƀ</g></abbr><expan>liber</expan></choice> de consanguinitate<pc type="distinctio"><g ref="#char-f1f8"></g></pc></fw> <cb n="a" facs="468,885,2109,4995"/> <lb n="1" facs="540,921,1958,182"/><note type="editorial-comment" resp="transkribus">Spalte leer</note> <cb n="b" facs="2470,885,1922,4995"/> <lb n="1" facs="2502,824,1735,311"/></item>
+          </list>
+        </div>
+        <!-- Beginn des Haupttextes  -->
+        <div type="content" xml:id="bamberg-sb-c-6-07-con">
+          <div xml:id="bamberg-sb-c-6-07-con-000" type="praefatiuncula">
+            <head type="incipit">
+              <hi rend="color:red capitals">INCIPIT LIBER SEPTIMUS</hi>
+            </head>
+            <lb n="2" facs="2606,1047,1648,192"/>
+            <p n="1">
+              <hi rend="color:red">de incesta copulatione<pc type="distinctio"><g ref="#char-f1f8"></g></pc> con<lb n="3" facs="2588,1184,1674,207" break="no"/>sanguinitatis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et <choice><abbr>c<g ref="#char-0305">̅</g>tinet</abbr><expan>continet</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> in quo
+<lb n="4" facs="2617,1353,1630,182"/>geniculo<pc type="distinctio"><g ref="#char-f1f8"></g></pc> fideles et coniungi
+<lb n="5" facs="2599,1518,1674,203"/>et separuri debeant<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <g ref="#char-0119">ę</g>t de reuo<lb n="6" facs="2610,1659,1753,178" break="no"/>catione<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et de <choice><abbr>p<g ref="#char-0119">ę</g>nitntia<g ref="#char-0304">̄</g></abbr><expan>p<g ref="#char-0119">ę</g>nitntiam</expan></choice> <choice><abbr>singulo<g ref="#char-a75D">ꝝ</g></abbr><expan>singulorum</expan></choice></hi>
+            </p>
+          </div>
+          <lb n="7" facs="2531,1803,1778,164"/>
+          <div n="1" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4284,1688,932,308">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>i<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red"><choice><abbr>Q<g ref="#char-0111">đ</g></abbr><expan>Quod</expan></choice> infames <choice><abbr>uocent<g ref="#char-f1c2"></g></abbr><expan>uocentur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> gui ex <choice><abbr>c<g ref="#char-0305">̅</g>onsan<lb n="8" facs="2894,1943,1234,164" break="no"/>giuineis</abbr><expan>cononsan<lb n="8" facs="2894,1943,1234,164" break="no"/>giuineis</expan></choice> nascuntur<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="9" facs="2851,2098,1411,167"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4284,2048,932,664">Ex <choice><abbr>ep<g ref="#char-a749">ꝉ</g>a</abbr><expan>epistola</expan></choice> Calisti <choice><abbr>pp<g ref="#char-0305">̅</g></abbr><expan>papae</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>fratrib<g ref="#char-f1ac"></g></abbr><expan>fratribus</expan></choice> <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> <choice><abbr>gallia<g ref="#char-0304">̄</g></abbr><expan>galliam</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g>sti</abbr><expan>consti</expan></choice> tutis missa<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Cap<g ref="#char-0305">̅</g>i<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">C</hi>ONIVNCTIONES <choice><abbr>AVTE<g ref="#char-0304">̄</g></abbr><expan>AVTEM</expan></choice><choice><abbr>CON<lb n="10" facs="2873,2260,1364,214" break="no"/>sanguineoru<g ref="#char-0304">̄</g></abbr><expan>CON<lb n="10" facs="2873,2260,1364,214" break="no"/>sanguineorum</expan></choice> fieri <choice><abbr><g ref="#char-a753">ꝓ</g>hibete</abbr><expan>prohibete</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="11" facs="2628,2429,1576,189"/><choice><abbr>q<g ref="#char-0111">đ</g></abbr><expan>quod</expan></choice> eas et diuin<g ref="#char-0119">ę</g> et <choice><abbr>sc<g ref="#char-a749">ꝉ</g>i</abbr><expan>seculi</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g>hibent</abbr><expan>prohibent</expan></choice>
+<lb n="12" facs="2628,2606,1652,164"/>leges<pc type="distinctio"><g ref="#char-f1f8"></g></pc> leges ergo diuin<g ref="#char-0119">ę</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc> h<g ref="#char-0119">ę</g>c agen<lb n="13" facs="2628,2768,1648,153" break="no"/>tes et eos qui exeis <choice><abbr><g ref="#char-a753">ꝓ</g>deunt</abbr><expan>prodeunt</expan></choice> non <choice><abbr>solu<g ref="#char-0304">̄</g></abbr><expan>solum</expan></choice>
+<lb n="14" facs="2646,2912,1573,164"/>eiciunt<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> sed et maledictos appel<lb n="15" facs="2639,3070,1378,174" break="no"/>lant<pc type="distinctio"><g ref="#char-f1f8"></g></pc> leges <choice><abbr>uͦ</abbr><expan>uero</expan></choice> <choice><abbr>sc<g ref="#char-a749">ꝉ</g>i</abbr><expan>seculi</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> infames
+<lb n="16" facs="2624,3218,1512,196"/>tales uocant<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> et ab h<g ref="#char-0119">ę</g>reditate<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="17" facs="2635,3405,1591,153"/>repellunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Nos uero sequentes
+<lb n="18" facs="2632,3495,1645,236"/>patres <choice><abbr>nr<g ref="#char-0305">̅</g>os</abbr><expan>nostros</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> infamia eos <choice><abbr>notam<g ref="#char-1dd2">᷒</g></abbr><expan>notamus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="19" facs="2624,3725,1594,135"/>et infames <choice><abbr>ee<g ref="#char-0305">̅</g></abbr><expan>esse</expan></choice> censemus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> quia in<lb n="20" facs="2650,3869,1684,164" break="no"/>fami<g ref="#char-0119">ę</g> maculis <note type="editorial-comment" resp="transkribus">Loch</note> <choice><abbr>as<g ref="#char-a751">ꝑ</g>si</abbr><expan>aspersi</expan></choice> sunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc> nec eos
+<lb n="21" facs="2660,4049,1602,113"/>quos leges <choice><abbr>sc<g ref="#char-a749">ꝉ</g>i</abbr><expan>seculi</expan></choice> <note type="editorial-comment" resp="transkribus">Loch</note> reiciunt<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> nos in
+<lb n="22" facs="2639,4161,1555,160"/><choice><abbr>testimoniu<g ref="#char-0304">̄</g></abbr><expan>testimonium</expan></choice> suscipere debemus<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="23" facs="2552,4298,1710,185"/><hi rend="versal">E</hi>os <choice><abbr>aute<g ref="#char-0304">̄</g></abbr><expan>autem</expan></choice> consanguineos dicimus<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="24" facs="2660,4474,1634,138"/>quos diuin<g ref="#char-0119">ę</g> et <choice><abbr>sc<g ref="#char-a749">ꝉ</g>i</abbr><expan>seculi</expan></choice> leges <choice><abbr>c<g ref="#char-0305">̅</g>sangui<lb n="25" facs="2639,4622,1630,146" break="no"/>neos</abbr><expan>consangui<lb n="25" facs="2639,4622,1630,146" break="no"/>neos</expan></choice> appellant<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> et in <choice><abbr>h<g ref="#char-0119">ę</g>reditate<g ref="#char-0304">̄</g></abbr><expan>h<g ref="#char-0119">ę</g>reditatem</expan></choice>
+<lb n="26" facs="2660,4748,1692,189"/>suscipiunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc> nec repellere possunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="27" facs="2578,4931,1738,146"/><choice><abbr><hi rend="versal">T</hi>aliu<g ref="#char-0304">̄</g></abbr><expan><hi rend="versal">T</hi>alium</expan></choice> <choice><abbr>eni<g ref="#char-0304">̄</g></abbr><expan>enim</expan></choice> coniunctiones<pc type="distinctio"><g ref="#char-f1f8"></g></pc> nec legeti<lb n="28" facs="2668,5079,1616,131" break="no"/>me sunt<pc type="p-interrogativus"><g ref="#char-f160"></g></pc> nec manere possunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="29" facs="2632,5230,1724,146"/>sed sunt repellend<g ref="#char-0119">ę</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Quis quis ergo
+<lb n="30" facs="2650,5356,1569,214"/>non <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> legitime <choice><abbr>c<g ref="#char-0305">̅</g>unctus</abbr><expan>conunctus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> <choice><abbr>absq<g ref="#char-f1ac"></g></abbr><expan>absque</expan></choice>
+
+<pb n="140v" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00284/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/284" ana="/annotations/bamberg-sb-c-6-annotation-284"/> 
+<fw type="page-header" place="top" facs="2326,514,1119,200">vii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>li<g ref="#char-0180">ƀ</g></abbr><expan>liber</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc></fw>
+<cb n="a" facs="943,744,1879,5661"/>
+<lb n="1" facs="1123,881,1630,182"/>dotali titulo et sine benedictione
+<lb n="2" facs="1141,1047,1587,146"/>sacerdotis constat <choice><abbr>ee<g ref="#char-0305">̅</g></abbr><expan>esse</expan></choice> copulatus<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="3" facs="1123,1209,1684,149"/>sacerdotes uel legitime coniunctos
+<lb n="4" facs="1109,1371,1623,124"/>criminari<pc type="distinctio"><g ref="#char-f1f8"></g></pc> uel in eos testificari
+<lb n="5" facs="1141,1518,1497,135"/>minime potest<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>quonia<g ref="#char-0304">̄</g></abbr><expan>quoniam</expan></choice> <choice><abbr>om<g ref="#char-0305">̅</g>is</abbr><expan>omnis</expan></choice>
+<lb n="6" facs="1138,1648,1576,146"/>in cesti macula pollutus<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> infa<lb n="7" facs="1102,1803,1602,149" break="no"/>mis <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> et accusare <choice><abbr>sup<g ref="#char-1dd3">ᷓ</g>dictos</abbr><expan>supradictos</expan></choice> <choice><abbr>n<g ref="#char-0305">̅</g></abbr><expan>non</expan></choice> <choice><abbr><g ref="#char-a751">ꝑ</g><lb n="8" facs="1123,1943,1573,142" break="no"/>mittitur</abbr><expan>p<lb n="8" facs="1123,1943,1573,142" break="no"/>ermittitur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Non <choice><abbr>solu<g ref="#char-0304">̄</g></abbr><expan>solum</expan></choice> ergo hi reici<lb n="9" facs="1120,2098,1634,153" break="no"/>endi sunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et infames <choice><abbr>efficiunt<g ref="#char-f1c2"></g></abbr><expan>efficiuntur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="10" facs="1116,2249,1562,149"/>sed <choice><abbr>etia<g ref="#char-0304">̄</g></abbr><expan>etiam</expan></choice> <choice><abbr>om<g ref="#char-0305">̅</g>s</abbr><expan>omnes</expan></choice> eis consentientes<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="11" facs="1141,2386,1573,182"/></p>
+          </div>
+          <div n="2" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="158,2188,900,408">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>ii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red"><choice><abbr>Q<g ref="#char-0111">đ</g></abbr><expan>Quod</expan></choice> nulli liceat<pc type="distinctio"><g ref="#char-f1f8"></g></pc> de <choice><abbr><g ref="#char-a753">ꝓ</g>pria</abbr><expan>propria</expan></choice>
+<lb n="12" facs="1120,2591,1663,138"/>cognatione <choice><abbr>uxore<g ref="#char-0304">̄</g></abbr><expan>uxorem</expan></choice> ducere<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="13" facs="1138,2746,1659,128"/>
+            <note type="inscription" place="margin left" anchored="false" facs="158,2649,900,768">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> uuormaci<lb break="no"/>ensi<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> ii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">I</hi>n copulatione <choice><abbr>fideliu<g ref="#char-0304">̄</g></abbr><expan>fidelium</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc><choice><abbr>generationu<g ref="#char-0304">̄</g></abbr><expan>generationum</expan></choice><lb n="14" facs="1022,2890,1728,156"/><choice><abbr>numeru<g ref="#char-0304">̄</g></abbr><expan>numerum</expan></choice><choice><abbr>n<g ref="#char-0305">̅</g></abbr><expan>non</expan></choice> definimus<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> sed id
+<lb n="15" facs="1087,3041,1602,156"/>statuimus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ut nulli liceat <choice><abbr>xp<g ref="#char-0305">̅</g>ia<lb n="16" facs="1116,3200,1530,146" break="no"/>no</abbr><expan>chris<lb n="16" facs="1116,3200,1530,146" break="no"/>tiano</expan></choice> de <choice><abbr><g ref="#char-a753">ꝓ</g>pria</abbr><expan>propria</expan></choice> consanguinitate<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="17" facs="1123,3358,1573,167"/>seu cognatione <choice><abbr>uxore<g ref="#char-0304">̄</g></abbr><expan>uxorem</expan></choice> accipere<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="18" facs="1098,3520,1616,131"/><choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> <choice><abbr>du<g ref="#char-0304">̄</g></abbr><expan>dum</expan></choice> generatio recordatur<pc type="distinctio"><g ref="#char-f1f8"></g></pc> cog<lb n="19" facs="1109,3689,1652,117" break="no"/>noscitur<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> aut memoria retinetur<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="20" facs="1091,3808,1173,189"/></p>
+          </div>
+          <div n="3" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="158,3470,900,423">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>iii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De incestuo<note type="editorial-comment" resp="transkribus">Loch</note>sis<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="21" facs="1181,3934,1598,207"/>
+            <note type="inscription" place="margin left" anchored="false" facs="158,3945,900,1046">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> Hiler<lb break="no"/>densi<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> x<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">D</hi>e his qui se in<note type="editorial-comment" resp="transkribus">Loch</note>cesta pollutione
+<lb n="22" facs="1166,4121,1512,149"/><choice><abbr>co<g ref="#char-0304">̄</g>maculant</abbr><expan>commaculant</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> placuit ut quo
+<lb n="23" facs="1098,4287,1375,120"/><choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> in ipso detestando et
+<lb n="24" facs="1130,4438,1609,142"/>illicito carnis contubernio per<lb n="25" facs="1120,4582,1537,146" break="no"/>seuerant<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> ad missam <choice><abbr>tatu<g ref="#char-0304">̄</g></abbr><expan>tatum</expan></choice>
+<lb n="26" facs="1098,4737,1569,135"/><choice><abbr>catecuminoru<g ref="#char-0304">̄</g></abbr><expan>catecuminorum</expan></choice> in <g ref="#char-0119">ę</g>cclesia admit<lb n="27" facs="1112,4884,1576,146" break="no"/>tantur<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cu<g ref="#char-0304">̄</g></abbr><expan>Cum</expan></choice> <choice><abbr>quib<g ref="#char-f1ac"></g></abbr><expan>quibus</expan></choice> <choice><abbr>etia<g ref="#char-0304">̄</g></abbr><expan>etiam</expan></choice> nec cibum
+<lb n="28" facs="1112,5018,1386,156"/>sumere<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> ulli <choice><abbr>xp<g ref="#char-0305">̅</g>ianorum</abbr><expan>christiano<g ref="#char-a75D">ꝝ</g></expan></choice>
+<lb n="29" facs="1123,5194,1414,167"/>sicut <choice><abbr>ap<g ref="#char-a749">ꝉ</g>s</abbr><expan>apostolus</expan></choice> iussit oportet<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="30" facs="1120,5324,831,196"/></p>
+          </div>
+          <div n="4" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="158,5043,900,678">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>iiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <cb n="b" facs="1645,744,2934,5661"/>
+            <lb n="1" facs="2657,842,1717,264"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4378,852,694,686">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> Aga<lb break="no"/>thensi<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> viii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">D</hi>e incestis <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice><choice><abbr>iunctionib<g ref="#char-f1ac"></g></abbr><expan>iunctionibus</expan></choice> nil
+<lb n="2" facs="2660,1119,1728,153"/><choice><abbr><g ref="#char-a753">ꝓ</g>rsus</abbr><expan>prorsus</expan></choice> ueni<g ref="#char-0119">ę</g> reseruamus<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> nisi <choice><abbr>cu<g ref="#char-0304">̄</g></abbr><expan>cum</expan></choice>
+<lb n="3" facs="2686,1263,1764,142"/><choice><abbr>adulteriu<g ref="#char-0304">̄</g></abbr><expan>adulterium</expan></choice> separatione sanauerint<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="4" facs="2686,1403,1681,124"/>Et si sanare noluerint<pc type="distinctio"><g ref="#char-f1f8"></g></pc> anathe<lb n="5" facs="2812,1580,748,106" break="no"/>matizentur<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="6" facs="2632,1659,1011,149"/></p>
+          </div>
+          <div n="5" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4381,1590,691,228">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>v<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="7" facs="2628,1778,1947,167"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4385,1871,687,311">ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilium</expan></choice> <del rend="">l</del>Aure<lb break="no"/>lianensi <pc type="distinctio"><g ref="#char-f1f8"></g></pc>Cap<g ref="#char-0305">̅</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">I</hi>ncestuosi <choice><abbr>du<g ref="#char-0304">̄</g></abbr><expan>dum</expan></choice> in ipso detestando
+<lb n="8" facs="2646,1961,1918,142"/><choice><abbr>eq<g ref="#char-f1ac"></g></abbr><expan>eque</expan></choice> nefando scelere manent<pc type="p-interrogativus"><g ref="#char-f160"></g></pc>
+<lb n="9" facs="2671,2098,1749,171"/><choice><abbr>n<g ref="#char-0304">̄</g></abbr><expan>nm</expan></choice> inter fideles <choice><abbr>xp<g ref="#char-0305">̅</g>ianos</abbr><expan>christianos</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> sed inter
+<lb n="10" facs="2671,2260,1868,164"/>gentiles aut catecuminos <choice><abbr>habeant<g ref="#char-f1c2"></g></abbr><expan>habeantur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="11" facs="2678,2429,1767,167"/><choice><abbr>ide<g ref="#char-0305">̅</g></abbr><expan>ERROR</expan></choice> <choice><abbr>cu<g ref="#char-0304">̄</g></abbr><expan>cum</expan></choice> <choice><abbr>xp<g ref="#char-0305">̅</g>ianis</abbr><expan>christianis</expan></choice> non sumant <choice><abbr>potu<g ref="#char-0304">̄</g></abbr><expan>potum</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="12" facs="2671,2602,1623,120"/>non <choice><abbr>cibu<g ref="#char-0304">̄</g></abbr><expan>cibum</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> sed soli hoc faciant<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="13" facs="2696,2739,1731,156"/><choice><abbr>n<g ref="#char-0305">̅</g></abbr><expan>non</expan></choice> <choice><abbr>osculent<g ref="#char-f1c2"></g></abbr><expan>osculentur</expan></choice> aut salutentur ab eis<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="14" facs="2740,2894,1710,120"/>Sed si suis <choice><abbr>sacerdotib<g ref="#char-f1ac"></g></abbr><expan>sacerdotibus</expan></choice> inoboedientes
+<lb n="15" facs="2657,3048,1857,124"/>extiteri<del rend=""/>nt<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> et a tam nefanalo scelere
+<lb n="16" facs="2596,3221,1825,146"/>se segregare<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>atq<g ref="#char-f1ac"></g></abbr><expan>atque</expan></choice> ad publica <choice><abbr>poeni<lb n="17" facs="2614,3380,1764,146" break="no"/>tentia<g ref="#char-0304">̄</g></abbr><expan>poeni<lb n="17" facs="2614,3380,1764,146" break="no"/>tentiam</expan></choice> redire noluerint<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> inter
+<lb n="18" facs="2624,3538,1742,106"/>eos habeantur<pc type="distinctio"><g ref="#char-f1f8"></g></pc> qui <choice><abbr>spritu<g ref="#char-0304">̄</g></abbr><expan>spritum</expan></choice> peri<lb n="19" facs="2621,3704,1695,128" break="no"/>clitantur inmundo<pc type="distinctio"><g ref="#char-f1f8"></g></pc> uel <choice><abbr>etia<g ref="#char-0304">̄</g></abbr><expan>etiam</expan></choice>
+<lb n="20" facs="2768,3844,1670,138"/>inter eos de <choice><abbr>quib<g ref="#char-f1ac"></g></abbr><expan>quibus</expan></choice> <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> se ueritas ait<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="21" facs="2657,4006,1612,117"/>site <choice><abbr>n<g ref="#char-0305">̅</g></abbr><expan>non</expan></choice> audierit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> sit tibi sicut
+<lb n="22" facs="2650,4146,1886,120"/>et huicus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et publicanus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Et si alter
+<lb n="23" facs="2783,4308,1587,160"/><choice><abbr>eoru<g ref="#char-0304">̄</g></abbr><expan>eorum</expan></choice> morte <choice><abbr>p<g ref="#char-0305">̅</g>uentus</abbr><expan>ERROR</expan></choice> fuerit<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>alt<g ref="#char-0305">̅</g></abbr><expan>alter</expan></choice>
+<lb n="24" facs="2632,4456,1785,153"/><choice><abbr>qua<g ref="#char-0304">̄</g></abbr><expan>quam</expan></choice> diu iuuat<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>grauit<g ref="#char-0305">̅</g></abbr><expan>grauiter</expan></choice> peniteat<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="25" facs="2642,4625,1432,113"/>et sine spe <choice><abbr>c<g ref="#char-0305">̅</g>iugu</abbr><expan>coniugu</expan></choice> maneat<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="26" facs="2624,4733,1857,153"/></p>
+          </div>
+          <div n="6" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4457,4560,615,380">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>vi<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">Ne aliquis <choice><abbr>fideliu<g ref="#char-0304">̄</g></abbr><expan>fidelium</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> ac <choice><abbr><g ref="#char-a753">ꝓ</g>pinqua<g ref="#char-0304">̄</g></abbr><expan>propinquam</expan></choice>
+<lb n="27" facs="2556,4888,1555,178"/>sanguinis sui accedat<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="28" facs="2740,5028,1821,146"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4446,4992,626,628">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> Tole<lb break="no"/>tano <pc type="distinctio"><g ref="#char-f1f8"></g></pc>ii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> v<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">N</hi>am et h<g ref="#char-0119">ę</g>c salubriter <choice><abbr>p<g ref="#char-0304">̄</g></abbr><expan>prae</expan></choice> cauenda
+<lb n="29" facs="2779,5208,1771,146"/>sancimus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> nequis <choice><abbr>fideliu<g ref="#char-0304">̄</g></abbr><expan>fidelium</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g>pin<lb n="30" facs="2765,5403,1764,128" break="no"/>qua<g ref="#char-0304">̄</g></abbr><expan>prop<lb n="30" facs="2765,5403,1764,128" break="no"/>inquam</expan></choice> sanguinis fui usque <choice><abbr>uͦ</abbr><expan>uero</expan></choice> affinitatis
+
+<pb n="141r" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00285/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/285" ana="/annotations/bamberg-sb-c-6-annotation-285"/> 
+<fw type="page-header" place="top" facs="2081,744,1360,200"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>de <choice><abbr>c<g ref="#char-0305">̅</g>sanguinitate</abbr><expan>consanguinitate</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc></fw>
+<cb n="a" facs="842,968,1882,5348"/>
+<lb n="1" facs="1037,1000,1501,218"/><choice><abbr>liniam<g ref="#char-0304">̄</g>ta</abbr><expan>liniammta</expan></choice> successione generis
+<lb n="2" facs="1033,1230,1533,138"/>cognoscit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> in matrimonio sibi
+<lb n="3" facs="1008,1367,1695,178"/>desideret copulari<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>qu<g ref="#char-0305">̅</g>o</abbr><expan>quoniam</expan></choice> <choice><abbr>scriptu<g ref="#char-0304">̄</g></abbr><expan>scriptum</expan></choice> e<pc type="distinctio"><g ref="#char-f1f8"></g></pc><g ref="#char-0305">̅</g>
+<lb n="4" facs="929,1511,1623,167"/><hi rend="versal">O</hi>mnis homo ad <choice><abbr><g ref="#char-a753">ꝓ</g>ximam</abbr><expan>proximam</expan></choice> <choice><abbr>sangiu<g ref="#char-0304">̄</g><lb n="5" facs="994,1706,1476,117" break="no"/>nis</abbr><expan>sangium<lb n="5" facs="994,1706,1476,117" break="no"/>nis</expan></choice> sui <choice><abbr>n<g ref="#char-0305">̅</g></abbr><expan>non</expan></choice> acedat<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ut reuelet
+<lb n="6" facs="1015,1835,1587,128"/>turpitudinem eius<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Et iterum<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="7" facs="943,1997,1706,192"/><hi rend="versal">A</hi>nima qu<g ref="#char-0119">ę</g> fecerit <choice><abbr>quippia<g ref="#char-0304">̄</g></abbr><expan>quippiam</expan></choice> existis<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="8" facs="1033,2163,1368,113"/>peribit de medio populi sui<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="9" facs="932,2332,1656,113"/><hi rend="versal">S</hi>ane <choice><abbr>quib<g ref="#char-f1ac"></g></abbr><expan>quibus</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g>iunctio</abbr><expan>coniunctio</expan></choice> illicita inter
+<lb n="10" facs="1015,2454,1602,149"/><choice><abbr>dicit<g ref="#char-f1c2"></g></abbr><expan>dicuntur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> habebunt in eundi melio<lb n="11" facs="1026,2638,1288,156" break="no"/>ris coniugii libereatem<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="12" facs="958,2742,1641,185"/></p>
+          </div>
+          <div n="7" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="414,2555,583,434">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>vii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red"><choice><abbr>Q<g ref="#char-0111">đ</g></abbr><expan>Quod</expan></choice><g ref="#char-0119">ę</g>qualiter coniungendus sit
+<lb n="13" facs="986,2922,1746,174"/>in matrimonio uir suis con<lb n="14" facs="943,3077,1364,200" break="no"/>sanguineis et uxoris<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="15" facs="1037,3218,1497,185"/>
+            <note type="inscription" place="margin left" anchored="false" facs="414,3023,658,448"><choice><abbr><unclear reason="tight-binding" resp="Transkribus" cert="low">...</unclear>decr<g ref="#char-0305">̅</g></abbr><expan><unclear reason="tight-binding" resp="Transkribus" cert="low">...dec</unclear>runt</expan></choice> Iulii <choice><abbr>pp<g ref="#char-0305">̅</g></abbr><expan>papae</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">A</hi>equaliter uir <choice><abbr>coniungat<g ref="#char-f1c2"></g></abbr><expan>coniungatur</expan></choice> in
+<lb n="16" facs="997,3416,1566,149"/>matrimonio consanguineis suis
+<lb n="17" facs="1015,3574,1440,135"/>et <choice><abbr>c<g ref="#char-0305">̅</g>sangu</abbr><expan>consangu</expan></choice> in eis uxoris fu<g ref="#char-0119">ę</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="18" facs="1012,3718,1594,146"/></p>
+          </div>
+          <div n="8" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="414,3516,586,452">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>viii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red"><choice><abbr>Q<g ref="#char-0111">đ</g></abbr><expan>Quod</expan></choice> uno modo<pc type="distinctio"><g ref="#char-f1f8"></g></pc> parentela uiri
+<lb n="19" facs="997,3869,1645,117"/>et mulieris in <choice><abbr>c<g ref="#char-0305">̅</g>iunctione</abbr><expan>coniunctione</expan></choice> con<lb n="20" facs="1087,4031,939,131" break="no"/>sideranda sit<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="21" facs="821,4118,1814,232"/>
+            <note type="inscription" place="margin left" anchored="false" facs="414,3981,590,736"><unclear reason="tight-binding" resp="Transkribus" cert="low">...</unclear>x <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilium</expan></choice> Alatis<lb break="no"/>ensi<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> iii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">S</hi>ane consanguinitas qu<g ref="#char-0119">ę</g> in <choice><abbr><g ref="#char-a753">ꝓ</g>p<g ref="#char-0365">ͥ</g>o</abbr><expan>proprio</expan></choice>
+<lb n="22" facs="979,4323,1584,156"/>iuro <choice><abbr>obseruandae<g ref="#char-0305">̅</g></abbr><expan>ERROR</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> h<g ref="#char-0119">ę</g>c <choice><abbr>nimiru<g ref="#char-0304">̄</g></abbr><expan>nimirum</expan></choice>
+<lb n="23" facs="994,4488,1404,124"/>in uxoris parentela<pc type="distinctio"><g ref="#char-f1f8"></g></pc> de lege
+<lb n="24" facs="979,4607,1548,156"/><choice><abbr>nuptiaru<g ref="#char-0304">̄</g></abbr><expan>nuptiarum</expan></choice> custodienda <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Quia
+<lb n="25" facs="983,4755,1634,131"/><choice><abbr>c<g ref="#char-0305">̅</g>stat</abbr><expan>constat</expan></choice> eos duos fuisse in carne una<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="26" facs="965,4910,1627,149"/><choice><abbr>co<g ref="#char-0304">̄</g>munis</abbr><expan>communis</expan></choice> illis <choice><abbr>utraq<g ref="#char-f1ac"></g></abbr><expan>utraque</expan></choice> parentela <choice><abbr>ee<g ref="#char-0305">̅</g></abbr><expan>esse</expan></choice>
+<lb n="27" facs="1012,5043,1450,160"/>credenda est<pc type="distinctio"><g ref="#char-f1f8"></g></pc> sicut <choice><abbr>seriptu<g ref="#char-0304">̄</g></abbr><expan>seriptum</expan></choice> <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice>
+<lb n="28" facs="900,5212,1519,131"/><hi rend="versal">E</hi>runt duo in carne una<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="29" facs="976,5320,1674,174"/></p>
+          </div>
+          <div n="9" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="414,4762,576,732">
+                <hi rend="color:red">viiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">In quo geniculo <choice><abbr>abstinendu<g ref="#char-0304">̄</g></abbr><expan>abstinendum</expan></choice> sit</hi>
+            </head>
+            <lb n="30" facs="824,5403,1753,239"/>
+            <note type="inscription" place="margin left" anchored="false" facs="414,5486,558,830">edictis isido</note>
+            <p n="1"><hi rend="color:red initial">I</hi>sidorus in ethimologiis suis <choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice><cb n="b" facs="2509,968,2023,5348"/><lb n="1" facs="2696,971,1641,282"/>ad <choice><abbr>septima<g ref="#char-0304">̄</g></abbr><expan>septimam</expan></choice><choice><abbr>generatione<g ref="#char-0304">̄</g></abbr><expan>generationem</expan></choice><choice><abbr>c<g ref="#char-0305">̅</g>sangui<lb n="2" facs="2693,1241,1684,153" break="no"/>nitatis</abbr><expan>consangui<lb n="2" facs="2693,1241,1684,153" break="no"/>nitatis</expan></choice><choice><abbr>abstinendu<g ref="#char-0304">̄</g></abbr><expan>abstinendum</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> et sic legitimo
+<lb n="3" facs="2560,1392,1796,156"/>conubio <choice><abbr>c<g ref="#char-0305">̅</g>iungendu<g ref="#char-0304">̄</g></abbr><expan>coniungendum</expan></choice> asseruit<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Inde
+<lb n="4" facs="2700,1558,1674,142"/>reor <choice><abbr>cu<g ref="#char-0304">̄</g></abbr><expan>cum</expan></choice> fecisse<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>q<g ref="#char-0111">đ</g></abbr><expan>quod</expan></choice> genealogi<g ref="#char-0119">ę</g> <choice><abbr>serie<g ref="#char-0305">̅</g></abbr><expan>ERROR</expan></choice>
+<lb n="5" facs="2693,1713,1605,124"/>retexens<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>quousq<g ref="#char-f1ac"></g></abbr><expan>quousque</expan></choice> <choice><abbr>ordine<g ref="#char-0304">̄</g></abbr><expan>ordinem</expan></choice> nume<lb n="6" facs="2700,1864,1616,142" break="no"/>randi <choice><abbr><g ref="#char-a751">ꝑ</g>ducere</abbr><expan>perducere</expan></choice> posset<pc type="distinctio"><g ref="#char-f1f8"></g></pc> eo cognati<lb n="7" facs="2696,2044,1684,117" break="no"/>one sanguinis <choice><abbr>seruanda<g ref="#char-0304">̄</g></abbr><expan>seruandam</expan></choice> estimauit<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="8" facs="2592,2152,1713,164"/><hi rend="versal">S</hi>ic <choice><abbr>q<g ref="#char-f1ac"></g></abbr><expan>que</expan></choice> ad <choice><abbr>inuocatione<g ref="#char-0304">̄</g></abbr><expan>inuocationem</expan></choice> generis et ami<lb n="9" facs="2686,2332,1616,167" break="no"/>cici<g ref="#char-0119">ę</g> ius <choice><abbr>confirmandu<g ref="#char-0304">̄</g></abbr><expan>confirmandum</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> redire ad
+<lb n="10" facs="2696,2494,1540,146"/><choice><abbr>conubiu<g ref="#char-0304">̄</g></abbr><expan>conubium</expan></choice> sanciuit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> quando iam
+<lb n="11" facs="2678,2663,1717,164"/>cognationis ordo numerari desiuit<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="12" facs="2671,2804,1814,164"/></p>
+          </div>
+          <div n="10" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4331,2490,946,585">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>x<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">In quo ramusculo <choice><abbr>c<g ref="#char-0305">̅</g>sanguinitatis</abbr><expan>consanguinitatis</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="13" facs="2585,2944,1728,146"/>legitima conubia fieri possint<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="14" facs="2538,3102,1713,160"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4309,3045,968,545">Ex dictis eiusde<g ref="#char-0304">̄</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">B</hi>eatus isidorus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> de <choice><abbr>c<g ref="#char-0305">̅</g>sanguinitate</abbr><expan>consanguinitate</expan></choice>
+<lb n="15" facs="2671,3264,1605,171"/>sic <choice><abbr>loquit<g ref="#char-f1c2"></g></abbr><expan>loquitur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Cuius series<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>septe<g ref="#char-0304">̄</g></abbr><expan>septem</expan></choice> gra
+<lb n="16" facs="2642,3419,1623,160"/><choice><abbr>dib<g ref="#char-f1ac"></g></abbr><expan>dibus</expan></choice> <choice><abbr>dirimte<g ref="#char-0304">̄</g></abbr><expan>dirimtem</expan></choice> hoc modo<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Filius et
+<lb n="17" facs="2646,3567,1620,128"/>filia<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>q<g ref="#char-0111">đ</g></abbr><expan>quod</expan></choice> <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> frater et soror<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> sit ipse
+<lb n="18" facs="2642,3714,1638,164"/>truncus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Illis <choice><abbr>seorsu<g ref="#char-0304">̄</g></abbr><expan>seorsum</expan></choice> se iunctis<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> ex
+<lb n="19" facs="2495,3869,1818,185"/>radice illius truinci <choice><abbr>egrediunt<g ref="#char-f1c2"></g></abbr><expan>egrediuntur</expan></choice> isti
+<lb n="20" facs="2664,4024,1598,156"/>ramusculi<pc type="distinctio"><g ref="#char-f1f8"></g></pc> nepos et neptis primus<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="21" facs="2635,4179,1598,142"/><choice><abbr><g ref="#char-a753">ꝓ</g>nepos</abbr><expan>pronepos</expan></choice> et <choice><abbr><g ref="#char-a753">ꝓ</g>neptis</abbr><expan>proneptis</expan></choice> <choice><abbr>sc<g ref="#char-0111">đ</g>s</abbr><expan>secundus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> abnepos et
+<lb n="22" facs="2639,4334,1641,156"/>abneptis tercius<pc type="distinctio"><g ref="#char-f1f8"></g></pc> adnepos et ad nep<lb n="23" facs="2621,4496,1598,135" break="no"/>tis quartus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> trinepos et trineptis
+<lb n="24" facs="2639,4629,1612,149"/>quintus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> trinepotis nepos et trine<lb n="25" facs="2628,4784,1630,156" break="no"/>potis neptis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> sextus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> h<g ref="#char-0119">ę</g>c <choice><abbr>c<g ref="#char-0305">̅</g>sangiuni<lb n="26" facs="2642,4920,1677,156" break="no"/>tas</abbr><expan>consangiuni<lb n="26" facs="2642,4920,1677,156" break="no"/>tas</expan></choice> <choice><abbr>du<g ref="#char-0304">̄</g></abbr><expan>dum</expan></choice> se paulatim in <choice><abbr><g ref="#char-a753">ꝓ</g>paginu<g ref="#char-0304">̄</g></abbr><expan>propaginum</expan></choice> <choice><abbr>ordi<lb n="27" facs="2606,5068,1728,149" break="no"/>nib<g ref="#char-f1ac"></g></abbr><expan>ordi<lb n="27" facs="2606,5068,1728,149" break="no"/>nibus</expan></choice> dirimens<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> ad <choice><abbr>ultimu<g ref="#char-0304">̄</g></abbr><expan>ultimum</expan></choice> <choice><abbr>gradu<g ref="#char-0304">̄</g></abbr><expan>gradum</expan></choice>
+<lb n="28" facs="2614,5212,1702,124"/>sese subtraxerit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> et <choice><abbr><g ref="#char-a753">ꝓ</g>pinquitas</abbr><expan>propinquitas</expan></choice> <choice><abbr>ee<g ref="#char-0305">̅</g></abbr><expan>esse</expan></choice> de<lb n="29" facs="2621,5360,1670,156" break="no"/>sierit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> tunc <choice><abbr>p<g ref="#char-0365">ͥ</g>mu<g ref="#char-0304">̄</g></abbr><expan>primum</expan></choice> lex in matrimonii
+<lb n="30" facs="2632,5518,1591,153"/><choice><abbr>uinculu<g ref="#char-0304">̄</g></abbr><expan>uinculum</expan></choice> <choice><abbr>recipiet<g ref="#char-f1c2"></g></abbr><expan>recipietur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> et <choice><abbr>quoda<g ref="#char-0304">̄</g></abbr><expan>quodam</expan></choice> modo
+
+<pb n="141v" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00286/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/286" ana="/annotations/bamberg-sb-c-6-annotation-286"/> 
+<fw type="page-header" place="top" facs="2279,816,734,200"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>vii<pc type="distinctio"><g ref="#char-f1f8"></g></pc><choice><abbr>li<g ref="#char-0180">ƀ</g></abbr><expan>liber</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc></fw>
+<cb n="a" facs="904,960,1782,5153"/>
+<lb n="1" facs="1019,914,1605,261"/>reuocabit <choice><abbr>fugiente<g ref="#char-0304">̄</g></abbr><expan>fugientem</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Ideo <choice><abbr>aute<g ref="#char-0304">̄</g></abbr><expan>autem</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="2" facs="1008,1187,1620,160"/><choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> ad <choice><abbr>sextu<g ref="#char-0304">̄</g></abbr><expan>sextum</expan></choice> generis <choice><abbr>gradu<g ref="#char-0304">̄</g></abbr><expan>gradum</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g>san<lb n="3" facs="1048,1335,1555,142" break="no"/>guinitas</abbr><expan>consan<lb n="3" facs="1048,1335,1555,142" break="no"/>guinitas</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g>stituta</abbr><expan>constituta</expan></choice> <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> ut sicut in
+<lb n="4" facs="1033,1515,1558,124"/>sex <choice><abbr><g ref="#char-0119">ę</g>tatib<g ref="#char-f1ac"></g></abbr><expan><g ref="#char-0119">ę</g>tatibus</expan></choice> mundi generatio<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et
+<lb n="5" facs="1037,1655,1627,149"/>hominis status <choice><abbr>finit<g ref="#char-f1c2"></g></abbr><expan>finitur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> ita <choice><abbr><g ref="#char-a753">ꝓ</g>pinqui<lb n="6" facs="1048,1803,1364,146" break="no"/>tas</abbr><expan>propinqui<lb n="6" facs="1048,1803,1364,146" break="no"/>tas</expan></choice> generis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> tot gradibus
+<lb n="7" facs="1044,1972,777,124"/>terminetur<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="8" facs="1022,2091,1558,200"/></p>
+          </div>
+          <div n="11" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="79,1907,932,358">
+                <hi rend="color:red">xi<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red"><choice><abbr>Q<g ref="#char-0111">đ</g></abbr><expan>Quod</expan></choice> consanguinitas<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> ad sep
+<lb n="9" facs="1033,2271,1659,142"/><choice><abbr>timu<g ref="#char-0304">̄</g></abbr><expan>timum</expan></choice> <choice><abbr>geniculu<g ref="#char-0304">̄</g></abbr><expan>geniculum</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g>seruari</abbr><expan>conseruari</expan></choice> debeat<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="10" facs="1062,2408,1569,178"/>
+            <note type="inscription" place="margin left" anchored="false" facs="79,2318,932,326">Ex <choice><abbr>ep<g ref="#char-a749">ꝉ</g>a</abbr><expan>epistola</expan></choice> <choice><abbr>Greg<g ref="#char-0305">̅</g></abbr><expan>Gregorius</expan></choice> <choice><abbr>pp<g ref="#char-0305">̅</g></abbr><expan>papae</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>ep<g ref="#char-0305">̅</g>is</abbr><expan>episcopis</expan></choice> gallie missa<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">P</hi>rogeniem <choice><abbr>sua<g ref="#char-0304">̄</g></abbr><expan>suam</expan></choice><choice><abbr>unu<g ref="#char-0304">̄</g></abbr><expan>unum</expan></choice><choice><abbr>que<g ref="#char-0304">̄</g>q<g ref="#char-f1ac"></g></abbr><expan>quemque</expan></choice> ad <choice><abbr>sep<lb n="11" facs="1058,2606,1566,138" break="no"/>tima<g ref="#char-0304">̄</g></abbr><expan>sep<lb n="11" facs="1058,2606,1566,138" break="no"/>timam</expan></choice> obseruare decernimus <choice><abbr>ge<lb n="12" facs="1044,2742,1537,153" break="no"/>neratione<g ref="#char-0304">̄</g></abbr><expan>ge<lb n="12" facs="1044,2742,1537,153" break="no"/>nerationem</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> et <choice><abbr>qua<g ref="#char-0304">̄</g></abbr><expan>quam</expan></choice> diu se agnos<lb n="13" facs="1066,2897,1558,153" break="no"/>cunt affinitate <choice><abbr><g ref="#char-a753">ꝓ</g>pinquos</abbr><expan>propinquos</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> ad
+<lb n="14" facs="1037,3045,1645,149"/><choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> iugale <choice><abbr>copula<g ref="#char-0304">̄</g></abbr><expan>copulam</expan></choice> accedere dene<lb n="15" facs="1033,3192,1666,160" break="no"/>gamus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Q<g ref="#char-0111">đ</g></abbr><expan>Quod</expan></choice> si fecerint<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>separent<g ref="#char-f1c2"></g></abbr><expan>separentur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="16" facs="1152,3351,903,131"/></p>
+          </div>
+          <div n="12" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="79,3290,932,167">
+                <hi rend="color:red">xii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="17" facs="1156,3509,1486,138"/>
+            <note type="inscription" place="margin left" anchored="false" facs="79,3509,932,412">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> apud theodo nis <choice><abbr>uilla<g ref="#char-0304">̄</g></abbr><expan>uillam</expan></choice> habito<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> viii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">N</hi>ullus <choice><abbr>fideliu<g ref="#char-0304">̄</g></abbr><expan>fidelium</expan></choice><choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> ad affinita<lb n="18" facs="1066,3650,1605,160" break="no"/>tis <choice><abbr>linea<g ref="#char-0304">̄</g></abbr><expan>lineam</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> id <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> <choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> in septimam
+<lb n="19" facs="1058,3819,1573,142"/><choice><abbr><g ref="#char-a753">ꝓ</g>ggenie</abbr><expan>proggenie</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>c<g ref="#char-0305">̅</g></abbr><expan>con</expan></choice> <choice><abbr>sanguinea<g ref="#char-0304">̄</g></abbr><expan>sanguineam</expan></choice> <choice><abbr>sua<g ref="#char-0304">̄</g></abbr><expan>suam</expan></choice> du<lb n="20" facs="1066,3956,1609,156" break="no"/>cat <choice><abbr>uxore<g ref="#char-0304">̄</g></abbr><expan>uxorem</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> <choice><abbr>ea<g ref="#char-0304">̄</g></abbr><expan>eam</expan></choice> quo <choice><abbr>q<g ref="#char-0365">ͥ</g></abbr><expan>qui</expan></choice> modo incesti
+<lb n="21" facs="1080,4107,1504,153"/>macula polluat<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Si quis uero
+<lb n="22" facs="1084,4269,1594,160"/>hoc terere <choice><abbr>p<g ref="#char-0304">̄</g><g ref="#char-0304">̄</g>su<g ref="#char-0304">̄</g>pserit</abbr><expan>praemsumpserit</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> ut <choice><abbr>incestu<g ref="#char-0304">̄</g></abbr><expan>incestum</expan></choice>
+<lb n="23" facs="1094,4431,1576,102"/>luat<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ac publice iuxta canonico
+<lb n="24" facs="1076,4553,1137,153"/>gradus poeniteat<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="25" facs="1192,4733,889,142"/></p>
+          </div>
+          <div n="13" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="79,4650,932,156">
+                <hi rend="color:red">xiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="26" facs="958,4852,1674,164"/>
+            <note type="inscription" place="margin left" anchored="false" facs="79,4859,932,484">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> Iugdun<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> x<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">N</hi>ulli ex <choice><abbr><g ref="#char-a753">ꝓ</g>pinquitate</abbr><expan>propinquitate</expan></choice> siu san<lb n="27" facs="1087,5000,1573,189" break="no"/>guinis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> ad <choice><abbr>septimu<g ref="#char-0304">̄</g></abbr><expan>septimum</expan></choice> <choice><abbr>gradu<g ref="#char-0304">̄</g></abbr><expan>gradum</expan></choice>
+<lb n="28" facs="1069,5169,1602,128"/>uxores ducant<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>neq<g ref="#char-f1ac"></g></abbr><expan>neque</expan></choice> sine bene<lb n="29" facs="1102,5309,1551,131" break="no"/>dictione sacerdotis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Qui ante
+<lb n="30" facs="1091,5446,1591,171"/>in nupti erant<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> a sacerdote bene<cb n="b" facs="2578,960,1879,5153"/>
+<lb n="1" facs="2686,1022,1288,171" break="no"/>dicti<pc type="distinctio"><g ref="#char-f1f8"></g></pc> nubere audeant<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="2" facs="2779,1184,874,160"/></p>
+          </div>
+          <div n="14" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4349,960,615,383">
+                <hi rend="color:red">xiiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De eudem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="3" facs="2808,1346,1540,160"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4349,1396,615,351">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> Aure<lb break="no"/>lianensi<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> xx<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><choice><abbr><hi rend="color:red initial">N</hi>ullu<g ref="#char-0304">̄</g></abbr><expan><hi rend="color:red initial">N</hi>ullum</expan></choice> in <choice><abbr>utroq<g ref="#char-f1ac"></g></abbr><expan>utroque</expan></choice> sexu <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> mittimus
+<lb n="4" facs="2725,1515,1598,171"/>ex <choice><abbr><g ref="#char-a753">ꝓ</g>pinguitate</abbr><expan>propinguitate</expan></choice> sui sanguinis
+<lb n="5" facs="2563,1662,1746,138"/><choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> uxoris<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> in septimi generis
+<lb n="6" facs="2725,1817,1494,131"/><choice><abbr>gradu<g ref="#char-0304">̄</g></abbr><expan>gradum</expan></choice> <choice><abbr>uxore<g ref="#char-0304">̄</g></abbr><expan>uxorem</expan></choice> ducere<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> incesti
+<lb n="7" facs="2714,1961,1141,110"/>macula <choice><abbr>co<g ref="#char-0304">̄</g>maculari</abbr><expan>commaculari</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="8" facs="2704,2112,864,171"/></p>
+          </div>
+          <div n="15" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4349,2055,615,228">
+                <hi rend="color:red">xv<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="9" facs="2585,2213,1738,228"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4349,2336,615,455">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> Agri <choice><abbr>pin<g ref="#char-0305">̅</g></abbr><expan>ERROR</expan></choice> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> vi</note>
+            <p n="1"><hi rend="color:red initial">I</hi>n septe <choice><abbr>gradib<g ref="#char-f1ac"></g></abbr><expan>gradibus</expan></choice> omnia <choice><abbr><g ref="#char-a753">ꝓ</g>pinquita<lb n="10" facs="2693,2436,1497,138" break="no"/>tu<g ref="#char-0304">̄</g></abbr><expan>propinquita<lb n="10" facs="2693,2436,1497,138" break="no"/>tum</expan></choice> nomina <choice><abbr>continent<g ref="#char-f1c2"></g></abbr><expan>continentur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> ultra
+<lb n="11" facs="2711,2602,1594,138"/>quos nec affinitas <choice><abbr>inuenit<g ref="#char-f1c2"></g></abbr><expan>inuenitur</expan></choice> nec
+<lb n="12" facs="2736,2746,1634,153"/>successio potest amplius <choice><abbr>p<g ref="#char-0304">̄</g>rogari</abbr><expan>praerogari</expan></choice><pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="13" facs="2761,2897,1062,131"/></p>
+          </div>
+          <div n="16" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4349,2843,615,185">
+                <hi rend="color:red">xvi<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">Item de eadem re</hi>
+            </head>
+            <lb n="14" facs="2617,2994,1684,207"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4349,3081,615,297">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> Mel<lb break="no"/>densi <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> vii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">D</hi>e affinitate <choice><abbr>na<g ref="#char-0304">̄</g>q<g ref="#char-f1ac"></g></abbr><expan>namque</expan></choice> sanguinis <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice>
+<lb n="15" facs="2560,3218,1857,160"/>gradus cognationis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> placuit <choice><abbr>us<g ref="#char-a759">ꝙ</g></abbr><expan>ERROR</expan></choice>
+<lb n="16" facs="2732,3376,1656,142"/>ad <choice><abbr>septima<g ref="#char-0304">̄</g></abbr><expan>septimam</expan></choice> <choice><abbr>generatione<g ref="#char-0304">̄</g></abbr><expan>generationem</expan></choice> obserua<lb n="17" facs="2714,3527,1674,138" break="no"/>re<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>na<g ref="#char-0304">̄</g></abbr><expan>nam</expan></choice> et hereditas <choice><abbr>reru<g ref="#char-0304">̄</g></abbr><expan>rerum</expan></choice> <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> legales
+<lb n="18" facs="2736,3657,1587,131"/>definitiones sancit<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> ad <choice><abbr>sep<lb n="19" facs="2747,3822,1605,142" break="no"/>timu<g ref="#char-0304">̄</g></abbr><expan>sep<lb n="19" facs="2747,3822,1605,142" break="no"/>timum</expan></choice> <choice><abbr>gradu<g ref="#char-0304">̄</g></abbr><expan>gradum</expan></choice> <choice><abbr>p<g ref="#char-0304">̄</g>tentere</abbr><expan>praetentere</expan></choice> <choice><abbr>h<g ref="#char-0119">ę</g>redu<g ref="#char-0304">̄</g></abbr><expan>h<g ref="#char-0119">ę</g>redum</expan></choice>
+<lb n="20" facs="2574,3999,1850,95"/><choice><abbr>succesione<g ref="#char-0304">̄</g></abbr><expan>succesionem</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Non <choice><abbr>eni<g ref="#char-0304">̄</g></abbr><expan>enim</expan></choice> succederent<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="21" facs="2736,4136,1645,131"/>nisi eis de <choice><abbr><g ref="#char-a753">ꝓ</g>pagine</abbr><expan>propagine</expan></choice> cognationis
+<lb n="22" facs="2574,4265,1555,135"/>deberetur<pc type="p-versus"><g ref="#char-f1ea"></g></pc> <seg corresp="#bamberg-sb-c-6-07-supp-004" type="pos-of-displaced"><g ref="#char-f1e1"></g>separent<g ref="#char-f1c2"></g><pc type="distinctio"><g ref="#char-f1f8"></g></pc></seg><supplied xml:id="bamberg-sb-c-6-07-supp-004" reason="displaced-over-the-line">separent<g ref="#char-f1c2"></g><pc type="distinctio"><g ref="#char-f1f8"></g></pc></supplied>
+<lb n="23" facs="2563,4416,1839,131"/></p>
+          </div>
+          <div n="17" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4349,4290,615,297">
+                <hi rend="color:red">xvii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">Vt duobus <choice><abbr><g ref="#char-019a">ƚ</g></abbr><expan>ERROR</expan></choice> <choice><abbr>trib<g ref="#char-f1ac"></g></abbr><expan>tribus</expan></choice> <choice><abbr>testib<g ref="#char-f1ac"></g></abbr><expan>testibus</expan></choice> testimo<lb n="24" facs="2747,4557,1620,142" break="no"/>nia <choice><abbr>dicentib<g ref="#char-f1ac"></g></abbr><expan>dicentibus</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> consanguinei</hi>
+            </head>
+            <lb n="25" facs="2671,4694,1652,135"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4349,4640,615,423">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Hlili<unclear reason="tight-binding" resp="Transkribus" cert="low">...</unclear>.<lb break="no"/>densi<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> xx<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">V</hi>t <choice><abbr>om<g ref="#char-0305">̅</g>is</abbr><expan>omnis</expan></choice> controuersia que de
+<lb n="26" facs="2743,4845,1602,128"/><choice><abbr><g ref="#char-0119">ę</g>cc<g ref="#char-a749">ꝉ</g>asticis</abbr><expan><g ref="#char-0119">ę</g>cclesiasticis</expan></choice> <choice><abbr>reb<g ref="#char-f1ac"></g></abbr><expan>rebus</expan></choice> fit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>sc<g ref="#char-0111">đ</g>m</abbr><expan>secundum</expan></choice> diuina
+<lb n="27" facs="2754,4989,1576,156"/><choice><abbr>lege<g ref="#char-0304">̄</g></abbr><expan>legem</expan></choice> sub <choice><abbr>duob<g ref="#char-f1ac"></g></abbr><expan>duobus</expan></choice> uel <choice><abbr>trib<g ref="#char-f1ac"></g></abbr><expan>tribus</expan></choice> <choice><abbr>testib<g ref="#char-f1ac"></g></abbr><expan>testibus</expan></choice>
+<lb n="28" facs="2747,5144,1620,120"/><choice><abbr>terminet<g ref="#char-f1c2"></g></abbr><expan>terminetur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Testis <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> <choice><abbr>dn<g ref="#char-0305">̅</g>s</abbr><expan>dominus</expan></choice> <choice><abbr>cu<g ref="#char-0304">̄</g></abbr><expan>cum</expan></choice> dixit<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="29" facs="2650,5288,1742,146"/><hi rend="versal">N</hi>on unus stet <choice><abbr>c<g ref="#char-0305">̅</g>tra</abbr><expan>contra</expan></choice> <choice><abbr>aliu<g ref="#char-0304">̄</g></abbr><expan>alium</expan></choice> sed in ore
+<lb n="30" facs="2743,5450,1627,185"/><choice><abbr>duoru<g ref="#char-0304">̄</g></abbr><expan>duorum</expan></choice> uel trium testium<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> stet
+
+<pb n="142r" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00287/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/287" ana="/annotations/bamberg-sb-c-6-annotation-287"/> 
+<fw type="page-header" place="top" facs="2156,809,1278,200">de consanguinitate<pc type="distinctio"><g ref="#char-f1f8"></g></pc></fw>
+<cb n="a" facs="770,950,1926,5175"/>
+<lb n="1" facs="976,1065,813,146"/>omne <choice><abbr>uerbu<g ref="#char-0304">̄</g></abbr><expan>uerbum</expan></choice>
+<lb n="2" facs="1019,1220,892,128"/></p>
+          </div>
+          <div n="18" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="324,950,630,372">
+                <hi rend="color:red">xviii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="3" facs="828,1281,1850,243"/>
+            <note type="inscription" place="margin left" anchored="false" facs="324,1374,615,351">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> Cabil<lb break="no"/>lonensi<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> v<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">C</hi>ontra dicimus <choice><abbr>quo<g ref="#char-a759">ꝙ</g></abbr><expan>ERROR</expan></choice> ut in <choice><abbr>q<g ref="#char-1dd3">ᷓ</g>rta</abbr><expan>quarta</expan></choice>
+<lb n="4" facs="947,1518,1742,153"/>uel quinta <choice><abbr>sexta<g ref="#char-a759">ꝙ</g></abbr><expan>ERROR</expan></choice> generatione<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="5" facs="940,1680,1648,131"/>nullus amplius coniugio copu<lb n="6" facs="968,1835,1652,131" break="no"/>letur<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Ubi <choice><abbr>aut<g ref="#char-0305">̅</g></abbr><expan>autem</expan></choice> post inter <choice><abbr>dictu<g ref="#char-0304">̄</g></abbr><expan>dictum</expan></choice>
+<lb n="7" facs="950,1968,1666,167"/><choice><abbr>factu<g ref="#char-0304">̄</g></abbr><expan>factum</expan></choice> fuerit <choice><abbr>inuentu<g ref="#char-0304">̄</g></abbr><expan>inuentum</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>separet<g ref="#char-f1c2"></g><g ref="#char-f1c2"></g><g ref="#char-f1c2"></g></abbr><expan>separetururur</expan></choice><pc type="p-interrogativus"><g ref="#char-f160"></g></pc>
+<lb n="8" facs="968,2134,1587,178"/></p>
+          </div>
+          <div n="19" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="324,1968,604,264">
+                <hi rend="color:red">xviiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">Quid <choice><abbr>sc<g ref="#char-0305">̅</g>s</abbr><expan>sanctus</expan></choice> gregorius augustino
+<lb n="9" facs="950,2314,1648,146"/><choice><abbr>angloru<g ref="#char-0304">̄</g></abbr><expan>anglorum</expan></choice> <choice><abbr>p<g ref="#char-0304">̄</g>dicatori</abbr><expan>praedicatori</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a753">ꝓ</g>pter</abbr><expan>propter</expan></choice> <choice><abbr>tene<lb n="10" facs="1001,2451,1533,153" break="no"/>ritate<g ref="#char-0304">̄</g></abbr><expan>tene<lb n="10" facs="1001,2451,1533,153" break="no"/>ritatem</expan></choice> nou<g ref="#char-0119">ę</g> fidei <choice><abbr><g ref="#char-a751">ꝑ</g>miserit</abbr><expan>permiserit</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="11" facs="778,2516,1839,261"/>
+            <note type="inscription" place="margin left" anchored="false" facs="324,2512,594,869">Ex <choice><abbr>ep<g ref="#char-a749">ꝉ</g>a</abbr><expan>epistola</expan></choice> Iohan<lb break="no"/>nis <choice><abbr>c<g ref="#char-0305">̅</g>stantino<lb break="no"/>politani</abbr><expan>constantino<lb break="no"/>politani</expan></choice> <choice><abbr>ep<g ref="#char-0305">̅</g>i</abbr><expan>episcopi</expan></choice> ad <choice><abbr>felice<g ref="#char-0304">̄</g></abbr><expan>felicem</expan></choice> <choice><abbr>ep<g ref="#char-0305">̅</g>m</abbr><expan>episcopum</expan></choice> sicili<g ref="#char-0119">ę</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">G</hi>regorius <choice><abbr>pp<g ref="#char-0305">̅</g></abbr><expan>papae</expan></choice> requisitus ab au<lb n="12" facs="796,2786,1699,138" break="no"/>gustino <choice><abbr>angloru<g ref="#char-0304">̄</g></abbr><expan>anglorum</expan></choice> gentis <choice><abbr>ep<g ref="#char-0305">̅</g>o</abbr><expan>episcopo</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="13" facs="796,2912,1857,167"/>quota generatione fideles debe<lb n="14" facs="958,3077,1688,146" break="no"/>ant copulari<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> dispensatorie<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="15" facs="965,3246,1710,113"/>sic rescribit<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Qu<g ref="#char-0119">ę</g>da<g ref="#char-0304">̄</g></abbr><expan>Qu<g ref="#char-0119">ę</g>dam</expan></choice> lex in roma<lb n="16" facs="958,3390,1681,149" break="no"/>na re publica <choice><abbr><g ref="#char-a751">ꝑ</g>mittit</abbr><expan>permittitur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> ut siue <choice><abbr>fr<g ref="#char-0305">̅</g></abbr><expan>frater</expan></choice>
+<lb n="17" facs="936,3556,1674,124"/>et soror<pc type="distinctio"><g ref="#char-f1f8"></g></pc> seu <choice><abbr>duoru<g ref="#char-0304">̄</g></abbr><expan>duorum</expan></choice> <choice><abbr>fr<g ref="#char-0305">̅</g>m</abbr><expan>fratrem</expan></choice> <choice><abbr>germa<lb n="18" facs="940,3696,1591,138" break="no"/>noru<g ref="#char-0304">̄</g></abbr><expan>germa<lb n="18" facs="940,3696,1591,138" break="no"/>norum</expan></choice> uel <choice><abbr>duaru<g ref="#char-0304">̄</g></abbr><expan>duarum</expan></choice> <choice><abbr>sororu<g ref="#char-0304">̄</g></abbr><expan>sororum</expan></choice> filius
+<lb n="19" facs="968,3866,1670,102"/>et filia <choice><abbr>misceant<g ref="#char-f1c2"></g></abbr><expan>misceantur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> sicut <choice><abbr>experim<g ref="#char-0304">̄</g><lb n="20" facs="954,4006,1605,146" break="no"/>to</abbr><expan>experimmt<lb n="20" facs="954,4006,1605,146" break="no"/>o</expan></choice> didicimus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ex tali coniugio
+<lb n="21" facs="983,4161,1576,149"/>sobolem non posse succrescere<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="22" facs="871,4316,1648,131"/><hi rend="versal">V</hi>nde necesse <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> ut iam quarta <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice>
+<lb n="23" facs="997,4452,1594,153"/>quinta generatio <choice><abbr>fideliu<g ref="#char-0304">̄</g></abbr><expan>fidelium</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>licent<g ref="#char-0305">̅</g></abbr><expan>licenter</expan></choice>
+<lb n="24" facs="968,4589,1537,156"/>sibi iungantur<pc type="p-versus"><g ref="#char-f1ea"></g></pc> <seg corresp="#bamberg-sb-c-6-07-supp-005" type="pos-of-displaced"><g ref="#char-f1e1"></g><g ref="#char-a751">ꝑ</g>miserit<pc type="distinctio"><g ref="#char-f1f8"></g></pc></seg><supplied xml:id="bamberg-sb-c-6-07-supp-005" reason="displaced-over-the-line"><g ref="#char-a751">ꝑ</g>miserit<pc type="distinctio"><g ref="#char-f1f8"></g></pc></supplied>
+<lb n="25" facs="997,4744,1566,178"/></p>
+          </div>
+          <div n="20" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="324,4622,640,383">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>xx<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red"><choice><abbr>Q<g ref="#char-0111">đ</g></abbr><expan>Quod</expan></choice><choice><abbr>sc<g ref="#char-0305">̅</g>s</abbr><expan>sanctus</expan></choice> gregoriiis hoc <choice><abbr>angloru<g ref="#char-0304">̄</g></abbr><expan>anglorum</expan></choice>
+<lb n="26" facs="968,4892,1627,167"/>genti <choice><abbr>spetialit<g ref="#char-0305">̅</g></abbr><expan>spetialiter</expan></choice> <choice><abbr>n<g ref="#char-0305">̅</g></abbr><expan>non</expan></choice> generaliter</hi>
+            </head>
+            <lb n="27" facs="1087,5054,1508,153"/>
+            <note type="inscription" place="margin left" anchored="false" facs="324,5057,680,434"><choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice><choice><abbr>ide<g ref="#char-0304">̄</g></abbr><expan>idem</expan></choice> Johan<lb break="no"/>..es dicit<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><choice><abbr><hi rend="color:red initial">V</hi>eru<g ref="#char-0304">̄</g></abbr><expan><hi rend="color:red initial">V</hi>erum</expan></choice> post <choice><abbr>multu<g ref="#char-0304">̄</g></abbr><expan>multum</expan></choice> <choice><abbr>te<g ref="#char-0304">̄</g>poris</abbr><expan>temporis</expan></choice> a feli<lb n="28" facs="1037,5205,1512,138" break="no"/>ce mesen<g ref="#char-0119">ę</g> sicili<g ref="#char-0119">ę</g> <choice><abbr>p<g ref="#char-0304">̄</g>sule</abbr><expan>praesule</expan></choice> requi<lb n="29" facs="943,5363,1648,164" break="no"/>situs<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>utru<g ref="#char-0304">̄</g></abbr><expan>utrum</expan></choice> augustino gregori<lb n="30" facs="954,5522,1504,138" break="no"/>us scripserit ut anglorum
+<cb n="b" facs="2588,950,1868,5175"/>
+<lb n="1" facs="2671,1029,1648,156"/>quarta generatione <choice><abbr>c<g ref="#char-0305">̅</g>tracta</abbr><expan>contracta</expan></choice> ma<lb n="2" facs="2635,1187,1710,167" break="no"/>trimonia minime <choice><abbr>soluerent<g ref="#char-f1c2"></g></abbr><expan>soluerentur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> hu
+<lb n="3" facs="2570,1346,1749,167"/>millimus pater gregorius<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>int<g ref="#char-0305">̅</g>c<g ref="#char-0119">ę</g><lb n="4" facs="2635,1504,1692,138" break="no"/>tera</abbr><expan>interc<g ref="#char-0119">ę</g><lb n="4" facs="2635,1504,1692,138" break="no"/>tera</expan></choice> tale dedit <choice><abbr>ratione<g ref="#char-0304">̄</g></abbr><expan>rationem</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Q<g ref="#char-0111">đ</g></abbr><expan>Quod</expan></choice> scripsi
+<lb n="5" facs="2639,1677,1677,146"/>augustino <choice><abbr>angloru<g ref="#char-0304">̄</g></abbr><expan>anglorum</expan></choice> gentis <choice><abbr>ep<g ref="#char-0305">̅</g>o</abbr><expan>episcopo</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="6" facs="2650,1828,1684,128"/>alumno uidelicet ut recorderis
+<lb n="7" facs="2635,1979,1641,113"/>tuo<pc type="distinctio"><g ref="#char-f1f8"></g></pc> de consanguinitatis <choice><abbr>c<g ref="#char-0305">̅</g>iunc<lb n="8" facs="2628,2130,1666,160" break="no"/>tione</abbr><expan>coniunc<lb n="8" facs="2628,2130,1666,160" break="no"/>tione</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> ipsi et <choice><abbr>angloru<g ref="#char-0304">̄</g></abbr><expan>anglorum</expan></choice> genti qu<g ref="#char-0119">ę</g>
+<lb n="9" facs="2639,2285,1702,135"/><choice><abbr>nu<g ref="#char-a751">ꝑ</g></abbr><expan>nuper</expan></choice> ad <choice><abbr>fide<g ref="#char-0304">̄</g></abbr><expan>fidem</expan></choice> uenerat<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ne a bono q <choice><abbr><g ref="#char-0111">đ</g></abbr><expan>ERROR</expan></choice>
+<lb n="10" facs="2621,2462,1569,120"/>c<g ref="#char-0119">ę</g>perat metuendo hausteriora
+<lb n="11" facs="2621,2624,1587,153"/>recederet<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> spetialiter<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et <choice><abbr>n<g ref="#char-0305">̅</g></abbr><expan>non</expan></choice> gera<lb n="12" facs="2632,2778,1512,135" break="no"/>liter certissime scripsis se me
+<lb n="13" facs="2668,2915,1537,164"/>cognoscas<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Unde et mihi omnis
+<lb n="14" facs="2639,3070,1548,146"/>romana ciuitas<pc type="distinctio"><g ref="#char-f1f8"></g></pc> testis existit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="15" facs="2574,3236,1594,131"/><hi rend="versal">N</hi>ec ea intentione h<g ref="#char-0119">ę</g>c illis scripsi
+<lb n="16" facs="2624,3387,1576,146"/>mandata<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> ut post <choice><abbr>qua<g ref="#char-0304">̄</g></abbr><expan>quam</expan></choice> firma ra<lb n="17" facs="2621,3545,1519,128" break="no"/>dice in fide fuerint solidati<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="18" facs="2646,3689,1558,156"/>si infra <choice><abbr><g ref="#char-a753">ꝓ</g>pria<g ref="#char-0304">̄</g></abbr><expan>propriam</expan></choice> <choice><abbr>consanguinitate<g ref="#char-0304">̄</g></abbr><expan>consanguinitatem</expan></choice>
+<lb n="19" facs="2646,3858,1551,131"/>inuenti fuerint<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> non <choice><abbr>separent<g ref="#char-f1c2"></g></abbr><expan>separentur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="20" facs="2642,4006,1558,149"/>aut infra affinitatis <choice><abbr>linea<g ref="#char-0304">̄</g></abbr><expan>lineam</expan></choice> id <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice>
+<lb n="21" facs="2639,4157,1548,164"/><choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> ad <choice><abbr>septima<g ref="#char-0304">̄</g></abbr><expan>septimam</expan></choice> generatione
+<lb n="22" facs="2642,4326,1584,135"/><choice><abbr>iungant<g ref="#char-f1c2"></g></abbr><expan>iungantur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> sed <choice><abbr>q<g ref="#char-0111">đ</g></abbr><expan>quod</expan></choice> ad huc illis ne<lb n="23" facs="2621,4470,1526,117" break="no"/>ophitis existentibus eis <choice><abbr>primu<g ref="#char-0304">̄</g></abbr><expan>primum</expan></choice>
+<lb n="24" facs="2635,4600,1616,156"/>illieita <choice><abbr>c<g ref="#char-0305">̅</g>sentire</abbr><expan>consentire</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> et eos uerbis
+<lb n="25" facs="2624,4791,1584,113"/>ac exemplis instruere<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et qu<g ref="#char-0119">ę</g>
+<lb n="26" facs="2653,4895,1569,164"/>post de <choice><abbr>talib<g ref="#char-f1ac"></g></abbr><expan>talibus</expan></choice> egerint <choice><abbr>rationa<lb n="27" facs="2610,5050,1616,138" break="no"/>bilit<g ref="#char-0305">̅</g></abbr><expan>rationa<lb n="27" facs="2610,5050,1616,138" break="no"/>biliter</expan></choice> et <choice><abbr>fidelit<g ref="#char-0305">̅</g></abbr><expan>fideliter</expan></choice> excludere opor<lb n="28" facs="2606,5201,1623,135" break="no"/>teret<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Nam iuxta <choice><abbr>ap<g ref="#char-a749">ꝉ</g>m</abbr><expan>apostolum</expan></choice> qui ait<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="29" facs="2578,5342,1620,196"/><hi rend="versal">L</hi>ac dedi uobis <choice><abbr>potu<g ref="#char-0304">̄</g></abbr><expan>potum</expan></choice> <choice><abbr>n<g ref="#char-0305">̅</g></abbr><expan>non</expan></choice> <choice><abbr>esca<g ref="#char-0304">̄</g></abbr><expan>escam</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> ista
+<lb n="30" facs="2624,5500,1591,196"/>illis modo<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>n<g ref="#char-0305">̅</g></abbr><expan>non</expan></choice> poteris ut <choice><abbr>p<g ref="#char-0304">̄</g>fixu<g ref="#char-0304">̄</g></abbr><expan>praefixum</expan></choice> <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice>
+
+<pb n="142v" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00288/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/288" ana="/annotations/bamberg-sb-c-6-annotation-288"/> 
+<fw type="page-header" place="top" facs="2149,773,756,200">vii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>li<g ref="#char-0180">ƀ</g></abbr><expan>liber</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc></fw>
+<cb n="a" facs="1008,986,1958,5020"/>
+<lb n="1" facs="1022,1025,1450,160"/><choice><abbr>te<g ref="#char-0304">̄</g>porib<g ref="#char-f1ac"></g></abbr><expan>temporibus</expan></choice> tenenda indulsimus<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="2" facs="1048,1227,1580,142"/>ne <choice><abbr>bonu<g ref="#char-0304">̄</g></abbr><expan>bonum</expan></choice> <choice><abbr>q<g ref="#char-0111">đ</g></abbr><expan>quod</expan></choice> infirma adhuc radice
+<lb n="3" facs="1058,1371,1587,153"/><choice><abbr>plantatu<g ref="#char-0304">̄</g></abbr><expan>plantatum</expan></choice> erat <choice><abbr>exureret<g ref="#char-f1c2"></g></abbr><expan>exureretur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> sed
+<lb n="4" facs="1055,1551,1580,142"/><choice><abbr>aliquantu<g ref="#char-0304">̄</g></abbr><expan>aliquantum</expan></choice> firmaretur<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et <choice><abbr>usq<g ref="#char-f1ac"></g></abbr><expan>usque</expan></choice> ad
+<lb n="5" facs="1062,1680,1522,153"/><choice><abbr><g ref="#char-a751">ꝑ</g>fectione<g ref="#char-0304">̄</g></abbr><expan>perfectionem</expan></choice> <choice><abbr>eustodiret<g ref="#char-f1c2"></g></abbr><expan>eustodiretur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> H<g ref="#char-0119">ę</g>c ergo<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="6" facs="1062,1853,1620,131"/>ego iohannes id circo <choice><abbr><g ref="#char-a751">ꝑ</g>stringenda</abbr><expan>perstringenda</expan></choice>
+<lb n="7" facs="1080,1990,1328,153"/>curaui<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> ut hi qui occasione
+<lb n="8" facs="1051,2156,1551,164"/>nou<g ref="#char-0119">ę</g> dispensationis illicita ma<lb n="9" facs="1076,2325,1504,120" break="no"/>trimonia contra hunc eruditis
+<lb n="10" facs="1062,2483,1526,131"/><choice><abbr>simu<g ref="#char-0304">̄</g></abbr><expan>simum</expan></choice> <choice><abbr>uiru<g ref="#char-0304">̄</g></abbr><expan>uirum</expan></choice> cau <choice><abbr>sant<g ref="#char-f1c2"></g></abbr><expan>santur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> non genera<lb n="11" facs="1066,2627,1584,156" break="no"/>liter quarte generationis <choice><abbr>co<lb n="12" facs="1094,2789,1501,146" break="no"/>pula<g ref="#char-0304">̄</g></abbr><expan>co<lb n="12" facs="1094,2789,1501,146" break="no"/>pulam</expan></choice> censiuisse<pc type="distinctio"><g ref="#char-f1f8"></g></pc> immo ueniali<lb n="13" facs="1069,2940,1584,142" break="no"/>ter <choice><abbr>simul<g ref="#char-a759">ꝙ</g></abbr><expan>ERROR</expan></choice> <choice><abbr>te<g ref="#char-0304">̄</g>poraliter</abbr><expan>temporaliter</expan></choice> <choice><abbr><g ref="#char-a751">ꝑ</g>misis</abbr><expan>permisis</expan></choice> se
+<lb n="14" facs="1102,3088,730,156"/>cognoscant<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="15" facs="1094,3236,1533,149"/></p>
+          </div>
+          <div n="21" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="79,986,1036,2633">
+                <hi rend="color:red">xxi<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red"><choice><abbr>Q<g ref="#char-0111">đ</g></abbr><expan>Quod</expan></choice> extranei nisi ex necessario<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="16" facs="1098,3423,1533,142"/><choice><abbr>discidiu<g ref="#char-0304">̄</g></abbr><expan>discidium</expan></choice> <choice><abbr>int<g ref="#char-0305">̅</g></abbr><expan>inter</expan></choice>  <choice><abbr>c<g ref="#char-0305">̅</g>sanguineos</abbr><expan>consanguineos</expan></choice> fa<lb n="17" facs="1238,3552,1036,149" break="no"/>cere non debeant<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="18" facs="1192,3693,1501,185"/>
+            <note type="inscription" place="margin left" anchored="false" facs="79,3671,1036,308">Ex <choice><abbr>decr<g ref="#char-0305">̅</g></abbr><expan>decretis</expan></choice> Fabiani <choice><abbr>pp<g ref="#char-0305">̅</g></abbr><expan>papae</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> viii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">C</hi>onsanguineos <choice><abbr>extraneoru<g ref="#char-0304">̄</g></abbr><expan>extraneorum</expan></choice> nul<lb n="19" facs="1094,3873,1584,142" break="no"/>lus accuset<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> <choice><abbr>consanguinitate<g ref="#char-0304">̄</g></abbr><expan>consanguinitatem</expan></choice> in
+<lb n="20" facs="1094,3999,1648,182"/>synodo <choice><abbr>co<g ref="#char-0304">̄</g>puto<g ref="#char-a75D">ꝝ</g></abbr><expan>computorum</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> sed <choice><abbr><g ref="#char-a753">ꝓ</g>pinqui</abbr><expan>propinqui</expan></choice> ad
+<lb n="21" facs="1109,4175,1591,164"/><choice><abbr>quoru<g ref="#char-0304">̄</g></abbr><expan>quorum</expan></choice> <choice><abbr>nota<g ref="#char-0304">̄</g></abbr><expan>notam</expan></choice> <choice><abbr><g ref="#char-a751">ꝑ</g>tinet</abbr><expan>pertinet</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> id <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> pater<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="22" facs="1134,4337,1620,135"/>mater<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>fr<g ref="#char-0305">̅</g></abbr><expan>frater</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> soror<pc type="distinctio"><g ref="#char-f1f8"></g></pc> patruus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> auun<lb n="23" facs="1141,4467,1584,160" break="no"/>culus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> amita<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>matt<g ref="#char-0305">̅</g>era</abbr><expan>matterera</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> et <choice><abbr>eo<g ref="#char-a75D">ꝝ</g></abbr><expan>eorum</expan></choice>
+<lb n="24" facs="1091,4571,1832,192"/><choice><abbr><g ref="#char-a753">ꝓ</g>creatio</abbr><expan>procreatio</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Si <choice><abbr>aute<g ref="#char-0304">̄</g></abbr><expan>autem</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g>genies</abbr><expan>progenies</expan></choice> tota
+<lb n="25" facs="1123,4758,1810,164"/>defecerit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> ab <choice><abbr>antiquiorib<g ref="#char-f1ac"></g></abbr><expan>antiquioribus</expan></choice> et <choice><abbr>uera<lb n="26" facs="1123,4931,1785,135" break="no"/>tiorib<g ref="#char-f1ac"></g></abbr><expan>uera<lb n="26" facs="1123,4931,1785,135" break="no"/>tioribus</expan></choice> <choice><abbr>quib<g ref="#char-f1ac"></g></abbr><expan>quibus</expan></choice> <choice><abbr>eade<g ref="#char-0304">̄</g></abbr><expan>eadem</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g>pinquitas</abbr><expan>propinquitas</expan></choice> no<lb n="27" facs="1127,5082,1821,135" break="no"/>ta sit<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>ep<g ref="#char-0305">̅</g>s</abbr><expan>episcopus</expan></choice> canonice <choice><abbr><g ref="#char-a751">ꝑ</g>quirat</abbr><expan>perquirat</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> et si in<lb n="28" facs="1152,5241,1785,153" break="no"/>uenta <choice><abbr><g ref="#char-a753">ꝓ</g>pinquitas</abbr><expan>propinquitas</expan></choice> fuerit<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>separent<g ref="#char-f1c2"></g></abbr><expan>separentur</expan></choice><pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="29" facs="1224,5388,799,135"/></p>
+          </div>
+          <div n="22" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="79,5277,1036,214">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>xxii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="30" facs="1159,5529,1803,171"/>
+            <note type="inscription" place="margin left" anchored="false" facs="79,5543,1036,462">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> Roma<lb break="no"/>no<pc type="distinctio"><g ref="#char-f1f8"></g></pc> greg<g ref="#char-0305">̅</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">S</hi>i quis <choice><abbr>nepte<g ref="#char-0304">̄</g></abbr><expan>neptem</expan></choice><choice><abbr>sua<g ref="#char-0304">̄</g></abbr><expan>suam</expan></choice> in <choice><abbr>c<g ref="#char-0305">̅</g>iugio</abbr><expan>coniugio</expan></choice> duxerit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<cb n="b" facs="2484,986,2293,5020"/>
+<lb n="1" facs="2678,1058,806,142"/>anathema sit<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="2" facs="2678,1198,889,185"/></p>
+          </div>
+          <div n="23" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4280,986,727,380">
+                <hi rend="color:red">xxiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De eadem re<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="3" facs="2596,1335,1692,214"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4291,1418,716,156"><choice><abbr>Eiusde<g ref="#char-0304">̄</g></abbr><expan>Eiusdem</expan></choice> greg<g ref="#char-0305">̅</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">S</hi>i quis <choice><abbr>consobrina<g ref="#char-0304">̄</g></abbr><expan>consobrinam</expan></choice> in coniugium
+<lb n="4" facs="2711,1544,1256,131"/>duxerit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> anathema sit<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="5" facs="2740,1691,838,149"/></p>
+          </div>
+          <div n="24" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4298,1626,709,160">
+                <hi rend="color:red">xxiiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De eademre<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="6" facs="2524,1810,1584,182"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4306,1839,702,95">
+              <choice>
+                <abbr>Ite<g ref="#char-0304">̄</g></abbr>
+                <expan>Item</expan>
+              </choice>
+              <choice>
+                <abbr>eiusde<g ref="#char-0304">̄</g>gr..</abbr>
+                <expan>eiusdemgr..</expan>
+              </choice>
+            </note>
+            <p n="1"><hi rend="color:red initial">S</hi>i quis de <choice><abbr><g ref="#char-a753">ꝓ</g>pria</abbr><expan>propria</expan></choice> cognatione<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="7" facs="2707,1972,1630,149"/>uel <choice><abbr>qua<g ref="#char-0304">̄</g></abbr><expan>quam</expan></choice> cognatus habuit<pc type="distinctio"><g ref="#char-f1f8"></g></pc> in con<lb n="8" facs="2704,2134,1548,153" break="no"/>iugio duxerit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> anathema sit<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="9" facs="2722,2282,1638,160"/></p>
+          </div>
+          <div n="25" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4320,2217,687,272">
+                <hi rend="color:red">xxv<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red"><choice><abbr>Sacram<g ref="#char-0305">̅</g>tu<g ref="#char-0304">̄</g></abbr><expan>Sacramentum</expan></choice> de parentela<pc type="distinctio"><g ref="#char-f1f8"></g></pc> quo
+<lb n="10" facs="2761,2433,1317,156"/>modo inquirenda sit<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="11" facs="2614,2537,1702,214"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4388,2591,640,311">
+              <note type="editorial-comment" resp="transkribus">Keine Inskription</note>
+            </note>
+            <p n="1"><hi rend="color:red initial">D</hi>e illa parentela <choice><abbr>qua<g ref="#char-0304">̄</g></abbr><expan>quam</expan></choice> dicunt
+<lb n="12" facs="2747,2764,1627,153"/><choice><abbr>ee<g ref="#char-0305">̅</g></abbr><expan>esse</expan></choice> inter <choice><abbr>illu<g ref="#char-0304">̄</g></abbr><expan>illum</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> N<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et <choice><abbr>ista<g ref="#char-0304">̄</g></abbr><expan>istam</expan></choice> <choice><abbr>ei<g ref="#char-1dd2">᷒</g></abbr><expan>eius</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g>iuge<g ref="#char-0304">̄</g></abbr><expan>coniugem</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>N<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="13" facs="2624,2922,1674,142"/><choice><abbr>quic<g ref="#char-a757">ꝗ</g>d</abbr><expan>quicquid</expan></choice> inde scis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> aut audisti
+<lb n="14" facs="2747,3074,1562,128"/>atuis uicinis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> aut atuis <choice><abbr>antiquio<lb n="15" facs="2732,3218,1537,164" break="no"/>rib<g ref="#char-f1ac"></g></abbr><expan>antiquior<lb n="15" facs="2732,3218,1537,164" break="no"/>ibus</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g>pinquis</abbr><expan>propinquis</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>q<g ref="#char-0111">đ</g></abbr><expan>quod</expan></choice> tu <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> nullum
+<lb n="16" facs="2765,3390,1623,131"/><choice><abbr>ingeniu<g ref="#char-0304">̄</g></abbr><expan>ingenium</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> nec <choice><abbr><g ref="#char-a753">ꝓ</g>pt<g ref="#char-0305">̅</g></abbr><expan>propter</expan></choice> <choice><abbr>amore<g ref="#char-0304">̄</g></abbr><expan>amorem</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> nec <choice><abbr><g ref="#char-a753">ꝓ</g>pt<g ref="#char-0305">̅</g></abbr><expan>propter</expan></choice>
+<lb n="17" facs="2740,3524,1720,160"/><choice><abbr>timore<g ref="#char-0304">̄</g></abbr><expan>timorem</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> aut <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> <choice><abbr>p<g ref="#char-0304">̄</g>miu<g ref="#char-0304">̄</g></abbr><expan>praemium</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> aut <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> <choice><abbr>consan<lb n="18" facs="2700,3689,1843,135" break="no"/>guinitate<g ref="#char-0304">̄</g></abbr><expan>consang<lb n="18" facs="2700,3689,1843,135" break="no"/>uinitatem</expan></choice> celabis <choice><abbr>ep<g ref="#char-0305">̅</g>m</abbr><expan>episcopum</expan></choice> <choice><abbr>tuu<g ref="#char-0304">̄</g></abbr><expan>tuum</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> aut
+<lb n="19" facs="2768,3855,1602,156"/>eius <choice><abbr>mssu<g ref="#char-0304">̄</g></abbr><expan>mssum</expan></choice> cui hoc inquirere ius
+<lb n="20" facs="2596,4010,1828,142"/>serit<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> quando <choice><abbr>cu<g ref="#char-0304">̄</g><g ref="#char-a759">ꝙ</g></abbr><expan>ERROR</expan></choice> te ex hoc <choice><abbr>int<g ref="#char-0305">̅</g>ro<lb n="21" facs="2776,4118,1713,221" break="no"/>gauerit</abbr><expan>interro<lb n="21" facs="2776,4118,1713,221" break="no"/>gauerit</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> sic te <choice><abbr>ds<g ref="#char-0305">̅</g></abbr><expan>deus</expan></choice> ad iuuet<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> et iste
+<lb n="22" facs="2610,4319,1180,142"/><choice><abbr>sc<g ref="#char-0305">̅</g>orum</abbr><expan>sanctorum</expan></choice> reliqui<g ref="#char-0119">ę</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="23" facs="2794,4452,1245,138"/></p>
+          </div>
+          <div n="26" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4392,4341,615,290">
+                <hi rend="color:red">xxvi<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red"><choice><abbr>Iuramentu<g ref="#char-0304">̄</g></abbr><expan>Iuramentum</expan></choice> testium<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="24" facs="2783,4575,1634,135"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4471,4737,576,254">
+              <note type="editorial-comment" resp="transkribus">Keine Inskription</note>
+            </note>
+            <p n="1"><hi rend="color:red initial">I</hi>stud <choice><abbr>sacramentu<g ref="#char-0304">̄</g></abbr><expan>sacramentum</expan></choice><choice><abbr>q<g ref="#char-0111">đ</g></abbr><expan>quod</expan></choice> iste iurauit
+<lb n="25" facs="2776,4748,1778,149"/>de illa parentela<pc type="distinctio"><g ref="#char-f1f8"></g></pc> qu<g ref="#char-0119">ę</g> inter <choice><abbr>illu<g ref="#char-0304">̄</g></abbr><expan>illum</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="26" facs="2761,4874,1674,171"/>et <choice><abbr>ei<g ref="#char-1dd2">᷒</g></abbr><expan>eius</expan></choice> <choice><abbr>coniuge<g ref="#char-0304">̄</g></abbr><expan>coniugem</expan></choice> <pc type="distinctio"><g ref="#char-f1f8"></g></pc>N<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>co<g ref="#char-0304">̄</g>putat<g ref="#char-f1c2"></g></abbr><expan>computatur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>q<g ref="#char-0111">đ</g></abbr><expan>quod</expan></choice> tu
+<lb n="27" facs="2765,5010,1699,167"/>illud obseruabis in quantum sapis<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="28" facs="2776,5180,1648,142"/>aut audisti<pc type="distinctio"><g ref="#char-f1f8"></g></pc> sic te <choice><abbr>ds<g ref="#char-0305">̅</g></abbr><expan>deus</expan></choice> adiuuet<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="29" facs="3006,5306,1756,192"/></p>
+          </div>
+          <div n="27" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin right" facs="4493,5198,514,336">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>xxvii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red"><choice><abbr>Sacram<g ref="#char-0305">̅</g>tu<g ref="#char-0304">̄</g></abbr><expan>Sacramentum</expan></choice> de incestuoso discidio<pc type="p-versus"><g ref="#char-f1ea"></g></pc></hi>
+            </head>
+            <lb n="30" facs="2779,5460,1774,192"/>
+            <note type="inscription" place="margin right" anchored="false" facs="4640,5586,367,419">
+              <note type="editorial-comment" resp="transkribus">Keine Inskription</note>
+            </note>
+            <p n="1"><hi rend="color:red initial">A</hi>b isto die in antea<pc type="distinctio"><g ref="#char-f1f8"></g></pc><choice><abbr>q<g ref="#char-0111">đ</g></abbr><expan>quod</expan></choice> tu <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> <choice><abbr>nullu<g ref="#char-0304">̄</g></abbr><expan>nullum</expan></choice>
+
+<pb n="143r" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00289/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/289" ana="/annotations/bamberg-sb-c-6-annotation-289"/> 
+<fw type="page-header" place="top" facs="2214,618,979,200">de <choice><abbr>c<g ref="#char-0304">̄</g>sanguinitate</abbr><expan>cmsanguinitate</expan></choice></fw>
+<cb n="a" facs="713,874,2019,5362"/>
+<lb n="1" facs="1008,1032,1562,192"/><choice><abbr>ingeniu<g ref="#char-0304">̄</g></abbr><expan>ingenium</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> te sociabis huic tu<g ref="#char-0119">ę</g>
+<lb n="2" facs="983,1223,1634,160"/>consangiune<g ref="#char-0119">ę</g> <pc type="distinctio"><g ref="#char-f1f8"></g></pc>N <choice><abbr>cu<g ref="#char-0304">̄</g></abbr><expan>cum</expan></choice> <choice><abbr>qua<g ref="#char-0304">̄</g></abbr><expan>quam</expan></choice> contra
+<lb n="3" facs="1015,1385,1688,138"/>legem et <choice><abbr>recta<g ref="#char-0304">̄</g></abbr><expan>rectam</expan></choice> <choice><abbr>xp<g ref="#char-0305">̅</g>ianitate<g ref="#char-0304">̄</g></abbr><expan>christianitatem</expan></choice> <choice><abbr>etia<g ref="#char-0304">̄</g></abbr><expan>etiam</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>ad<lb n="4" facs="1008,1522,1612,149" break="no"/>ulteriu<g ref="#char-0304">̄</g></abbr><expan>ad<lb n="4" facs="1008,1522,1612,149" break="no"/>ulterium</expan></choice> et <choice><abbr>incestu<g ref="#char-0304">̄</g></abbr><expan>incestum</expan></choice> <choice><abbr><g ref="#char-a751">ꝑ</g>petrasti</abbr><expan>perpetrasti</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> nec
+<lb n="5" facs="979,1684,1756,138"/>in coniugio nec in adulterio <choice><abbr>illa<g ref="#char-0304">̄</g></abbr><expan>illam</expan></choice>
+<lb n="6" facs="979,1824,1656,149"/>tibi sociabis<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> nec <choice><abbr>cu<g ref="#char-0304">̄</g></abbr><expan>cum</expan></choice> illa ad <choice><abbr>una<g ref="#char-0304">̄</g></abbr><expan>unam</expan></choice>
+<lb n="7" facs="983,1958,1558,113"/><choice><abbr>m<g ref="#char-0305">̅</g>sa<g ref="#char-0304">̄</g></abbr><expan>mensam</expan></choice> manducabis et bibes<pc type="distinctio"><g ref="#char-f1f8"></g></pc> aut
+<lb n="8" facs="1012,2076,1620,192"/>sub uno tecto manebis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> nisi forte
+<lb n="9" facs="979,2256,1512,178"/>in <choice><abbr><g ref="#char-0119">ę</g>cc<g ref="#char-a749">ꝉ</g>a</abbr><expan><g ref="#char-0119">ę</g>cclesia</expan></choice> aut in aliquo publico
+<lb n="10" facs="968,2408,1594,196"/>loco<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> ubi nulla mala suspitio
+<lb n="11" facs="979,2609,1706,124"/>possit <choice><abbr>ee<g ref="#char-0305">̅</g></abbr><expan>esse</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> ut ibi <choice><abbr>cora<g ref="#char-0304">̄</g></abbr><expan>coram</expan></choice> <choice><abbr>testib<g ref="#char-f1ac"></g></abbr><expan>testibus</expan></choice> idoneis
+<lb n="12" facs="940,2735,1778,156"/><choice><abbr><g ref="#char-a753">ꝓ</g>certa</abbr><expan>procerta</expan></choice> necessitate <choice><abbr>parit<g ref="#char-0305">̅</g></abbr><expan>pariter</expan></choice> <choice><abbr>colloq<g ref="#char-1dd3">ᷓ</g>mini</abbr><expan>colloquamini</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="13" facs="868,2922,1782,131"/><hi rend="versal">N</hi>ec alia <choice><abbr>c<g ref="#char-0305">̅</g>iuge<g ref="#char-0304">̄</g></abbr><expan>coniugem</expan></choice> accipies<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <del rend=""/>nisi forte
+<lb n="14" facs="983,3074,1580,128"/>post <choice><abbr><g ref="#char-a751">ꝑ</g>acta<g ref="#char-0304">̄</g></abbr><expan>peractam</expan></choice> <choice><abbr>poenitentia<g ref="#char-0304">̄</g></abbr><expan>poenitentiam</expan></choice> tibi li<lb n="15" facs="983,3207,1537,120" break="no"/>centia data fuerit ab <choice><abbr>ep<g ref="#char-0305">̅</g>o</abbr><expan>episcopo</expan></choice> tuo
+<lb n="16" facs="940,3354,1666,153"/>aut eius misso<pc type="distinctio"><g ref="#char-f1f8"></g></pc> sic te <choice><abbr>ds<g ref="#char-0305">̅</g></abbr><expan>deus</expan></choice> ad iuuet
+<lb n="17" facs="950,3502,1684,171"/>et iste reliqui<g ref="#char-0119">ę</g> <choice><abbr>sc<g ref="#char-0305">̅</g>oru<g ref="#char-0304">̄</g></abbr><expan>sanctorum</expan></choice><pc type="p-versus"><g ref="#char-f1ea"></g></pc> <seg corresp="#bamberg-sb-c-6-07-supp-006" type="pos-of-displaced"><g ref="#char-f1e1"></g>gradib<g ref="#char-f1ac"></g></seg><supplied xml:id="bamberg-sb-c-6-07-supp-006" reason="displaced-over-the-line">gradib<g ref="#char-f1ac"></g></supplied>
+<lb n="18" facs="896,3642,1839,232"/></p>
+          </div>
+          <div n="28" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="353,3470,604,408">
+                <hi rend="color:red">xxviiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">H<g ref="#char-0119">ę</g>c capitula <choice><abbr>desepte<g ref="#char-0304">̄</g></abbr><expan>deseptem</expan></choice> <choice><abbr>gradib<g ref="#char-f1ac"></g></abbr><expan>gradibus</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g><lb n="19" facs="936,3833,1627,142" break="no"/>sanguinitatis</abbr><expan>con<lb n="19" facs="936,3833,1627,142" break="no"/>sanguinitatis</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>sc<g ref="#char-0305">̅</g>s</abbr><expan>sanctus</expan></choice> isidorus dili<lb n="20" facs="922,3984,1792,178" break="no"/>genti inquisitione descripserat
+<lb n="21" facs="922,4121,1699,171"/>et in figiua inferius depicta <choice><abbr>a<lb n="22" facs="947,4283,1728,156" break="no"/><g ref="#char-a751">ꝑ</g>tius</abbr><expan>a<lb n="22" facs="947,4283,1728,156" break="no"/>pertius</expan></choice> ordinauerat<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> <pc type="distinctio"><g ref="#char-f1f8"></g></pc>i<pc type="distinctio"><g ref="#char-f1f8"></g></pc> de <choice><abbr>septe<g ref="#char-0304">̄</g></abbr><expan>septem</expan></choice></hi>
+            </head>
+            <lb n="23" facs="1044,4445,1404,171"/>
+            <note type="inscription" place="margin left" anchored="false" facs="353,4265,561,502">Isidorus de vii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>gradib<g ref="#char-f1ac"></g></abbr><expan>gradibus</expan></choice> c<g ref="#char-0305">̅</g>sang<g ref="#char-0305">̅</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">P</hi>rimo gradu<pc type="distinctio"><g ref="#char-f1f8"></g></pc> superiori linea
+<lb n="24" facs="932,4596,1555,146"/><choice><abbr>continent<g ref="#char-f1c2"></g></abbr><expan>continentur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>pat<g ref="#char-f1c2"></g></abbr><expan>patur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>mat<g ref="#char-f1c2"></g></abbr><expan>matur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> inferiori
+<lb n="25" facs="950,4701,1688,196"/>filius<pc type="distinctio"><g ref="#char-f1f8"></g></pc> filia<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>quib<g ref="#char-f1ac"></g></abbr><expan>quibus</expan></choice> <choice><abbr><g ref="#char-a759">ꝙ</g></abbr><expan>ERROR</expan></choice> n ull<g ref="#char-0119">ę</g> ali<g ref="#char-0119">ę</g>C
+<lb n="26" facs="914,4888,986,149"/><choice><abbr><g ref="#char-a751">ꝑ</g>son<g ref="#char-0119">ę</g></abbr><expan>person<g ref="#char-0119">ę</g></expan></choice> iunguntur<pc type="distinctio"><g ref="#char-f1f8"></g></pc><note type="editorial-comment" resp="transkribus">Unterkapitel richtig codieren!</note>
+<lb n="27" facs="864,5025,1065,160"/>capituilum <pc type="distinctio"><g ref="#char-f1f8"></g></pc>ii<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="28" facs="853,5172,1450,178"/>Secundo gradu<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>c<g ref="#char-0305">̅</g>tinentur</abbr><expan>continentur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="29" facs="907,5363,1450,149"/>superiori linea<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> auus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> auia
+<lb n="30" facs="911,5522,1324,153"/>inferiori<pc type="p-interrogativus"><g ref="#char-f160"></g></pc> nepos neptis<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<cb n="b" facs="2405,874,2102,5362"/>
+<lb n="1" facs="2581,1029,1598,167"/><hi rend="versal">I</hi>ntrans uersa<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> fratter<pc type="distinctio"><g ref="#char-f1f8"></g></pc> soror<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="2" facs="2473,1194,1634,192"/>qu<g ref="#char-0119">ę</g> <choice><abbr><g ref="#char-a751">ꝑ</g>son<g ref="#char-0119">ę</g></abbr><expan>person<g ref="#char-0119">ę</g></expan></choice> duplicantur<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="3" facs="2452,1374,1782,138"/><hi rend="versal">A</hi>uus enim et auia<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> tam ex pa<lb n="4" facs="2473,1551,1771,135" break="no"/>tre quam ex matre <choice><abbr>accipiunt<g ref="#char-f1c2"></g></abbr><expan>accipiuntur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="5" facs="2585,1706,1677,138"/><hi rend="versal">Q</hi>u<g ref="#char-0119">ę</g> <choice><abbr><g ref="#char-a751">ꝑ</g>son<g ref="#char-0119">ę</g></abbr><expan>person<g ref="#char-0119">ę</g></expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>sequentib<g ref="#char-f1ac"></g></abbr><expan>sequentibus</expan></choice> <choice><abbr>quoq<g ref="#char-f1ac"></g></abbr><expan>quoque</expan></choice> gra<lb n="6" facs="2452,1853,1810,131" break="no"/>dibus <choice><abbr>similit<g ref="#char-0305">̅</g></abbr><expan>similiter</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g></abbr><expan>pro</expan></choice> substantia <choice><abbr>earu<g ref="#char-0304">̄</g></abbr><expan>earum</expan></choice>
+<lb n="7" facs="2664,1997,1684,153"/>qu<g ref="#char-0119">ę</g> in quo gradu subsistunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ipso
+<lb n="8" facs="2408,2130,1890,174"/>ordine <choice><abbr>duplicant<g ref="#char-f1c2"></g></abbr><expan>duplicantur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Ist<g ref="#char-0119">ę</g> <choice><abbr><g ref="#char-a751">ꝑ</g>son<g ref="#char-0119">ę</g></abbr><expan>person<g ref="#char-0119">ę</g></expan></choice> in
+<lb n="9" facs="2646,2300,1702,160"/>secundo gradu ideo duplices <choice><abbr>appel<lb n="10" facs="2412,2447,1940,182" break="no"/>lant<g ref="#char-f1c2"></g></abbr><expan>appel<lb n="10" facs="2412,2447,1940,182" break="no"/>lantur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> quia duo <choice><abbr>avi<g ref="#char-0304">̄</g></abbr><expan>avim</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> et <choice><abbr>paternuse<g ref="#char-0304">̄</g></abbr><expan>paternusem</expan></choice>
+<lb n="11" facs="2581,2660,1782,128"/>et maternus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Ite duo genera <choice><abbr>nepo<lb n="12" facs="2599,2764,1706,167" break="no"/>tu<g ref="#char-0304">̄</g></abbr><expan>nepo<lb n="12" facs="2599,2764,1706,167" break="no"/>tum</expan></choice> sunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc> siue ex filio<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> siue ex filia
+<lb n="13" facs="2581,2951,1724,124"/><choice><abbr><g ref="#char-a753">ꝓ</g>creati</abbr><expan>procreati</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Fr<g ref="#char-0305">̅</g></abbr><expan>Frater</expan></choice> et soror ex transuerso
+<lb n="14" facs="2596,3088,1530,142"/>ueniunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc> id <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> aut <choice><abbr>frat<g ref="#char-0305">̅</g></abbr><expan>frater</expan></choice> pattris<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="15" facs="2610,3232,1688,164"/>aut <choice><abbr>fr<g ref="#char-0305">̅</g></abbr><expan>frater</expan></choice> matris<pc type="distinctio"><g ref="#char-f1f8"></g></pc> quia aut patruus<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="16" facs="2581,3423,1699,95"/>aut auunculus <choice><abbr>nominat<g ref="#char-f1c2"></g></abbr><expan>nominatur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Qui et
+<lb n="17" facs="2578,3549,1555,146"/>ipsi<pc type="distinctio"><g ref="#char-f1f8"></g></pc> hoc ordine <choice><abbr>cluplicant<g ref="#char-f1c2"></g></abbr><expan>cluplicantur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="18" facs="2592,3707,997,167"/>capitulum <pc type="distinctio"><g ref="#char-f1f8"></g></pc>iii<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="19" facs="2423,3866,1818,174"/>Tercio gradu ueniunt <choice><abbr>sup<g ref="#char-1dd3">ᷓ</g></abbr><expan>supra</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Pauus
+<lb n="20" facs="2574,4024,1584,135"/><choice><abbr><g ref="#char-a753">ꝓ</g>auia</abbr><expan>proauia</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> infra <choice><abbr><g ref="#char-a753">ꝓ</g>nepos</abbr><expan>pronepos</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g>neptis</abbr><expan>proneptis</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> ex
+<lb n="21" facs="2560,4161,1645,142"/><choice><abbr>obliqͦ</abbr><expan>obliquo</expan></choice> <choice><abbr>fri<g ref="#char-0305">̅</g>s</abbr><expan>fratris</expan></choice> sororis <choice><abbr>q<g ref="#char-f1ac"></g></abbr><expan>que</expan></choice> filius <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> filia<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="22" facs="2509,4323,1659,138"/><hi rend="versal">P</hi>atruus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> amita<pc type="distinctio"><g ref="#char-f1f8"></g></pc> id <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> patris <choice><abbr>fr<g ref="#char-0305">̅</g></abbr><expan>frater</expan></choice> et
+<lb n="23" facs="2581,4481,1796,171"/>soror<pc type="distinctio"><g ref="#char-f1f8"></g></pc> auunculus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Matertera<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Matris
+<lb n="24" facs="2578,4622,1645,156"/>Capitulum<pc type="distinctio"><g ref="#char-f1f8"></g></pc> iiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <seg corresp="#bamberg-sb-c-6-07-supp-007" type="pos-of-displaced"><g ref="#char-f1e1"></g>fr<g ref="#char-0305">̅</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc> et soror<pc type="distinctio"><g ref="#char-f1f8"></g></pc></seg><supplied xml:id="bamberg-sb-c-6-07-supp-007" reason="displaced-over-the-line">fr<g ref="#char-0305">̅</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc> et soror<pc type="distinctio"><g ref="#char-f1f8"></g></pc></supplied>
+<lb n="25" facs="2390,4683,1796,207"/>Quarto gradu ueniunt <choice><abbr>sup<g ref="#char-1dd3">ᷓ</g></abbr><expan>supra</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> ab
+<lb n="26" facs="2585,4924,1429,135"/>auus ab aua<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> infra ab <choice><abbr>nep<g ref="#char-0305">̅</g>os</abbr><expan>ERROR</expan></choice>
+<lb n="27" facs="2578,5046,1666,156"/>ab neptis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ex obliquo <choice><abbr>fri<g ref="#char-0305">̅</g>s</abbr><expan>fratris</expan></choice> et sororis
+<lb n="28" facs="2560,5212,1576,146"/>nepos neptis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> patruelis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> soror<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="29" facs="2552,5374,1674,156"/>patruelis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> id <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> patrui filius <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> filia<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="30" facs="2498,5532,1591,182"/><hi rend="versal">C</hi>on sobrinus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>c<g ref="#char-0305">̅</g>sobrina</abbr><expan>consobrina</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> id <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> auun
+
+<pb n="143v" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00290/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/290" ana="/annotations/bamberg-sb-c-6-annotation-290"/> 
+<fw type="page-header" place="top" facs="2045,795,874,200">vii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>li<g ref="#char-0180">ƀ</g></abbr><expan>liber</expan></choice></fw>
+<cb n="a" facs="137,986,2664,4948"/>
+<lb n="1" facs="1076,1025,1612,192"/>culi et matertere filius <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> filia<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="2" facs="968,1223,1555,149"/><hi rend="versal">A</hi>mitinus amitina<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>i<g ref="#char-0111">đ</g></abbr><expan>idus</expan></choice> <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> amit<g ref="#char-0119">ę</g>
+<lb n="3" facs="1073,1364,1548,156"/>filius <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> filia<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Ite<g ref="#char-0304">̄</g>q<g ref="#char-f1ac"></g></abbr><expan>Itemque</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g>sobrini</abbr><expan>consobrini</expan></choice> quia
+<lb n="4" facs="1087,1508,1569,153"/>ex duabus sororibus nas <choice><abbr>cunt<g ref="#char-f1c2"></g></abbr><expan>cuntur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="5" facs="1004,1680,1472,149"/><hi rend="versal">Q</hi>uibus accrescit patruus
+<lb n="6" facs="1062,1824,1544,146"/>magnus<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> amita magnia<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>ide<g ref="#char-0305">̅</g></abbr><expan>ERROR</expan></choice>
+<lb n="7" facs="1073,1979,1713,124"/>aui paterni <choice><abbr>fr<g ref="#char-0305">̅</g></abbr><expan>frater</expan></choice> et soror<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Auun<lb n="8" facs="1087,2112,1609,171" break="no"/>culiis magnus<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>mat<g ref="#char-0305">̅</g>tera</abbr><expan>matertera</expan></choice> magna<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="9" facs="1094,2292,1483,174"/><choice><abbr>ide<g ref="#char-0305">̅</g></abbr><expan>ERROR</expan></choice> aui<g ref="#char-0119">ę</g> <choice><abbr>ta<g ref="#char-0304">̄</g></abbr><expan>tam</expan></choice> pattern<g ref="#char-0119">ę</g> quam
+<lb n="10" facs="1080,2487,1274,135"/>matern<g ref="#char-0119">ę</g> <choice><abbr>fr<g ref="#char-0305">̅</g></abbr><expan>frater</expan></choice> et<pc type="distinctio"><g ref="#char-f1f8"></g></pc> fsoror<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<lb n="11" facs="1105,2609,943,142"/>Capitulum<pc type="distinctio"><g ref="#char-f1f8"></g></pc>v<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="12" facs="1282,2724,1418,185"/>Quinto gradu ueniunt <choice><abbr>sup<g ref="#char-1dd3">ᷓ</g></abbr><expan>supra</expan></choice>
+<lb n="13" facs="1300,2915,1458,156"/><choice><abbr>quide<g ref="#char-0304">̄</g></abbr><expan>quidem</expan></choice> atauiis atuia<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> infra
+<lb n="14" facs="1094,3070,1447,149"/>ad nepos ad neptis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ex obliquo
+<lb n="15" facs="1120,3203,1544,153"/><choice><abbr>fr<g ref="#char-0305">̅</g><add place="above" type="contemporary">i</add>s</abbr><expan>fra<add place="above" type="contemporary">tri</add>s</expan></choice> et sororis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a753">ꝓ</g>nepos</abbr><expan>pronepos</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g>neptis</abbr><expan>proneptis</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="16" facs="1109,3390,1580,117"/><choice><abbr>fr<g ref="#char-0305">̅</g>s</abbr><expan>fratres</expan></choice> patrueles<pc type="distinctio"><g ref="#char-f1f8"></g></pc> sorores patrueles<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="17" facs="1105,3534,1584,142"/>amitini amitine<pc type="distinctio"><g ref="#char-f1f8"></g></pc> consobrini<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="18" facs="1127,3678,1479,164"/>consobrine filius <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> filia<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a753">ꝓ</g>p<g ref="#char-0365">ͥ</g>us</abbr><expan>proprius</expan></choice>
+<lb n="19" facs="1138,3851,1501,131"/><choice><abbr>c<g ref="#char-0305">̅</g>sobrinus</abbr><expan>consobrinus</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g>sobrina</abbr><expan>consobrina</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> id <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> patrui
+<lb n="20" facs="1145,3995,1609,153"/>magni<pc type="distinctio"><g ref="#char-f1f8"></g></pc> amit<g ref="#char-0119">ę</g> magn<g ref="#char-0119">ę</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc> auun<lb n="21" facs="1138,4150,1533,164" break="no"/>culi magni<pc type="distinctio"><g ref="#char-f1f8"></g></pc> matertere magn<g ref="#char-0119">ę</g>
+<lb n="22" facs="1120,4305,1418,120"/>filius <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> filia<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Quib; accres<lb n="23" facs="1184,4463,1396,138" break="no"/>cunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a753">ꝓ</g>patruus</abbr><expan>propatruus</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g>amita</abbr><expan>proamita</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="24" facs="1069,4593,1587,142"/><hi rend="versal">H</hi>i sunt <choice><abbr><g ref="#char-a753">ꝓ</g>aiui</abbr><expan>proaiui</expan></choice> materni frater et
+<lb n="25" facs="1159,4762,1573,135"/>soror<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a753">ꝓ</g>auunculus</abbr><expan>proauunculus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a753">ꝓ</g>matertera</abbr><expan>promatertera</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="26" facs="1030,4866,1648,192"/><hi rend="versal">H</hi>i sunt <choice><abbr><g ref="#char-a753">ꝓ</g>aui<g ref="#char-0119">ę</g></abbr><expan>proaui<g ref="#char-0119">ę</g></expan></choice> patern<g ref="#char-0119">ę</g> <choice><abbr>matern<g ref="#char-0119">ę</g><g ref="#char-a759">ꝙ</g></abbr><expan>ERROR</expan></choice>
+<lb n="27" facs="1148,5079,1476,128"/><choice><abbr>fr<g ref="#char-0305">̅</g></abbr><expan>frater</expan></choice> et soror<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a753">ꝓ</g>auuiaq<g ref="#char-f1ac"></g></abbr><expan>proauuiaque</expan></choice> materni<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="28" facs="1055,5187,1519,185"/><hi rend="versal">H</hi><g ref="#char-0119">ę</g>c species<pc type="distinctio"><g ref="#char-f1f8"></g></pc> nec aliis gradibus
+<lb n="29" facs="1174,5345,1598,174"/><choice><abbr>qua<g ref="#char-0304">̄</g></abbr><expan>quam</expan></choice> scripta <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> nec alus uocabulis
+<lb n="30" facs="1202,5522,964,149"/>declarari potest<pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+<cb n="b" facs="2617,986,2307,4948"/>
+<lb n="1" facs="2711,996,1134,214"/>Capitulum<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <pc type="distinctio"><g ref="#char-f1f8"></g></pc>vi<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="2" facs="2725,1194,1569,185"/>Sexto gradu ueniunt supra
+<lb n="3" facs="2783,1349,1350,171"/>tritauus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> tritauia<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> in fra
+<lb n="4" facs="2740,1500,1609,146"/>trinepos trineptis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> exobliquo
+<lb n="5" facs="2689,1666,1771,138"/><choice><abbr>fri<g ref="#char-0305">̅</g>s</abbr><expan>fratris</expan></choice> et sororis<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> ad nepos ad neptis<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="6" facs="2707,1799,1677,160"/><choice><abbr>fr<g ref="#char-0305">̅</g>s</abbr><expan>fratres</expan></choice> patruelis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> sorores patruelis<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="7" facs="2642,1914,1648,156"/><hi rend="versal">A</hi>mitini amitin<g ref="#char-0119">ę</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>c<g ref="#char-0305">̅</g>sobrini<g ref="#char-0304">̄</g></abbr><expan>consobrinim</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g>so</abbr><expan>conso</expan></choice>
+<lb n="8" facs="2714,2066,1566,178"/>brin<g ref="#char-0119">ę</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Patrui magni<pc type="distinctio"><g ref="#char-f1f8"></g></pc> amite
+<lb n="9" facs="2714,2220,1591,207"/>magn<g ref="#char-0119">ę</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Auunculi magni<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ma<lb n="10" facs="2743,2393,1591,200" break="no"/>tertere magn<g ref="#char-0119">ę</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Nep<g ref="#char-0305">̅</g>os</abbr><expan>ERROR</expan></choice> neptis <choice><abbr><g ref="#char-a753">ꝓ</g></abbr><expan>pro</expan></choice>
+<lb n="11" facs="2732,2577,1584,142"/>prioris <choice><abbr>c<g ref="#char-0305">̅</g>sobrini</abbr><expan>consobrini</expan></choice> filius<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> filia<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="12" facs="2736,2688,1558,171"/>qui <choice><abbr>c<g ref="#char-0305">̅</g>fobrini<g ref="#char-0304">̄</g></abbr><expan>confobrinim</expan></choice> <choice><abbr>appellant<g ref="#char-f1c2"></g></abbr><expan>appellantur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>Qub<g ref="#char-f1ac"></g></abbr><expan>Qubus</expan></choice>
+<lb n="13" facs="2761,2843,1591,189"/>exlatere accrescunt <choice><abbr><g ref="#char-a753">ꝓ</g>patrui</abbr><expan>propatrui</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="14" facs="2729,3012,1641,160"/><choice><abbr><hi rend="versal"><g ref="#char-a753">ꝓ</g></hi></abbr><expan><hi rend="versal">p</hi>ro</expan></choice> amit<g ref="#char-0119">ę</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a753">ꝓ</g></abbr><expan>pro</expan></choice> auunculi<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><g ref="#char-a753">ꝓ</g>mat<g ref="#char-0305">̅</g>ter<g ref="#char-0119">ę</g></abbr><expan>promaterter<g ref="#char-0119">ę</g></expan></choice>
+<lb n="15" facs="2747,3174,1573,160"/>filius <choice><abbr><g ref="#char-a749">ꝉ</g></abbr><expan>uel</expan></choice> filia<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ad patruus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ad ami<lb n="16" facs="2747,3336,1717,156" break="no"/>ta<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Hi sunt ab aui <choice><abbr>pat<g ref="#char-0305">̅</g>ni</abbr><expan>paterni</expan></choice> <choice><abbr>fr<g ref="#char-0305">̅</g></abbr><expan>frater</expan></choice> et soror<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="17" facs="2743,3502,1526,128"/>ab auunculus ab matertera<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="18" facs="2707,3632,1735,182"/><hi rend="versal">H</hi>i sunt ab aui<g ref="#char-0119">ę</g> <choice><abbr>pat<g ref="#char-0305">̅</g>n<g ref="#char-0119">ę</g></abbr><expan>patern<g ref="#char-0119">ę</g></expan></choice> <choice><abbr>mat<g ref="#char-0305">̅</g>neq<g ref="#char-f1ac"></g></abbr><expan>materneque</expan></choice> <choice><abbr>fr<g ref="#char-0305">̅</g></abbr><expan>frater</expan></choice> et
+<lb n="19" facs="2758,3819,1623,142"/>soror<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ab <choice><abbr>auiq<g ref="#char-f1ac"></g></abbr><expan>auique</expan></choice> <choice><abbr>mat<g ref="#char-0305">̅</g>ni</abbr><expan>materni</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> H<g ref="#char-0119">ę</g>c <choice><abbr>quoq<g ref="#char-f1ac"></g></abbr><expan>quoque</expan></choice>
+<lb n="20" facs="2786,3941,1648,156"/>ex planari amplius non possunt<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc>
+<lb n="21" facs="2808,4125,1404,149"/><choice><abbr>qua<g ref="#char-0304">̄</g></abbr><expan>quam</expan></choice> auctor ipse disseruit<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="22" facs="2848,4269,1076,164"/>Capitulum<pc type="distinctio"><g ref="#char-f1f8"></g></pc> vii
+<lb n="23" facs="2905,4388,1605,196"/>Septimo gradu<pc type="distinctio"><g ref="#char-f1f8"></g></pc> qui sunt cogna<lb n="24" facs="2797,4564,1645,174" break="no"/>ti recta linea<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>sup<g ref="#char-1dd3">ᷓ</g></abbr><expan>supra</expan></choice> <choice><abbr>infraq<g ref="#char-f1ac"></g></abbr><expan>infraque</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g>priis</abbr><expan>propriis</expan></choice>
+<lb n="25" facs="2812,4730,1666,156"/><choice><abbr>nominib<g ref="#char-f1ac"></g></abbr><expan>nominibus</expan></choice> <choice><abbr>n<g ref="#char-0305">̅</g></abbr><expan>non</expan></choice> <choice><abbr>appellant<g ref="#char-f1c2"></g></abbr><expan>appellantur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> sed extrans
+<lb n="26" facs="2808,4852,1533,149"/>uersa linea <choice><abbr>c<g ref="#char-0305">̅</g>tinent<g ref="#char-f1c2"></g></abbr><expan>continentur</expan></choice><pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> <choice><abbr>fri<g ref="#char-0305">̅</g>s</abbr><expan>fratris</expan></choice> soro
+<lb n="27" facs="2790,5010,1587,142"/>ris adnepos ad neptis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>c<g ref="#char-0305">̅</g><g ref="#char-a749">ꝉ</g>obrini</abbr><expan>ERROR</expan></choice>
+<lb n="28" facs="2819,5165,1591,142"/>filii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>fili<g ref="#char-0119">ę</g>q<g ref="#char-f1ac"></g></abbr><expan>fili<g ref="#char-0119">ę</g>que</expan></choice> successionis<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Id circo
+<lb n="29" facs="2815,5320,1569,182"/>gradus<pc type="distinctio"><g ref="#char-f1f8"></g></pc> uii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>c<g ref="#char-0305">̅</g>stituti</abbr><expan>constituti</expan></choice> sunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>q<g ref="#char-0365">ͥ</g>a</abbr><expan>quia</expan></choice>
+<lb n="30" facs="2815,5514,1594,138"/>ultxrius <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> <choice><abbr>reru<g ref="#char-0304">̄</g></abbr><expan>rerum</expan></choice> <choice><abbr>natura<g ref="#char-0304">̄</g></abbr><expan>naturam</expan></choice> nec no<lb break="no"/>
+
+<pb n="144r" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00291/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/291" ana="/annotations/bamberg-sb-c-6-annotation-291"/> 
+<fw type="page-header" place="top" facs="2110,712,1360,200">de c<g ref="#char-0305">̅</g>sangiunitate<pc type="distinctio"><g ref="#char-f1f8"></g></pc></fw>
+<cb n="a" facs="482,917,3607,1467"/>
+<lb n="1" facs="1040,993,1710,189"/>mna inuenuiri<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> nec uita succeden<lb n="2" facs="1019,1169,1623,185" break="no"/>tibus <choice><abbr><g ref="#char-a753">ꝓ</g>rogari</abbr><expan>prorogari</expan></choice> potest<pc type="distinctio"><g ref="#char-f1f8"></g></pc> In his vii<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="3" facs="1033,1353,1598,164"/>gradibus omnia <choice><abbr><g ref="#char-a753">ꝓ</g>pinquitatu<g ref="#char-0304">̄</g></abbr><expan>propinquitatum</expan></choice>
+<lb n="4" facs="1033,1497,1501,167"/>nomina continentur<pc type="distinctio"><g ref="#char-f1f8"></g></pc> ultra
+<lb n="5" facs="1033,1623,1479,189"/>quos affinitas in ueniri<pc type="p-elevatus"><g ref="#char-f1f0"></g></pc> nex
+<lb n="6" facs="1026,1810,1782,178"/>saccessio potest amplius <choice><abbr><g ref="#char-a753">ꝓ</g>pagari</abbr><expan>propagari</expan></choice><pc type="p-versus"><g ref="#char-f1ea"></g></pc>
+
+<cb n="b"/>
+
+<pb n="144v" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00292/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/292" ana="/annotations/bamberg-sb-c-6-annotation-292"/> 
+<fw type="page-header" place="top" facs="2250,435,738,200">vii liber<pc type="distinctio"><g ref="#char-f1f8"></g></pc></fw>
+<cb n="a" facs="72,543,4903,5844"/>
+<lb n="1" facs="238,906,1609,167"/><note type="editorial-comment" resp="transkribus">Abbildung codieren!</note>
+
+<cb n="b"/>
+
+<pb n="145r" facs="https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00293/full/full/0/default.jpg" corresp="https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/293" ana="/annotations/bamberg-sb-c-6-annotation-293"/> 
+<fw type="page-header" place="top" facs="2063,712,1180,200">de consanguinitate<pc type="distinctio"><g ref="#char-f1f8"></g></pc></fw>
+<cb n="a" facs="637,856,1951,5956"/>
+<lb n="1" facs="878,881,1699,192"/></p>
+          </div>
+          <div n="29" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="299,856,680,225">
+                <hi rend="color:red">xxviiii<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red">De in cestuosis qui ad monitiones
+<lb n="2" facs="896,1068,1479,135"/>sac <choice><abbr>erdotu<g ref="#char-0304">̄</g></abbr><expan>erdotum</expan></choice> contempnunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+            </head>
+            <lb n="3" facs="817,1140,1569,243"/>
+            <note type="inscription" place="margin left" anchored="false" facs="299,1133,669,1283">Ex <choice><abbr>c<g ref="#char-0305">̅</g>ci<g ref="#char-a749">ꝉ</g></abbr><expan>concilio</expan></choice> Turonen<lb break="no"/> ..si <choice><abbr>Cap<g ref="#char-0305">̅</g></abbr><expan>Capitulum</expan></choice> xli<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">I</hi>ncestuosi parricid<g ref="#char-0119">ę</g> homicid<g ref="#char-0119">ę</g>
+<lb n="4" facs="882,1403,1486,128"/>multi apud nos <choice><abbr><g ref="#char-a753">ꝓ</g></abbr><expan>pro</expan></choice> dolor <choice><abbr>reperi<lb n="5" facs="878,1526,1598,174" break="no"/>unt<g ref="#char-f1c2"></g></abbr><expan>reperi<lb n="5" facs="878,1526,1598,174" break="no"/>untur</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> sed aliqui ex illis <choice><abbr>sacerdotu<g ref="#char-0304">̄</g></abbr><expan>sacerdotum</expan></choice>
+<lb n="6" facs="886,1691,1548,171"/>nolunt ad <choice><abbr>monitionib<g ref="#char-f1ac"></g></abbr><expan>monitionibus</expan></choice> aurem
+<lb n="7" facs="850,1850,1663,164"/><choice><abbr>acco<g ref="#char-0304">̄</g>modare</abbr><expan>accommodare</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> uolentes in pristinis
+<lb n="8" facs="871,1976,1670,218"/>per durare <choice><abbr>criminib<g ref="#char-f1ac"></g></abbr><expan>criminibus</expan></choice> quos oportet<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="9" facs="882,2188,1533,146"/><choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> <choice><abbr>sc<g ref="#char-a749">ꝉ</g>aris</abbr><expan>saecularis</expan></choice> potenti<g ref="#char-0119">ę</g> disciplinam
+<lb n="10" facs="839,2339,1566,142"/><choice><abbr>ata<g ref="#char-0304">̄</g></abbr><expan>atam</expan></choice> praua <choice><abbr>c<g ref="#char-0305">̅</g>suetudine</abbr><expan>consuetudine</expan></choice> coerceri
+<lb n="11" facs="850,2480,1497,160"/>qui <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> salutifera sacerdotum
+<lb n="12" facs="839,2663,1602,117"/>monita noluerunt reuocari<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="13" facs="853,2768,1652,167"/></p>
+          </div>
+          <div n="30" type="chapter">
+            <head type="chapter-title">
+              <label type="chapter-number" place="margin left" facs="299,2469,594,542">
+                <hi rend="color:red"><pc type="distinctio"><g ref="#char-f1f8"></g></pc>xxx<pc type="distinctio"><g ref="#char-f1f8"></g></pc></hi>
+              </label>
+              <hi rend="color:red"><choice><abbr>Q<g ref="#char-0111">đ</g></abbr><expan>Quod</expan></choice> infra sextam generatione
+<lb n="14" facs="839,2915,1332,182"/>coniugia non fiant</hi>
+            </head>
+            <lb n="15" facs="673,2966,1810,300"/>
+            <note type="inscription" place="margin left" anchored="false" facs="299,3063,655,905"><choice><abbr><unclear reason="tight-binding" resp="Transkribus" cert="low">...</unclear>ci<g ref="#char-a749">ꝉ</g></abbr><expan><unclear reason="tight-binding" resp="Transkribus" cert="low">ERROR</unclear></expan></choice> apud <choice><abbr>c<g ref="#char-0305">̅</g></abbr><expan>con</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr><unclear reason="tight-binding" resp="Transkribus" cert="low">...</unclear>tia<g ref="#char-0304">̄</g></abbr><expan><unclear reason="tight-binding" resp="Transkribus" cert="low">...ti</unclear>am</expan></choice> Cap i cui<unclear reason="tight-binding" resp="Transkribus" cert="low">...</unclear>. <unclear reason="tight-binding" resp="Transkribus" cert="low">...</unclear>at Karolus ..ricus regesi<pc type="distinctio"><g ref="#char-f1f8"></g></pc></note>
+            <p n="1"><hi rend="color:red initial">A</hi>nno dominic<g ref="#char-0119">ę</g> in carnationis
+<lb n="16" facs="864,3275,1627,149"/>dccccxxii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> apud <choice><abbr>confluentia<g ref="#char-0304">̄</g></abbr><expan>confluentiam</expan></choice> iussu
+<lb n="17" facs="648,3434,1857,146"/><choice><abbr>uenerabiliu<g ref="#char-0304">̄</g></abbr><expan>uenerabilium</expan></choice> <choice><abbr>principu<g ref="#char-0304">̄</g></abbr><expan>principum</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> karoli iude
+<lb n="18" facs="853,3556,1573,178"/>licet<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et Henrici <choice><abbr>regu<g ref="#char-0304">̄</g></abbr><expan>regum</expan></choice> reuerentissi
+<lb n="19" facs="832,3725,1656,164"/><choice><abbr>moru<g ref="#char-0304">̄</g></abbr><expan>morum</expan></choice> congregati sunt <choice><abbr>ep<g ref="#char-0305">̅</g>i</abbr><expan>episcopi</expan></choice> numero
+<lb n="20" facs="853,3891,1674,138"/>viii<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Herimannus agripinensis <choice><abbr>archi<lb n="21" facs="835,4006,1587,178" break="no"/>ep<g ref="#char-0305">̅</g>s</abbr><expan>archi<lb n="21" facs="835,4006,1587,178" break="no"/>episcopus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Herigeruis mogontiensis <choice><abbr>archi<lb n="22" facs="846,4168,1558,171" break="no"/>ep<g ref="#char-0305">̅</g>s</abbr><expan>archi<lb n="22" facs="846,4168,1558,171" break="no"/>episcopus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Thiedo vuirceburgensis <choice><abbr>ep<g ref="#char-0305">̅</g>s</abbr><expan>episcopus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="23" facs="796,4323,1623,156"/>Liutharius mindanensis <choice><abbr>ep<g ref="#char-0305">̅</g>s</abbr><expan>episcopus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Doto<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="24" facs="814,4474,1526,135"/>osneburgensis <choice><abbr>ep<g ref="#char-0305">̅</g>s</abbr><expan>episcopus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Rihgouiuio<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="25" facs="803,4618,1476,102"/>vuormatiensis <choice><abbr>ep<g ref="#char-0305">̅</g>s</abbr><expan>episcopus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Rihuinus<unclear reason="tight-binding" resp="Transkribus" cert="low">...</unclear><pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="26" facs="824,4726,1670,164"/>strazburgensis <choice><abbr>ep<g ref="#char-0305">̅</g>s</abbr><expan>episcopus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> Un uuanus pade<lb n="27" facs="821,4902,1526,124" break="no"/>brunensis <choice><abbr>ep<g ref="#char-0305">̅</g>s</abbr><expan>episcopus</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> <choice><abbr>eu<g ref="#char-0304">̄</g></abbr><expan>eum</expan></choice> <choice><abbr>abbatib<g ref="#char-f1ac"></g></abbr><expan>abbatibus</expan></choice> <choice><abbr>aliisq<g ref="#char-f1ac"></g></abbr><expan>aliisque</expan></choice>
+<lb n="28" facs="824,5057,1573,113"/>sacri ordinis iiris <choice><abbr>qua<g ref="#char-0304">̄</g></abbr><expan>quam</expan></choice> plurimis<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="29" facs="763,5190,1594,196"/>Cap<g ref="#char-0305">̅</g><pc type="distinctio"><g ref="#char-f1f8"></g></pc>i<pc type="distinctio"><g ref="#char-f1f8"></g></pc> qui ipso cooperante<pc type="distinctio"><g ref="#char-f1f8"></g></pc> et sen<lb n="30" facs="785,5352,1576,164" break="no"/>tentias <choice><abbr>eoru<g ref="#char-0304">̄</g></abbr><expan>eorum</expan></choice> <choice><abbr>c<g ref="#char-0305">̅</g>firmante</abbr><expan>confirmante</expan></choice> <choice><abbr>dn<g ref="#char-0305">̅</g>o</abbr><expan>domino</expan></choice> <choice><abbr>xp<g ref="#char-0305">̅</g>o</abbr><expan>Christo</expan></choice>
+<cb n="b" facs="2452,856,1954,2306"/>
+<lb n="1" facs="2567,975,1616,131"/>in synodali residentes conventu<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="2" facs="2552,1112,1576,167"/>multa utilia ac <choice><abbr>sc<g ref="#char-0305">̅</g><g ref="#char-0119">ę</g></abbr><expan>sanct<g ref="#char-0119">ę</g></expan></choice> <choice><abbr>di<g ref="#char-0305">̅</g></abbr><expan>dei</expan></choice> <choice><abbr>ecc<g ref="#char-a749">ꝉ</g><g ref="#char-0119">ę</g></abbr><expan>ERROR</expan></choice> <choice><abbr><g ref="#char-a753">ꝓ</g>fu<lb n="3" facs="2549,1277,1591,153" break="no"/>tura</abbr><expan>pro<lb n="3" facs="2549,1277,1591,153" break="no"/>futura</expan></choice> saluberrimo tractantes con<lb n="4" facs="2552,1436,1627,149" break="no"/>filio<pc type="distinctio"><g ref="#char-f1f8"></g></pc> Intercetera qu<g ref="#char-0119">ę</g> statuerunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="5" facs="2538,1576,1684,182"/>hoc maxime <choice><abbr>necessariu<g ref="#char-0304">̄</g></abbr><expan>necessarium</expan></choice><pc type="distinctio"><g ref="#char-f1f8"></g></pc> et instanti
+<lb n="6" facs="2513,1745,1659,174"/><choice><abbr><g ref="#char-a753">ꝓ</g></abbr><expan>pro</expan></choice> dolor <choice><abbr>te<g ref="#char-0304">̄</g>pore</abbr><expan>tempore</expan></choice> <choice><abbr><g ref="#char-a751">ꝑ</g></abbr><expan>per</expan></choice> abusione frequen<lb n="7" facs="2524,1878,1656,171" break="no"/>tissimu cognationis <choice><abbr>incestu<g ref="#char-0304">̄</g></abbr><expan>incestum</expan></choice> <choice><abbr>su<g ref="#char-0304">̄</g>ma</abbr><expan>summa</expan></choice>
+<lb n="8" facs="2542,2044,1540,164"/>cautela <choice><abbr>uitandu<g ref="#char-0304">̄</g></abbr><expan>uitandum</expan></choice> firmnauerunt<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+<lb n="9" facs="2480,2202,1508,146"/>Hoc <choice><abbr>e<g ref="#char-0305">̅</g></abbr><expan>est</expan></choice> ne ullus <choice><abbr>xp<g ref="#char-0305">̅</g>i</abbr><expan>christi</expan></choice> nus infra
+<lb n="10" facs="2538,2375,1562,146"/>sextam <choice><abbr>generatume<g ref="#char-0304">̄</g></abbr><expan>generatumem</expan></choice> nuptias co<lb n="11" facs="2538,2523,1033,200" break="no"/>pulare presumat<pc type="distinctio"><g ref="#char-f1f8"></g></pc>
+
+            </p>
+          </div>
+        </div>
+      </div>
+    </body>
+  </text>
+</TEI>
