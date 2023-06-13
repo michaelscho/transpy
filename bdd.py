@@ -587,7 +587,7 @@ class ManuscriptToProcess:
 
         self.bdd_tei_text = text_page
 
-
+class BddTei:
     """
     A class for transforming PAGE XML files to TEI format according to BDD schematics.
 
