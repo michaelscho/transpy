@@ -1018,7 +1018,7 @@ class PageXMLTests:
         print(f"===> {number_of_entries} {type}-entries detected")
         return number_of_entries, set_of_entries, entries
 
-    def check_number_of_items(self, items, test_number):
+    def check_number_of_items(self, items, test_number, type):
         """
         Checks the number of items in a list for a specific test number.
 
@@ -1040,8 +1040,8 @@ class PageXMLTests:
             if items.count(i) / 2 == test_number:
                 pass
             else:
-                print(f"Item {i} has wrong number.\n")
-                print(sorted(items))
+                print(f"Item ({type}) {i} has wrong number.")
+                #print(sorted(items))
                 test = False
         print("All items correct.")
         return test
@@ -1075,8 +1075,8 @@ class PageXMLTests:
             print(f"\n=============================\nSet of Chapter entries: {set_of_entries_chapter}\n")
 
         # check, that two toc items and 3 chapter items have been asigned
-        test_toc = self.check_number_of_items(entries_toc, 2)
-        test_chapter = self.check_number_of_items(entries_chapter, 3)
+        test_toc = self.check_number_of_items(entries_toc, 2,'TOC')
+        test_chapter = self.check_number_of_items(entries_chapter, 3,'Chapter')
         if test_toc == True and test_chapter == True:
             pass
         else:

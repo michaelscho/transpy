@@ -154,7 +154,7 @@ manuscript_data = { 'F': {
                     'Vb': {
                         'signatur': 'Vatikan, BAV, Pal. lat. 586',
                         'transkribus_collection_id': 80437,
-                        'transkribus_document_id': 788015,
+                        'transkribus_document_id': 1197208,
                         'base_folder': '01_Transkription_BAV_Pal_lat_586',
                         'tei_base_id': 'vatican-bav-pal-lat-586-',
                         'iiif_scale_factor': 1,
