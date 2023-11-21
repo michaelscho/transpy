@@ -325,17 +325,20 @@ class ManuscriptToProcess:
 
     def create_tei_fw_head(self, root):
         """ create tei:fw for header
-
         Creates tei:fw element including header if available from pageXML.
-
         :param root: Takes root from etree
         :return text_header: Returns tei:fw element as string
         """
 
         try:
-            header = root.xpath('//ns0:TextRegion[contains(@type,"header")]',
-                                namespaces={'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[
-                0]
+            header_list = root.xpath('//ns0:TextRegion[contains(@type,"header")]',
+                                namespaces={'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
+            if header_list:
+                header = header_list[0]
+            else:
+                header = root.xpath('//ns0:TextRegion[contains(@custom,"type:header")]',
+                                    namespaces={
+                                        'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[0]
             unicode_header = header.xpath('.//ns0:TextLine/ns0:TextEquiv/ns0:Unicode/text()', namespaces={
                 'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
             coords_header = self.coords_baseline(header, './/ns0:TextLine//ns0:Baseline/@points')
@@ -391,16 +394,23 @@ class ManuscriptToProcess:
         """
 
         try:
-            footer = root.xpath('//ns0:TextRegion[contains(@type,"footer")]',
-                                namespaces={'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[
-                0]
+            footer_list = root.xpath('//ns0:TextRegion[contains(@type,"footer")]',
+                                     namespaces={'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
+            if footer_list:
+                footer = footer_list[0]
+            else:
+                footer = root.xpath('//ns0:TextRegion[contains(@custom,"type:footer")]',
+                                    namespaces={'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[
+                    0]
             unicode_footer = footer.xpath('.//ns0:TextLine/ns0:TextEquiv/ns0:Unicode/text()', namespaces={
                 'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
             coords_footer = self.coords_baseline(footer, './/ns0:TextLine//ns0:Baseline/@points')
             text_footer = \
                 f'\n<fw type="quire-numeral" place="bottom" facs="{coords_footer[0]}">{unicode_footer[0]}</fw>'
-        except:
+        except Exception as e:
+            print(e)
             text_footer = ''
+
         return text_footer
 
     def store_toc_label_for_later_replacement(self, root):
@@ -434,6 +444,12 @@ class ManuscriptToProcess:
                                                            namespaces={
                                                                'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})[
                     0]
+
+                # todo
+                '''match_chapter_number_wrong = re.match(r"(?<!^)\*(\d{1,3})\*", chapter_number_text)
+                if match_chapter_number_wrong:
+                    print("PROVAPROVA", chapter_number_text)'''
+
                 coords_label_a = chapter_number.xpath('./ns0:Coords/@points', namespaces={
                     'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
                 coords_label_b = self.coords_text_region(chapter_number, './ns0:Coords/@points')
@@ -638,6 +654,9 @@ class BddTei:
 
         """
 
+        print("roba1", self.tei)
+        print("____")
+
         # Insert label TOC
         for element in self.toc_label_for_later_replacement:
             if int(element[0]) == 1:
@@ -645,9 +664,16 @@ class BddTei:
                 self.tei = re.sub(r'\n(<lb.*?/>)(</hi></head>\n)<list>\n~1~(\w)',
                                   r'\g<2>\g<1><list>' + element[2].replace(element[1], '') + r'\g<3></hi>', self.tei)
             else:
-                self.tei = re.sub(f'\n(<lb.*?/>){element[1]}(\w)',
+                elmt = re.findall(f'\n(<lb.*?/>){element[1]}(\w)', self.tei)
+                if elmt:
+                    self.tei = re.sub(f'\n(<lb.*?/>){element[1]}(\w)',
                                   r'</item>\n\g<1>' + element[2].replace(element[1], '') + r'\g<2></hi>', self.tei)
+                else: #for chapter titles that are on the same line
+                    self.tei = re.sub(f'{element[1]}()',
+                                  r'</item>\n\g<1>' + element[2].replace(element[1], '') + r'\g<1></hi>', self.tei)
 
+        print("roba2", self.tei)
+        print("____")
         # Insert label interrogation
         for element in self.interrogation_label_for_later_replacement:
             # print(element[0])
@@ -938,7 +964,7 @@ class PageXMLTests:
             with open(filename, 'r', encoding = 'utf8') as file:
                 text = file.read()
                 single_text_file = single_text_file + text
-        self.single_text_file = single_text_file
+        self.single_text_file = single_text_file.replace('⁓','~') #replace wrong '⁓' with correct one '~'
         return self.single_text_file
 
     def check_text_regions(self):
@@ -1012,7 +1038,6 @@ class PageXMLTests:
         else:
             entries = re.findall(f'{character}\d+{character}', self.single_text_file)
             entries = [int(i.replace(f'{character}', '')) for i in entries]
-
         number_of_entries = max(entries)
         set_of_entries = set(entries)
         print(f"===> {number_of_entries} {type}-entries detected")
