@@ -636,6 +636,8 @@ def word_segmentation(text_page):
     # Remove duplicate words from the list
     wordlist = list(dict.fromkeys(wordlist))
 
+
+
     # Iterate through each word in the list
     for word in wordlist:
         # If the word is found in the lexicon, retain it as is
