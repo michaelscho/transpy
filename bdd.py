@@ -654,9 +654,6 @@ class BddTei:
 
         """
 
-        print("roba1", self.tei)
-        print("____")
-
         # Insert label TOC
         for element in self.toc_label_for_later_replacement:
             if int(element[0]) == 1:
@@ -669,11 +666,9 @@ class BddTei:
                     self.tei = re.sub(f'\n(<lb.*?/>){element[1]}(\w)',
                                   r'</item>\n\g<1>' + element[2].replace(element[1], '') + r'\g<2></hi>', self.tei)
                 else: #for chapter titles that are on the same line
-                    self.tei = re.sub(f'{element[1]}()',
-                                  r'</item>\n\g<1>' + element[2].replace(element[1], '') + r'\g<1></hi>', self.tei)
+                    self.tei = re.sub(f'{element[1]}(\w)',
+                                r'</item>\n' + element[2].replace(element[1], '') + r'\g<1></hi>', self.tei)
 
-        print("roba2", self.tei)
-        print("____")
         # Insert label interrogation
         for element in self.interrogation_label_for_later_replacement:
             # print(element[0])
