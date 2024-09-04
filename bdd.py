@@ -1177,7 +1177,8 @@ def main():
 
     # test pageXML for consistency according to project needs
     page_xml_tests.check_text_regions()
-    page_xml_tests.check_internal_structure()
+    if book_int > 0:  # Exclude Prologue (book 0)
+        page_xml_tests.check_internal_structure()
 
     # conversion of pageXML into tei object
     manuscript.create_tei_from_pagexml()
