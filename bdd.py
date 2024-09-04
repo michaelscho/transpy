@@ -448,7 +448,7 @@ class ManuscriptToProcess:
                 # todo
                 '''match_chapter_number_wrong = re.match(r"(?<!^)\*(\d{1,3})\*", chapter_number_text)
                 if match_chapter_number_wrong:
-                    print("PROVAPROVA", chapter_number_text)'''
+                    print("test", chapter_number_text)'''
 
                 coords_label_a = chapter_number.xpath('./ns0:Coords/@points', namespaces={
                     'ns0': 'http://schema.primaresearch.org/PAGE/gts/pagecontent/2013-07-15'})
@@ -566,19 +566,20 @@ class ManuscriptToProcess:
             # create page
             text_page = f"{text_page}{page_break}{text_header}\n{text_column_1}\n{text_column_2}\n{text_footer}"
 
-            # create list of toc_labels for later replacment
+            # create list of toc_labels for later replacement
             try:
                 self.store_toc_label_for_later_replacement(root)
             except:
                 pass
-            # create list of labels for later replacment
+            # create list of labels for later replacement
             try:
                 self.store_label_for_later_replacement(root)
             except Exception as e:
                 print(e)
-            # create list of interrogation labels for later replacment
+            # create list of interrogation labels for later replacement
             try:
                 self.store_interrogation_label_for_later_replacement(root)
+
             except:
                 pass
             # create list of inscriptions for later replacment
@@ -680,6 +681,21 @@ class BddTei:
             else:
                 self.tei = re.sub(r'\*i' + element[0] + r'\*~(\w)',
                                   '</p></div>' + element[2].replace(element[1], '') + r'\g<1></hi>', self.tei)
+
+
+        if len(self.interrogation_label_for_later_replacement) == 0:
+            replace_keys = re.findall(r'\*i\d+\*', self.tei)
+            # print("found_keys", replace_keys)
+            for r_k in replace_keys:
+                div_number = r_k.replace('*', '')
+                div_number = div_number.replace('i', '')
+                label = f'<div n="{div_number}" type="interrogation"><p n="1"><hi rend="color:red">'
+                if int(div_number)==1:
+                    self.tei = re.sub(r'\*i' + div_number + r'\*',
+                                  label + '</hi>', self.tei)
+                else:
+                    self.tei = re.sub(r'\*i' + div_number + r'\*',
+                                      '</p></div>\n' + label + '</hi>', self.tei)
 
         # Insert label chapter
         for element in self.label_for_later_replacement:
@@ -1161,7 +1177,8 @@ def main():
 
     # test pageXML for consistency according to project needs
     page_xml_tests.check_text_regions()
-    page_xml_tests.check_internal_structure()
+    if book_int > 0:  # Exclude Prologue (book 0)
+        page_xml_tests.check_internal_structure()
 
     # conversion of pageXML into tei object
     manuscript.create_tei_from_pagexml()

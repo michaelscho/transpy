@@ -81,6 +81,7 @@ character_list = [['<g ref="#char-f1ac"></g>',''],
     ['<g ref="#char-a748">Ꝉ</g>','Ꝉ'],
     ['<g ref="#char-a749">ꝉ</g>','ꝉ'],
     ['<g ref="#char-019a">ƚ</g>','ƚ'],
+    ['<g ref="#char-0118">Ę</g>','Ę'],
     ['<g ref="#char-0119">ę</g>','ę'],
     ['<g ref="#char-a750">Ꝑ</g>','Ꝑ'],
     ['<g ref="#char-a751">ꝑ</g>','ꝑ'],
@@ -125,8 +126,8 @@ manuscript_data = { 'F': {
                         'base_folder': '01_Transkription_Bamberg_Stabi_Can_6',
                         'tei_base_id': 'bamberg-sb-c-6-',
                         'iiif_scale_factor': 1,
-                        'facs_url':'"{URL}"',
-                        'corresp':'"{URL}"',
+                        'facs_url':'f"https://api.digitale-sammlungen.de/iiif/image/v2/bsb00140701_00{self.iiif_image_id}/full/full/0/default.jpg"',
+                        'corresp':'f"https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00140701/canvas/{self.iiif_image_id}"',
                         'ana':'f"/annotations/bamberg-sb-c-6-annotation-{self.iiif_image_id}"'},
 
                     'K': {
